@@ -14,21 +14,25 @@ public class PartSpawner : MonoBehaviour
     void Start()
     {
         powerState = gameObject.GetComponent<PowerState>();
+        timeSinceLastPickup = respawnTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!spawnPoint.activeSelf)
+        if (powerState.ReturnPowerState())
         {
-            timeSinceLastPickup += Time.deltaTime;
-            if (timeSinceLastPickup > respawnTimer)
+            if (!spawnPoint.activeSelf)
             {
-                spawnPoint.SetActive(true);
-            }            
+                timeSinceLastPickup += Time.deltaTime;
+                if (timeSinceLastPickup > respawnTimer)
+                {
+                    spawnPoint.SetActive(true);
+                }
+            }
         }
     }
-    public void itemPickedUp()
+    public void ItemPickedUp()
     {
         timeSinceLastPickup = 0;
     }

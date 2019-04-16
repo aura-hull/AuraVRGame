@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PowerState : MonoBehaviour
 {
+    [SerializeField]
+    bool powerState = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,13 @@ public class PowerState : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SetPowerState(bool powered)
+    {
+        powerState = powered;
+    }
+    public bool ReturnPowerState()
+    {
+        return powerState;
     }
 }
