@@ -5,11 +5,11 @@ using UnityEngine;
 public class PowerOutput : MonoBehaviour
 {
     [SerializeField]
-    float powerOutput = 10;
+    float _powerOutput = 10;
     // Start is called before the first frame update
     void Start()
     {
-        PowerManager.instance.IncreasePowerOutput(powerOutput);
+        PowerManager.instance.IncreasePowerOutput(_powerOutput);
     }
 
     // Update is called once per frame

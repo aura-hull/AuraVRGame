@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     [SerializeField]
-    PartSpawner partSpawner;
+    PartSpawner _partSpawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class PickUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        partSpawner.ItemPickedUp();
+        _partSpawner.ItemPickedUp();
         // other.getComponent<parts>().GiveParts()
         gameObject.SetActive(false);
     }    

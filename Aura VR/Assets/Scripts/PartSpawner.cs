@@ -5,35 +5,35 @@ using UnityEngine;
 public class PartSpawner : MonoBehaviour
 {
     [SerializeField]
-    private float respawnTimer;
+    private float _respawnTimer;
     [SerializeField]
-    private GameObject spawnPoint;
-    private float timeSinceLastPickup;
-    private PowerState powerState;
+    private GameObject _spawnPoint;
+    private float _timeSinceLastPickup;
+    private PowerState _powerState;
     // Start is called before the first frame update
     void Start()
     {
-        powerState = gameObject.GetComponent<PowerState>();
-        timeSinceLastPickup = respawnTimer;
+        _powerState = gameObject.GetComponent<PowerState>();
+        _timeSinceLastPickup = _respawnTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (powerState.ReturnPowerState())
+        if (_powerState.ReturnPowerState())
         {
-            if (!spawnPoint.activeSelf)
+            if (!_spawnPoint.activeSelf)
             {
-                timeSinceLastPickup += Time.deltaTime;
-                if (timeSinceLastPickup > respawnTimer)
+                _timeSinceLastPickup += Time.deltaTime;
+                if (_timeSinceLastPickup > _respawnTimer)
                 {
-                    spawnPoint.SetActive(true);
+                    _spawnPoint.SetActive(true);
                 }
             }
         }
     }
     public void ItemPickedUp()
     {
-        timeSinceLastPickup = 0;
+        _timeSinceLastPickup = 0;
     }
 }

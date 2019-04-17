@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerState : MonoBehaviour
 {
     [SerializeField]
-    bool powerState = false;
+    bool _powerState = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +19,10 @@ public class PowerState : MonoBehaviour
     }
     public void SetPowerState(bool powered)
     {
-        powerState = powered;
+        _powerState = powered;
     }
     public bool ReturnPowerState()
     {
-        return powerState;
+        return _powerState;
     }
 }

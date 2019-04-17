@@ -5,7 +5,7 @@ using UnityEngine;
 public class TextPopUp : MonoBehaviour
 {
     [SerializeField]
-    GameObject text;
+    GameObject _text;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +19,10 @@ public class TextPopUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        text.SetActive(true);
+        _text.SetActive(true);
     }
     private void OnTriggerExit(Collider other)
     {
-        text.SetActive(false);
+        _text.SetActive(false);
     }
 }
