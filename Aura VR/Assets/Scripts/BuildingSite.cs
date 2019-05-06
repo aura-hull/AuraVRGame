@@ -22,6 +22,16 @@ public class BuildingSite : MonoBehaviour
         if (_parts == null)
             _parts = new GameObject[0];
         _partIsOwned = new bool[_parts.Length];
+
+        for (int i = 0; i < _parts.Length; i++)
+        {
+            // Change part to use holographic material
+            Renderer partRend = _parts[i].GetComponent<Renderer>();
+            if (partRend != null)
+            {
+                partRend.material = _holoMaterial;
+            }
+        }
     }
 
     // Update is called once per frame
