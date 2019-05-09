@@ -25,11 +25,14 @@ public class BuildingSite : MonoBehaviour
 
         for (int i = 0; i < _parts.Length; i++)
         {
-            // Change part to use holographic material
-            Renderer partRend = _parts[i].GetComponent<Renderer>();
-            if (partRend != null)
-            {
-                partRend.material = _holoMaterial;
+            if (_parts[i] != null)
+            { 
+                // Change part to use holographic material
+                Renderer partRend = _parts[i].GetComponent<Renderer>();
+                if (partRend != null)
+                {
+                    partRend.material = _holoMaterial;
+                }
             }
         }
     }
@@ -57,26 +60,29 @@ public class BuildingSite : MonoBehaviour
 
             for (int i = 0; i < _parts.Length; i++)
             {
-                // Check if the part is wanted
-                if (partName == _parts[i].name)
+                if (_parts[i] != null)
                 {
-                    // Check the part isn't already owned
-                    if (_partIsOwned[i] == false)
+                    // Check if the part is wanted
+                    if (partName == _parts[i].name)
                     {
-                        // Set part as owned
-                        _partIsOwned[i] = true;
-                        // Increase the number of owned parts
-                        _numOfPartsOwned++;
-
-                        // Change part to use filled material
-                        Renderer partRend = _parts[i].GetComponent<Renderer>();
-                        if (partRend != null)
+                        // Check the part isn't already owned
+                        if (_partIsOwned[i] == false)
                         {
-                            partRend.material = _filledMaterial;
-                        }
+                            // Set part as owned
+                            _partIsOwned[i] = true;
+                            // Increase the number of owned parts
+                            _numOfPartsOwned++;
 
-                        // Destroy the GameObject used as the part
-                        part.Use();
+                            // Change part to use filled material
+                            Renderer partRend = _parts[i].GetComponent<Renderer>();
+                            if (partRend != null)
+                            {
+                                partRend.material = _filledMaterial;
+                            }
+
+                            // Destroy the GameObject used as the part
+                            part.Use();
+                        }
                     }
                 }
             }
