@@ -23,6 +23,7 @@ namespace OculusSampleFramework
         GrabManager m_crosshairManager;
         Renderer m_renderer;
         MaterialPropertyBlock m_mpb;
+        Collider collider;
 
 
         public bool InRange
@@ -57,13 +58,26 @@ namespace OculusSampleFramework
             RefreshCrosshair();
             m_mpb.SetColor(m_materialColorField, Color.white);
             m_renderer.SetPropertyBlock(m_mpb);
+            collider = GetComponent<Collider>();
         }
 
         void RefreshCrosshair()
         {
+            if (collider)
+            {                
+                if (isGrabbed)
+                {                    
+                    collider.isTrigger = true;
+                }
+                else
+                {
+                    collider.isTrigger = false;
+                }
+            }
             if (m_crosshair)
             {
-                if (isGrabbed) m_crosshair.SetState(GrabbableCrosshair.CrosshairState.Disabled);
+                
+                if (isGrabbed)m_crosshair.SetState(GrabbableCrosshair.CrosshairState.Disabled);  
                 else if (!InRange) m_crosshair.SetState(GrabbableCrosshair.CrosshairState.Disabled);
                 else m_crosshair.SetState(Targeted ? GrabbableCrosshair.CrosshairState.Targeted : GrabbableCrosshair.CrosshairState.Enabled);
             }
