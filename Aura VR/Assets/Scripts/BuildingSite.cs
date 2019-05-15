@@ -43,7 +43,7 @@ public class BuildingSite : MonoBehaviour
         // If the the build is complete, delete the site and make the build
         if (_numOfPartsOwned >= _parts.Length)
         {
-            Instantiate(_objectToBecome);
+            Instantiate(_objectToBecome,gameObject.transform.position,gameObject.transform.rotation);
             Destroy(this.gameObject);
         }
     }

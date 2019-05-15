@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parts: []
-  _objectToBecome: {fileID: 0}
+  _objectToBecome: {fileID: 6045216954375032258, guid: 09d93e47ee0e54c488c020f9eb3812bc,
+    type: 3}
   _holoMaterial: {fileID: 2100000, guid: aee1849dd30e2764999c0a5770c0ccda, type: 2}
   _filledMaterial: {fileID: 2100000, guid: be46caa4309730346bcd8ec6af2e1e61, type: 2}
