@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 7101a3aacd68f9646bac8a31efe1c127
+labels:
+- factory
+- rts
+- industrial
+- iOS
+- iPhone
+- Android
+- Mobile
+- low
+- poly
+- colliders
+- prefab
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
