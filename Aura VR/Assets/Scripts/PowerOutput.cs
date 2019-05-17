@@ -9,7 +9,7 @@ public class PowerOutput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PowerManager.instance.IncreasePowerOutput(_powerOutput);
+        PowerManager.Instance.IncreasePowerOutput(_powerOutput);
     }
 
     // Update is called once per frame

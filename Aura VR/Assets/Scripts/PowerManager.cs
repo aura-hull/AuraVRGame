@@ -2,37 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerManager : MonoBehaviour
+public class PowerManager
 {
-    [SerializeField]
-    float powerOutput=0;
-    [SerializeField]
-    float powerUsage = 0;
-    public static PowerManager instance;
-    // Start is called before the first frame update
-    void Start()
+    private static PowerManager _instance;
+    public static PowerManager Instance
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
+        get {
+            if (_instance == null) {
+                _instance = new PowerManager();
+            }
+            return _instance;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private float _powerProduced = 0;
+    private float _powerUsed = 0;
+
+    private float PowerProduced
     {
-        
+        get
+        {
+            return _powerProduced;
+        }
     }
+
+    private float PowerUsed
+    {
+        get
+        {
+            return _powerUsed;
+        }
+    }
+    
     public void IncreasePowerOutput(float amountToIncrease)
     {
-        powerOutput += amountToIncrease;
+        _powerProduced += amountToIncrease;
     }
     public void IncreasePowerUsage(float usage)
     {
-        powerUsage += usage;
+        _powerUsed += usage;
     }
 }
