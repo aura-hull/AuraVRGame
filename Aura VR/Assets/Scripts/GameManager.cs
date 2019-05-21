@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
+    [SerializeField]
     public GameState CurrentGameState;
 
     private PowerManager _powerManager;
