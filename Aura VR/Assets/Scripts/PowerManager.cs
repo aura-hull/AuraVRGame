@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerManager : MonoBehaviour
+public class PowerManager
 {
+    // Instancing
     private static PowerManager _instance;
     public static PowerManager Instance
     {
@@ -14,32 +16,48 @@ public class PowerManager : MonoBehaviour
             return _instance;
         }
     }
+    private PowerManager()
+    {
+
+    }
 
     private float _powerProduced = 0;
+    public Action OnPowerProducedChanged;
     private float _powerUsed = 0;
+    public Action OnPowerUsedChanged;
 
-    private float PowerProduced
+    public float PowerProduced
     {
         get
         {
             return _powerProduced;
         }
+        private set
+        {
+            _powerProduced = value;
+            OnPowerProducedChanged?.Invoke();
+        }
     }
 
-    private float PowerUsed
+    public float PowerUsed
     {
         get
         {
             return _powerUsed;
         }
+        private set
+        {
+            _powerUsed = value;
+            OnPowerUsedChanged?.Invoke();
+        }
     }
     
     public void IncreasePowerOutput(float amountToIncrease)
     {
-        _powerProduced += amountToIncrease;
+        PowerProduced += amountToIncrease;
     }
     public void IncreasePowerUsage(float usage)
     {
-        _powerUsed += usage;
+        PowerUsed += usage;
     }
 }
