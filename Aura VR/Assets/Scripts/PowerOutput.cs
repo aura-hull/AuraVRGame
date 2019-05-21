@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerOutput : MonoBehaviour
 {
+    private float _powerOutput;
     [SerializeField]
     private Vector2 _powerOutputMinMax = new Vector2(10, 100);
     [SerializeField]
@@ -13,18 +14,24 @@ public class PowerOutput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float distance = Vector3.Distance(_positionToScaleFrom.position, transform.position);
-        distance = Mathf.Clamp(distance, _distanceMinMax.x, _distanceMinMax.y);
-        float scale = MapValue(distance, _distanceMinMax.x, _distanceMinMax.y, 0, 1);
-
-        float powerOutput = Mathf.Lerp(_powerOutputMinMax.x, _powerOutputMinMax.y, scale);
-        PowerManager.Instance.IncreasePowerOutput(powerOutput);
+        CalculateOutput();
+        PowerManager.Instance.IncreasePowerOutput(_powerOutput);
+        Debug.Log("Power Output: " + _powerOutput);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void CalculateOutput()
+    {
+        float distance = Vector3.Distance(_positionToScaleFrom.position, transform.position);
+        distance = Mathf.Clamp(distance, _distanceMinMax.x, _distanceMinMax.y);
+        float scale = MapValue(distance, _distanceMinMax.x, _distanceMinMax.y, 0, 1);
+
+        _powerOutput = Mathf.Lerp(_powerOutputMinMax.x, _powerOutputMinMax.y, scale);
     }
 
     private float MapValue(float from, float fromMin, float fromMax, float toMin, float toMax)
