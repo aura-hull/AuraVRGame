@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Billboard : MonoBehaviour
-{    
+{
+    [SerializeField]
+    Transform _camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,11 +13,13 @@ public class Billboard : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {        
-            Vector3 camPos = Camera.main.transform.position;
+    {
+        if (_camera != null)
+        {
 
             transform.LookAt(
-                new Vector3(-camPos.x, transform.position.y, -camPos.z)
+                new Vector3(-_camera.position.x, transform.position.y, -_camera.position.z)
                 );
+        }
     }    
 }
