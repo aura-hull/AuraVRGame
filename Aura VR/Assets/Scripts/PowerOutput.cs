@@ -29,23 +29,8 @@ public class PowerOutput : MonoBehaviour
     {
         float distance = Vector3.Distance(_positionToScaleFrom.position, transform.position);
         distance = Mathf.Clamp(distance, _distanceMinMax.x, _distanceMinMax.y);
-        float scale = MapValue(distance, _distanceMinMax.x, _distanceMinMax.y, 0, 1);
+        float scale = MathsTools.Map(distance, _distanceMinMax.x, _distanceMinMax.y, 0, 1);
 
         _powerOutput = Mathf.Lerp(_powerOutputMinMax.x, _powerOutputMinMax.y, scale);
-    }
-
-    private float MapValue(float from, float fromMin, float fromMax, float toMin, float toMax)
-    {
-        float fromAbs = from - fromMin;
-        float fromMaxAbs = fromMax - fromMin;
-
-        float normal = fromAbs / fromMaxAbs;
-
-        float toMaxAbs = toMax - toMin;
-        float toAbs = toMaxAbs * normal;
-
-        float to = toAbs + toMin;
-
-        return to;
     }
 }
