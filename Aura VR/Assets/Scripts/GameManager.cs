@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    Tutorial,
+    Gameplay,
+    EndScreen
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
+
+    public GameState CurrentGameState;
 
     private PowerManager _powerManager;
     private ScoreManager _scoreManager;
@@ -12,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _playDurationLimit = 30;
     private float _playDuration = 0;
-    private bool _playHasStarted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +30,8 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(gameObject);
 
+        CurrentGameState = GameState.Tutorial;
+
         _powerManager = PowerManager.Instance;
         _scoreManager = ScoreManager.Instance;
     }
@@ -29,23 +39,41 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_playHasStarted)
+        switch (CurrentGameState)
         {
-            _playDuration += Time.deltaTime;
-
-            if (_playDuration >= _playDurationLimit)
-            {
-                // Get final values
-                float finalScore = _scoreManager.Score;
-                float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
-                
-                // Game should end
-            }
+            case GameState.Tutorial:
+                UpdateTutorial();
+                break;
+            case GameState.Gameplay:
+                UpdateGameplay();
+                break;
+            case GameState.EndScreen:
+                UpdateEndScreen();
+                break;
         }
     }
 
-    public void StartPlay()
+    private void UpdateTutorial()
     {
-        _playHasStarted = true;
+
+    }
+
+    private void UpdateGameplay()
+    {
+        _playDuration += Time.deltaTime;
+
+        if (_playDuration >= _playDurationLimit)
+        {
+            // Get final values
+            float finalScore = _scoreManager.Score;
+            float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
+
+            // Game should end
+        }
+    }
+
+    private void UpdateEndScreen()
+    {
+
     }
 }
