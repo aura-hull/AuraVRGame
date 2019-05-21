@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerManager
+public class PowerManager : MonoBehaviour
 {
     private static PowerManager _instance;
     public static PowerManager Instance
