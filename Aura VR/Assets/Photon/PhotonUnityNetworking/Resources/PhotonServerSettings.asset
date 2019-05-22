@@ -17,10 +17,10 @@ MonoBehaviour:
     AppIdChat: 8500b7de-07f5-48d6-a0b0-1c3c8ef1170c
     AppIdVoice: 
     AppVersion: 
-    UseNameServer: 0
+    UseNameServer: 1
     FixedRegion: 
-    Server: 10.5.35.1
-    Port: 5055
+    Server: 
+    Port: 0
     Protocol: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
