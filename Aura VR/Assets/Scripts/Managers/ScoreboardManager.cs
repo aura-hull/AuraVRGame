@@ -82,19 +82,42 @@ public class ScoreboardManager
         }
         else
         {
+            int indexToBe = -1;
+
             for (int i = 0; i < _scores.Count; i += 1)
             {
+                //failing
                 if (score < _scores[i].score)
                 {
-                    // Create record with current score
-                    DateTime time = DateTime.Now;
-                    newScoreData = new ScoreData("Not Set", score, time);
-                    Debug.Log(newScoreData);
-                    // place in list
-                    _scores.Insert(i, newScoreData);
+                    indexToBe = i;
 
                     break;
                 }
+            }
+
+            if (indexToBe != -1)
+            {
+                Debug.Log("Creating new record with index: " + indexToBe);
+
+                // Create record with current score
+                DateTime time = DateTime.Now;
+                newScoreData = new ScoreData("Not Set", score, time);
+                Debug.Log(newScoreData);
+
+                // place in list
+                _scores.Insert(indexToBe, newScoreData);
+            }
+            else if (_scores.Count < _scoreboardSize)
+            {
+                Debug.Log("Creating new record");
+
+                // Create record with current score
+                DateTime time = DateTime.Now;
+                newScoreData = new ScoreData("Not Set", score, time);
+                Debug.Log(newScoreData);
+
+                // place in list
+                _scores.Add(newScoreData);
             }
 
             if (_scores.Count > _scoreboardSize)
