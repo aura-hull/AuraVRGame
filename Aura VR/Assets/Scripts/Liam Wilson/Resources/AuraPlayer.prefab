@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrtkRig: {fileID: 3133751295486411607}
   photonView: {fileID: 3133286319932603433}
-  boundaryChecker: {fileID: 2959695319724210070}
   avatar: {fileID: 5874983102448838372}
 --- !u!114 &3133286319932603433
 MonoBehaviour:
