@@ -12,18 +12,22 @@ namespace AuraHull.AuraVRGame
 
 		[SerializeField]
 		protected PhotonView photonView;
-        
-		public virtual GameObject GameObject
+
+        [SerializeField]
+        protected GameObject localOnlyBehaviour;
+
+        public virtual GameObject GameObject
 		{
 			get { return gameObject; }
 		}
         
 		public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
-		{			
-			if (!photonView.IsMine)
+		{
+            if (!photonView.IsMine)
 			{
                 vrtkRig.SetActive(false);
-				return;
+                localOnlyBehaviour.SetActive(false);
+                return;
 			}
 		}
 
@@ -35,6 +39,7 @@ namespace AuraHull.AuraVRGame
 		public virtual void GameSetup()
 		{
             vrtkRig.SetActive(photonView.IsMine);
-		}
+            localOnlyBehaviour.SetActive(photonView.IsMine);
+        }
 	}
 }
