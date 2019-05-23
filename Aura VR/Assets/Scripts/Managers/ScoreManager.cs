@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ScoreManager
 {
-    // Instancing
+    #region Singleton
     private static ScoreManager _instance;
     public static ScoreManager Instance
     {
@@ -18,6 +18,8 @@ public class ScoreManager
             return _instance;
         }
     }
+    #endregion
+
     private ScoreManager()
     {
 

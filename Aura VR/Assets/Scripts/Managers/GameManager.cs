@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public GameState CurrentGameState;
+    public Action OnGameOver;
 
     private PowerManager _powerManager;
     private ScoreManager _scoreManager;
@@ -72,6 +74,8 @@ public class GameManager : MonoBehaviour
             float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
 
             // Game should end
+
+            OnGameOver?.Invoke();
         }
     }
 
