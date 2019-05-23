@@ -52,6 +52,7 @@ MonoBehaviour:
   vrtkRig: {fileID: 3133751295486411607}
   photonView: {fileID: 3133286319932603433}
   boundaryChecker: {fileID: 2959695319724210070}
+  avatar: {fileID: 5874983102448838372}
 --- !u!114 &3133286319932603433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7824468177652276633
 Transform:
   m_ObjectHideFlags: 0

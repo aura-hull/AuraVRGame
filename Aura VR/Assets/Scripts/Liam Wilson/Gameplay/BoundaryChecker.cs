@@ -12,6 +12,11 @@ namespace AuraHull.AuraVRGame
             Vector3.left, Vector3.right
         };
 
+        void Awake()
+        {
+            VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
+        }
+
         void FixedUpdate()
         {
             int checkMask = LayerMask.GetMask("WorldBoundaries");
@@ -29,6 +34,11 @@ namespace AuraHull.AuraVRGame
                     }
                 }
             }
+        }
+
+        void OnDestroy()
+        {
+            VRTK_SDKManager.instance.RemoveBehaviourToToggleOnLoadedSetupChange(this);
         }
     }
 }

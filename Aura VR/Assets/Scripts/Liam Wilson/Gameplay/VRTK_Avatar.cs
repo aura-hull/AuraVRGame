@@ -18,7 +18,7 @@ namespace AuraHull.AuraVRGame
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
         }
 
-        void OnEnable()
+        void Start()
         {
             Transform vrtkActiveRig = VRTK_DeviceFinder.PlayAreaTransform();
             VRTK_SDKSetup vrtkSetup = vrtkActiveRig.GetComponentInParent<VRTK_SDKSetup>();
