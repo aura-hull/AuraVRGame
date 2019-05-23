@@ -14,7 +14,7 @@ namespace AuraHull.AuraVRGame
 		protected PhotonView photonView;
 
         [SerializeField]
-        protected GameObject localOnly;
+        protected GameObject localOnlyBehaviour;
 
         public virtual GameObject GameObject
 		{
@@ -26,7 +26,7 @@ namespace AuraHull.AuraVRGame
             if (!photonView.IsMine)
 			{
                 vrtkRig.SetActive(false);
-                localOnly.SetActive(false);
+                localOnlyBehaviour.SetActive(false);
                 return;
 			}
 		}
@@ -39,7 +39,7 @@ namespace AuraHull.AuraVRGame
 		public virtual void GameSetup()
 		{
             vrtkRig.SetActive(photonView.IsMine);
-            localOnly.SetActive(photonView.IsMine);
+            localOnlyBehaviour.SetActive(photonView.IsMine);
         }
 	}
 }
