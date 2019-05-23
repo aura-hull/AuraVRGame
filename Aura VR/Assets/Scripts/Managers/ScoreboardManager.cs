@@ -38,7 +38,7 @@ public class ScoreboardManager
         {
             List<string> lines = new List<string>();
 
-            Debug.Log("Scores Count: " + _scores.Count);
+            // Generate lines to write
             for (int i = 0; i < _scores.Count; i += 1)
             {
                 if (_scores[i].valid)
@@ -54,8 +54,8 @@ public class ScoreboardManager
                 }
             }
 
+            // Concatinate into single string
             string toWrite = "";
-
             for (int i = 0; i < lines.Count; i += 1)
             {
                 if (i != 0)
@@ -73,65 +73,35 @@ public class ScoreboardManager
 
     public void AddNewRecord(float score)
     {
-        ScoreData newScoreData;
+        DateTime time = DateTime.Now;
+        ScoreData newScoreData = new ScoreData("Not Set", score, time);
 
-        if (_scores.Count == 0)
+        if (_scores.Count == 0 || _scores.Count < _scoreboardSize)
         {
-            DateTime time = DateTime.Now;
-            newScoreData = new ScoreData("Not Set", score, time);
-            //Debug.Log(newScoreData);
-
-            // place in list
             _scores.Add(newScoreData);
         }
         else
         {
             int indexToBe = -1;
 
+            // Find desired rank
             for (int i = 0; i < _scores.Count; i += 1)
             {
-                //failing
                 if (score > _scores[i].score)
                 {
                     indexToBe = i;
-
                     break;
                 }
             }
 
+            // Place at desired rank
             if (indexToBe != -1)
-            {
-                //Debug.Log("Creating new record with index: " + indexToBe);
-
-                // Create record with current score
-                DateTime time = DateTime.Now;
-                newScoreData = new ScoreData("Not Set", score, time);
-                //Debug.Log(newScoreData);
-
-                // place in list
                 _scores.Insert(indexToBe, newScoreData);
-            }
-            else if (_scores.Count < _scoreboardSize)
-            {
-                //Debug.Log("Creating new record");
 
-                // Create record with current score
-                DateTime time = DateTime.Now;
-                newScoreData = new ScoreData("Not Set", score, time);
-                //Debug.Log(newScoreData);
-
-                // place in list
-                _scores.Add(newScoreData);
-            }
-
+            // remove the excess records
             if (_scores.Count > _scoreboardSize)
-            {
-                // remove the excess records
                 _scores.RemoveRange(_scoreboardSize, _scores.Count - _scoreboardSize);
-            }
         }
-
-        //Debug.Log(_scores);
     }
 
     public void ClearScores()
@@ -141,8 +111,6 @@ public class ScoreboardManager
 
     public void LoadScores()
     {
-        //Debug.Log("Loading scoreboard");
-
         List<ScoreData> scoresFromFile = new List<ScoreData>();
 
         try
@@ -156,12 +124,8 @@ public class ScoreboardManager
 
                     if (score.valid)
                         scoresFromFile.Add(score);
-
-                    //Debug.Log("Score Loaded: \n" + score);
                 }
             }
-
-            //Debug.Log("Scoreboard loaded");
         }
         catch
         {
