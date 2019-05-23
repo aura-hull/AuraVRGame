@@ -43,17 +43,18 @@ public class GameManager : MonoBehaviour
         _scoreboardManager = ScoreboardManager.Instance;
 
         _scoreboardManager.LoadScores();
-        _scoreboardManager.AddNewRecord(10);
-        _scoreboardManager.AddNewRecord(9);
-        _scoreboardManager.AddNewRecord(8);
-        _scoreboardManager.AddNewRecord(7);
-        _scoreboardManager.AddNewRecord(6);
-        _scoreboardManager.AddNewRecord(5);
-        _scoreboardManager.AddNewRecord(4);
-        _scoreboardManager.AddNewRecord(3);
-        _scoreboardManager.AddNewRecord(2);
-        _scoreboardManager.AddNewRecord(1);
-        _scoreboardManager.AddNewRecord(0);
+        _scoreboardManager.AddNewRecord(11);
+        //_scoreboardManager.AddNewRecord(10);
+        //_scoreboardManager.AddNewRecord(9);
+        //_scoreboardManager.AddNewRecord(8);
+        //_scoreboardManager.AddNewRecord(7);
+        //_scoreboardManager.AddNewRecord(6);
+        //_scoreboardManager.AddNewRecord(5);
+        //_scoreboardManager.AddNewRecord(4);
+        //_scoreboardManager.AddNewRecord(3);
+        //_scoreboardManager.AddNewRecord(2);
+        //_scoreboardManager.AddNewRecord(1);
+        //_scoreboardManager.AddNewRecord(0);
         _scoreboardManager.SaveScores();
     }
 

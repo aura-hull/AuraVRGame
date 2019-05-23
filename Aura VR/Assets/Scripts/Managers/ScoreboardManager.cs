@@ -91,7 +91,7 @@ public class ScoreboardManager
             for (int i = 0; i < _scores.Count; i += 1)
             {
                 //failing
-                if (score < _scores[i].score)
+                if (score > _scores[i].score)
                 {
                     indexToBe = i;
 
