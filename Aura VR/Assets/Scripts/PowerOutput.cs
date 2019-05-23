@@ -16,7 +16,7 @@ public class PowerOutput : MonoBehaviour
     {
         CalculateOutput();
         PowerManager.Instance.IncreasePowerOutput(_powerOutput);
-        Debug.Log("Power Output: " + _powerOutput);
+        //Debug.Log("Power Output: " + _powerOutput);
     }
 
     // Update is called once per frame

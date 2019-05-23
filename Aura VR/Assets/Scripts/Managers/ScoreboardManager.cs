@@ -69,40 +69,45 @@ public class ScoreboardManager
 
     public void AddNewRecord(float score)
     {
+        ScoreData newScoreData;
+
         if (_scores.Count == 0)
         {
             DateTime time = DateTime.Now;
-            ScoreData newScoreData = new ScoreData("Not Set", score, time);
+            newScoreData = new ScoreData("Not Set", score, time);
+            Debug.Log(newScoreData);
 
             // place in list
             _scores.Add(newScoreData);
-
-            return;
         }
-
-        for (int i = 0; i < _scores.Count; i += 1)
+        else
         {
-            if (score < _scores[i].score)
+            for (int i = 0; i < _scores.Count; i += 1)
             {
-                // Create record with current score
-                DateTime time = DateTime.Now;
-                ScoreData newScoreData = new ScoreData("Not Set", score, time);
+                if (score < _scores[i].score)
+                {
+                    // Create record with current score
+                    DateTime time = DateTime.Now;
+                    newScoreData = new ScoreData("Not Set", score, time);
+                    Debug.Log(newScoreData);
+                    // place in list
+                    _scores.Insert(i, newScoreData);
 
-                // place in list
-                _scores.Insert(i, newScoreData);
+                    break;
+                }
+            }
 
-                break;
+            if (_scores.Count > _scoreboardSize)
+            {
+                // remove the excess records
+                _scores.RemoveRange(_scoreboardSize, _scores.Count - _scoreboardSize);
             }
         }
 
-        if (_scores.Count > _scoreboardSize)
-        {
-            // remove the excess records
-            _scores.RemoveRange(_scoreboardSize, _scores.Count - _scoreboardSize);
-        }
+        Debug.Log(_scores);
     }
 
-    public List<ScoreData> LoadScores()
+    public void LoadScores()
     {
         Debug.Log("Loading scoreboard");
 
@@ -120,7 +125,7 @@ public class ScoreboardManager
                     if (score.valid)
                         scoresFromFile.Add(score);
 
-                    Debug.Log("Score Loaded: " + score.score);
+                    Debug.Log("Score Loaded: \n" + score);
                 }
             }
 
@@ -131,7 +136,7 @@ public class ScoreboardManager
             Debug.LogWarning("Failed to load scores from: " + _filepath);
         }
 
-        return scoresFromFile;
+        _scores = scoresFromFile;
     }
 }
 
@@ -152,7 +157,7 @@ public struct ScoreData
 
     public ScoreData(string dataLine)
     {
-        string[] parts = dataLine.Split(' ');
+        string[] parts = dataLine.Split(new char[] { '-' }, 3);
 
         if (parts.Length == 3)
         {
@@ -172,6 +177,6 @@ public struct ScoreData
 
     public override string ToString()
     {
-        return "";
+        return (name + "-" + score + "-" + time);
     }
 }
