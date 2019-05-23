@@ -34,32 +34,36 @@ public class ScoreboardManager
 
     public void SaveScores()
     {
-        Debug.Log("Saving scores");
-
         try
         {
-            using (StreamWriter sw = new StreamWriter(_filepath))
+            List<string> lines = new List<string>();
+
+            Debug.Log("Scores Count: " + _scores.Count);
+            for (int i = 0; i < _scores.Count; i += 1)
             {
-                for (int i = 0; i < _scores.Count; i += 1)
+                if (_scores[i].valid)
                 {
-                    if (_scores[i].valid)
-                    {
-                        string line = _scores[i].ToString();
-
-                        sw.WriteLine(line);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Attempted to save invalid score record \n" + 
-                            "name: " + _scores[i].name + "\n" +
-                            "score: " + _scores[i].score);
-                    }
+                    string line = _scores[i].ToString();
+                    lines.Add(line);
                 }
-
-                sw.Close();
+                else
+                {
+                    Debug.LogWarning("Attempted to save invalid score record \n" + 
+                        "name: " + _scores[i].name + "\n" +
+                        "score: " + _scores[i].score);
+                }
             }
 
-            Debug.Log("Scores saved");
+            string toWrite = "";
+
+            for (int i = 0; i < lines.Count; i += 1)
+            {
+                if (i != 0)
+                    toWrite += Environment.NewLine;
+                toWrite += lines[i];
+            }
+
+            File.WriteAllText(_filepath, toWrite);
         }
         catch
         {
@@ -75,7 +79,7 @@ public class ScoreboardManager
         {
             DateTime time = DateTime.Now;
             newScoreData = new ScoreData("Not Set", score, time);
-            Debug.Log(newScoreData);
+            //Debug.Log(newScoreData);
 
             // place in list
             _scores.Add(newScoreData);
@@ -97,24 +101,24 @@ public class ScoreboardManager
 
             if (indexToBe != -1)
             {
-                Debug.Log("Creating new record with index: " + indexToBe);
+                //Debug.Log("Creating new record with index: " + indexToBe);
 
                 // Create record with current score
                 DateTime time = DateTime.Now;
                 newScoreData = new ScoreData("Not Set", score, time);
-                Debug.Log(newScoreData);
+                //Debug.Log(newScoreData);
 
                 // place in list
                 _scores.Insert(indexToBe, newScoreData);
             }
             else if (_scores.Count < _scoreboardSize)
             {
-                Debug.Log("Creating new record");
+                //Debug.Log("Creating new record");
 
                 // Create record with current score
                 DateTime time = DateTime.Now;
                 newScoreData = new ScoreData("Not Set", score, time);
-                Debug.Log(newScoreData);
+                //Debug.Log(newScoreData);
 
                 // place in list
                 _scores.Add(newScoreData);
@@ -127,12 +131,12 @@ public class ScoreboardManager
             }
         }
 
-        Debug.Log(_scores);
+        //Debug.Log(_scores);
     }
 
     public void LoadScores()
     {
-        Debug.Log("Loading scoreboard");
+        //Debug.Log("Loading scoreboard");
 
         List<ScoreData> scoresFromFile = new List<ScoreData>();
 
@@ -148,11 +152,11 @@ public class ScoreboardManager
                     if (score.valid)
                         scoresFromFile.Add(score);
 
-                    Debug.Log("Score Loaded: \n" + score);
+                    //Debug.Log("Score Loaded: \n" + score);
                 }
             }
 
-            Debug.Log("Scoreboard loaded");
+            //Debug.Log("Scoreboard loaded");
         }
         catch
         {
