@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private PowerManager _powerManager;
     private ScoreManager _scoreManager;
     private PoolManager _poolManager;
+    private ScoreboardManager _scoreboardManager;
 
     [SerializeField]
     private float _playDurationLimit = 30;
@@ -39,6 +40,12 @@ public class GameManager : MonoBehaviour
         _powerManager = PowerManager.Instance;
         _scoreManager = ScoreManager.Instance;
         _poolManager = PoolManager.Instance;
+        _scoreboardManager = ScoreboardManager.Instance;
+
+        _scoreboardManager.LoadScores();
+        _scoreboardManager.AddNewRecord(10);
+        _scoreboardManager.AddNewRecord(15);
+        _scoreboardManager.SaveScores();
     }
 
     // Update is called once per frame

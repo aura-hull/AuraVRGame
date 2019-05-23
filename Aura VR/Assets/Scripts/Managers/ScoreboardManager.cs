@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreboardManager : MonoBehaviour
+public class ScoreboardManager
 {
     #region Singleton
     private static ScoreboardManager _instance;
@@ -20,62 +20,46 @@ public class ScoreboardManager : MonoBehaviour
     }
     #endregion
 
-    private string _filepath = "Data/Scores.txt";
+    private string _filepath = "scores.txt";
     public string Filepath { get; set; }
 
     private int _scoreboardSize = 100;
+    private List<ScoreData> _scores;
 
     private ScoreboardManager()
     {
-        GameManager.Instance.OnGameOver += SaveScoresToFile;
+        GameManager.Instance.OnGameOver += SaveScores;
+        _scores = new List<ScoreData>();
     }
 
-
-    private void SaveScoresToFile()
+    public void SaveScores()
     {
-        List<ScoreData> scores = LoadScores();
-
-        // Get score of the current game
-        ScoreManager scoreManager = ScoreManager.Instance;
-        float score = scoreManager.Score;
-
-        for (int i = 0; i < scores.Count; i += 1)
-        {
-            if (score < scores[i].score)
-            {
-                // Create record with current score
-                DateTime time = DateTime.Now;
-                ScoreData newScoreData = new ScoreData("Not Set", score, time);
-
-                // place in list
-                scores.Insert(i, newScoreData);
-
-                break;
-            }
-        }
-
-        if (scores.Count > _scoreboardSize)
-        {
-            // remove the excess records
-            scores.RemoveRange(_scoreboardSize, scores.Count - _scoreboardSize);
-        }
+        Debug.Log("Saving scores");
 
         try
         {
             using (StreamWriter sw = new StreamWriter(_filepath))
             {
-                for (int i = 0; i < scores.Count; i += 1)
+                for (int i = 0; i < _scores.Count; i += 1)
                 {
-                    if (scores[i].valid)
+                    if (_scores[i].valid)
                     {
-                        string line = scores[i].ToString();
+                        string line = _scores[i].ToString();
 
                         sw.WriteLine(line);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Attempted to save invalid score record \n" + 
+                            "name: " + _scores[i].name + "\n" +
+                            "score: " + _scores[i].score);
                     }
                 }
 
                 sw.Close();
             }
+
+            Debug.Log("Scores saved");
         }
         catch
         {
@@ -83,8 +67,45 @@ public class ScoreboardManager : MonoBehaviour
         }
     }
 
-    private List<ScoreData> LoadScores()
+    public void AddNewRecord(float score)
     {
+        if (_scores.Count == 0)
+        {
+            DateTime time = DateTime.Now;
+            ScoreData newScoreData = new ScoreData("Not Set", score, time);
+
+            // place in list
+            _scores.Add(newScoreData);
+
+            return;
+        }
+
+        for (int i = 0; i < _scores.Count; i += 1)
+        {
+            if (score < _scores[i].score)
+            {
+                // Create record with current score
+                DateTime time = DateTime.Now;
+                ScoreData newScoreData = new ScoreData("Not Set", score, time);
+
+                // place in list
+                _scores.Insert(i, newScoreData);
+
+                break;
+            }
+        }
+
+        if (_scores.Count > _scoreboardSize)
+        {
+            // remove the excess records
+            _scores.RemoveRange(_scoreboardSize, _scores.Count - _scoreboardSize);
+        }
+    }
+
+    public List<ScoreData> LoadScores()
+    {
+        Debug.Log("Loading scoreboard");
+
         List<ScoreData> scoresFromFile = new List<ScoreData>();
 
         try
@@ -98,8 +119,12 @@ public class ScoreboardManager : MonoBehaviour
 
                     if (score.valid)
                         scoresFromFile.Add(score);
+
+                    Debug.Log("Score Loaded: " + score.score);
                 }
             }
+
+            Debug.Log("Scoreboard loaded");
         }
         catch
         {
@@ -110,7 +135,7 @@ public class ScoreboardManager : MonoBehaviour
     }
 }
 
-struct ScoreData
+public struct ScoreData
 {
     public bool valid;
     public string name;
@@ -139,7 +164,7 @@ struct ScoreData
         else
         {
             valid = false;
-            name = "name";
+            name = dataLine;
             score = 0;
             time = DateTime.Now;
         }
