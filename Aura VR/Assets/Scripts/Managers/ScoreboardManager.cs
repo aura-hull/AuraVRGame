@@ -23,7 +23,7 @@ public class ScoreboardManager
     private string _filepath = "scores.txt";
     public string Filepath { get; set; }
 
-    private int _scoreboardSize = 100;
+    private int _scoreboardSize = 10;
     private List<ScoreData> _scores;
 
     private ScoreboardManager()
@@ -132,6 +132,11 @@ public class ScoreboardManager
         }
 
         //Debug.Log(_scores);
+    }
+
+    public void ClearScores()
+    {
+        _scores.Clear();
     }
 
     public void LoadScores()
