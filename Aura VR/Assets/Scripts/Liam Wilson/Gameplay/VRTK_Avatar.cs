@@ -22,15 +22,14 @@ namespace AuraHull.AuraVRGame
         {
             Transform vrtkActiveRig = VRTK_DeviceFinder.PlayAreaTransform();
             VRTK_SDKSetup vrtkSetup = vrtkActiveRig.GetComponentInParent<VRTK_SDKSetup>();
-
+            
             switch (vrtkSetup.systemSDKInfo.description.prettyName)
             {
-                case "Oculus (Standalone:Oculus)":
+                case "Oculus Rift (Standalone:Oculus)":
                     try
                     {
-                        OvrAvatar oculusAvatar = vrtkActiveRig.GetComponentInChildren<OvrAvatar>();
-                        OvrAvatarBody oculusNeck = oculusAvatar.GetComponentInChildren<OvrAvatarBody>();
-                        avatarNeck = oculusNeck.transform;
+                        OvrAvatar oculusAvatar = vrtkSetup.GetComponentInChildren<OvrAvatar>();
+                        avatarNeck = oculusAvatar.Base.transform;
                     }
                     catch (MissingComponentException)
                     {
