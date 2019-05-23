@@ -52,8 +52,8 @@ namespace AuraHull.AuraVRGame
             }
             else
             {
-                transform.SetParent(avatarNeck, false);
                 Debug.Log("AuraHull.AuraVRGame.VRTK_Avatar : Avatar linked! " + avatarNeck.name);
+                transform.SetParent(avatarNeck, false);
             }
         }
 
