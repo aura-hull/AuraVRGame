@@ -8,23 +8,21 @@ public class BuildPart : MonoBehaviour
     private string _partName;
     [SerializeField]
     private int _numOfUsesLeft;
+    public string Name
+    {
+        get
+        {
+            return _partName;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         if (_partName == null)
             _partName = "Name Not Given";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public string GetName()
-    {
-        return _partName;
+        if (_numOfUsesLeft == 0)
+            _numOfUsesLeft = 1;
     }
 
     public void Use()
@@ -32,7 +30,7 @@ public class BuildPart : MonoBehaviour
         _numOfUsesLeft--;
         if (_numOfUsesLeft <= 0)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

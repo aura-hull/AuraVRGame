@@ -56,7 +56,7 @@ public class BuildingSite : MonoBehaviour
         if (part != null)
         {
             // Get the name of the part
-            string partName = part.GetName();
+            string partName = part.Name;
 
             for (int i = 0; i < _parts.Length; i++)
             {
