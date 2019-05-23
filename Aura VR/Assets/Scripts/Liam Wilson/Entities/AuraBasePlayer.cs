@@ -12,8 +12,11 @@ namespace AuraHull.AuraVRGame
 
 		[SerializeField]
 		protected PhotonView photonView;
-        
-		public virtual GameObject GameObject
+
+        [SerializeField]
+        protected BoundaryChecker boundaryChecker;
+
+        public virtual GameObject GameObject
 		{
 			get { return gameObject; }
 		}
@@ -23,7 +26,8 @@ namespace AuraHull.AuraVRGame
 			if (!photonView.IsMine)
 			{
                 vrtkRig.SetActive(false);
-				return;
+                boundaryChecker.enabled = false;
+                return;
 			}
 		}
 
