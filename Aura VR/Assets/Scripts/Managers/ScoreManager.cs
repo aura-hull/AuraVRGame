@@ -26,7 +26,7 @@ public class ScoreManager
     }
 
     private float _score;
-    public Action OnScoreChange;
+    public Action<float> OnScoreChange;
 
     public float Score
     {
@@ -37,7 +37,7 @@ public class ScoreManager
         private set
         {
             _score = value;
-            OnScoreChange?.Invoke();
+            OnScoreChange?.Invoke(_score);
         }
     }
 

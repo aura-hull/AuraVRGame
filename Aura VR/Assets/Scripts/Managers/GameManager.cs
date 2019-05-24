@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _playDurationLimit = 30;
     private float _playDuration = 0;
+    public Action<float, float> onPlayDurationChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -35,27 +36,12 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(gameObject);
 
-        CurrentGameState = GameState.Tutorial;
+        CurrentGameState = GameState.Gameplay;
 
         _powerManager = PowerManager.Instance;
         _scoreManager = ScoreManager.Instance;
         _poolManager = PoolManager.Instance;
         _scoreboardManager = ScoreboardManager.Instance;
-
-        _scoreboardManager.LoadScores();
-        _scoreboardManager.AddNewRecord(11);
-        //_scoreboardManager.AddNewRecord(10);
-        //_scoreboardManager.AddNewRecord(9);
-        //_scoreboardManager.AddNewRecord(8);
-        //_scoreboardManager.AddNewRecord(7);
-        //_scoreboardManager.AddNewRecord(6);
-        //_scoreboardManager.AddNewRecord(5);
-        //_scoreboardManager.AddNewRecord(4);
-        //_scoreboardManager.AddNewRecord(3);
-        //_scoreboardManager.AddNewRecord(2);
-        //_scoreboardManager.AddNewRecord(1);
-        //_scoreboardManager.AddNewRecord(0);
-        _scoreboardManager.SaveScores();
     }
 
     // Update is called once per frame
@@ -83,6 +69,7 @@ public class GameManager : MonoBehaviour
     private void UpdateGameplay()
     {
         _playDuration += Time.deltaTime;
+        onPlayDurationChanged?.Invoke(_playDuration, _playDurationLimit);
 
         if (_playDuration >= _playDurationLimit)
         {
