@@ -12,7 +12,7 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance = null;
+    public static GameManager Instance { get; private set; }
 
     [SerializeField]
     public GameState CurrentGameState;
@@ -28,14 +28,17 @@ public class GameManager : MonoBehaviour
     private float _playDuration = 0;
     public Action<float, float> onPlayDurationChanged;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance == null)
             Instance = this;
         else if (Instance != this)
             Destroy(gameObject);
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         CurrentGameState = GameState.Gameplay;
 
         _powerManager = PowerManager.Instance;

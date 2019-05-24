@@ -19,8 +19,7 @@ public class ScreenUpdater : MonoBehaviour
         ScoreManager.Instance.OnScoreChange += ScoreChanged;
         PowerManager.Instance.OnPowerProducedChanged += PowerProducedChanged;
         PowerManager.Instance.OnPowerUsedChanged += PowerUsedChanged;
-        // Broken, null since GameManager not created yet
-        //GameManager.Instance.onPlayDurationChanged += GameTimeChanged;
+        GameManager.Instance.onPlayDurationChanged += GameTimeChanged;
 
         scoreDisplay.text = "0";
         powerUsedDisplay.text = "0";
