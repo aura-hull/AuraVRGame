@@ -12,6 +12,10 @@ public class ScreenUpdater : MonoBehaviour
     public TextMeshProUGUI timeLeftDisplay;
     public Slider netPowerSlider;
 
+    private float _powerProduced = 0;
+    private float _powerUsed = 0;
+    private float _netPower = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +45,16 @@ public class ScreenUpdater : MonoBehaviour
 
     private void PowerProducedChanged(float powerProduced)
     {
-        powerProducedDisplay.text = powerProduced.ToString();
+        _powerProduced = powerProduced;
+        _netPower = _powerProduced - _powerUsed;
+        powerProducedDisplay.text = _powerProduced.ToString();
     }
 
     private void PowerUsedChanged(float powerUsed)
     {
-        powerUsedDisplay.text = powerUsed.ToString();
+        _powerUsed = powerUsed;
+        _netPower = _powerProduced - _powerUsed;
+        powerUsedDisplay.text = _powerUsed.ToString();
     }
 
     private void GameTimeChanged(float timeSinceStart, float timeLimit)
