@@ -417,7 +417,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildSiteBeingPlaced: {fileID: 771215626999058927, guid: d1ebe47475d08e44fa1e7b8d4e47c18f,
     type: 3}
-  _placementIndicator: {fileID: 100000, guid: f05f2734ffbf9414ba58a734f87730bd, type: 3}
+  _placementIndicator: {fileID: 8357368196487140694, guid: 6776d69144fde70479b4eafd2d1c9519,
+    type: 3}
   buildMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -557,7 +558,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839505786}
   m_LocalRotation: {x: 0, y: -0.7018423, z: 0, w: 0.71233237}
-  m_LocalPosition: {x: -69.8, y: 21.3, z: 123}
+  m_LocalPosition: {x: -69.8, y: 19.88, z: 123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -729,7 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409254285}
   m_Layer: 0
-  m_Name: '[Placing Example] (not working)'
+  m_Name: '[Placing Example]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,7 +767,7 @@ PrefabInstance:
     - target: {fileID: 2855059996196802665, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2855059996196802661, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
@@ -911,7 +912,7 @@ PrefabInstance:
     - target: {fileID: 2855059997629993316, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2855059997629993316, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
@@ -921,7 +922,7 @@ PrefabInstance:
     - target: {fileID: 2855059996745009965, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2855059996745009965, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
