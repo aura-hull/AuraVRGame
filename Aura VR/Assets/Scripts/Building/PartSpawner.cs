@@ -7,16 +7,34 @@ public class PartSpawner : MonoBehaviour
     [SerializeField]
     private float _respawnTime;
     [SerializeField]
-    private GameObject _spawnObject;
+    private List<GameObject> _spawnObjects;
     [SerializeField]
     private Transform _spawnLocation;
+    [SerializeField]
+    private string _lookingForTag;
+
+    private int _spawnIndex = 0;
+    private PoolManager poolManager;
 
     private float _timeOfLastPickup;
+    private bool _hasSpawnedItem = false;
     public bool IsPowered { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (string.IsNullOrEmpty(_lookingForTag))
+        {
+            //_lookingForTag = "Untagged";
+        }
+
+        // Create pools for items
+        poolManager = PoolManager.Instance;
+        for (int i = 0; i < _spawnObjects.Count; i += 1)
+        {
+            poolManager.CreatePool(_spawnObjects[i].name, _spawnObjects[i], 10);
+        }
+
         IsPowered = true;
         _timeOfLastPickup = 0;
     }
@@ -26,18 +44,29 @@ public class PartSpawner : MonoBehaviour
     {
         if (IsPowered)
         {
-            float timeSincePickup = Time.time - _timeOfLastPickup;
-            if (timeSincePickup >= _respawnTime)
+            if (_spawnObjects.Count > 0)
             {
-                GameObject newObject = Instantiate<GameObject>(_spawnObject);
-                newObject.transform.position = _spawnLocation.position;
-                newObject.transform.localRotation = _spawnLocation.localRotation;
-                newObject.transform.localScale = _spawnLocation.localScale;
+                float timeSincePickup = Time.time - _timeOfLastPickup;
+                if (timeSincePickup >= _respawnTime && !_hasSpawnedItem)
+                {
+                    _hasSpawnedItem = true;
+                    // Fetch item from pool
+                    GameObject spawnObject = poolManager.SpawnFromPool(_spawnObjects[_spawnIndex].name, _spawnLocation.position, _spawnLocation.localRotation);
+
+                    _spawnIndex++;
+                    if (_spawnIndex >= _spawnObjects.Count)
+                        _spawnIndex = 0;
+                }
             }
         }
     }
-    public void ItemPickedUp()
+    void OnCollisionEnter(Collision collision)
     {
-        _timeOfLastPickup = Time.time;
+        Debug.Log("Collision with: " + collision.collider.name);
+        if (collision.collider.tag == _lookingForTag && _hasSpawnedItem == true)
+        {
+            _timeOfLastPickup = Time.time;
+            _hasSpawnedItem = false;
+        }
     }
 }
