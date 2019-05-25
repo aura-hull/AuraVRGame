@@ -59,6 +59,12 @@ public class ScreenUpdater : MonoBehaviour
 
     private void GameTimeChanged(float timeSinceStart, float timeLimit)
     {
-        timeLeftDisplay.text = (timeLimit - timeSinceStart).ToString();
+        float timeLeft = timeLimit - timeSinceStart;
+        timeLeft = Mathf.Round(timeLeft);
+
+        if (timeLeft < 0)
+            timeLeft = 0;
+
+        timeLeftDisplay.text = timeLeft.ToString();
     }
 }

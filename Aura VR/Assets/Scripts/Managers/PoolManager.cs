@@ -51,7 +51,7 @@ public class PoolManager
     {
         if (!_poolDictionary.ContainsKey(poolID))
         {
-            Debug.LogWarning("Pool with the tag " + poolID + " doesn't exist");
+            Debug.LogWarning("Pool with the ID " + poolID + " doesn't exist");
             return null;
         }
 

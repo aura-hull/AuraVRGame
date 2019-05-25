@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
 
             // Game should end
 
+            CurrentGameState = GameState.EndScreen;
             OnGameOver?.Invoke();
         }
     }
