@@ -423,6 +423,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   placeKey: 32
+  _validMaterial: {fileID: 2100000, guid: c35786dcf63af5d4a85f052ec385fe09, type: 2}
+  _invalidMaterial: {fileID: 2100000, guid: b0925693bb18bbf4ca67fdaffcdfcb7f, type: 2}
 --- !u!4 &820465503
 Transform:
   m_ObjectHideFlags: 0

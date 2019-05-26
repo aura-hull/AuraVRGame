@@ -6,18 +6,21 @@ public class BuildSitePlacer : MonoBehaviour
 {
     [SerializeField]
     private GameObject _buildSiteBeingPlaced;
-
     [SerializeField]
     GameObject _placementIndicator;
-
     public LayerMask buildMask;
-
     [SerializeField]
     private KeyCode placeKey;
+
+    [SerializeField]
+    private Material _validMaterial;
+    [SerializeField]
+    private Material _invalidMaterial;
 
     private bool placing = false;
     private bool _validSpawn = false;
 
+    public float _placeRange = 2;
     Ray _ray;
     RaycastHit _hit;
     Vector3 _spawnPoint;
@@ -51,12 +54,21 @@ public class BuildSitePlacer : MonoBehaviour
             // Set ray here
             _ray = new Ray(transform.position, Vector3.down); // replace this for the hand pointer
 
-            _validSpawn = Physics.Raycast(_ray, out _hit, 100, buildMask);
+            _validSpawn = Physics.Raycast(_ray, out _hit, _placeRange, buildMask);
+            _placementIndicator.SetActive(true);
+
             if (_validSpawn)
             {
+                _placementIndicator.GetComponent<Renderer>().material = _validMaterial;
+
                 _spawnPoint = _hit.point;
                 _placementIndicator.transform.position = _hit.point;
-                _placementIndicator.SetActive(true);
+            }
+            else
+            {
+                _placementIndicator.GetComponent<Renderer>().material = _invalidMaterial;
+
+                _placementIndicator.transform.position = _ray.origin + (_ray.direction * _placeRange);
             }
         }
     }    
