@@ -16,6 +16,7 @@ public class BuildSitePlacer : MonoBehaviour
     private KeyCode placeKey;
 
     private bool placing = false;
+    private bool _validSpawn = false;
 
     Ray _ray;
     RaycastHit _hit;
@@ -36,20 +37,27 @@ public class BuildSitePlacer : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(placeKey))
-        {
             placing = true;
-            if (Physics.Raycast(_ray, out _hit, 100, buildMask))
+        if (Input.GetKeyUp(placeKey) && placing)
+        {
+            placing = false;
+            if (_validSpawn)
+                Instantiate(_buildSiteBeingPlaced, _spawnPoint, Quaternion.identity);
+            _placementIndicator.SetActive(false);
+        }
+
+        if (placing)
+        {
+            // Set ray here
+            _ray = new Ray(transform.position, Vector3.down); // replace this for the hand pointer
+
+            _validSpawn = Physics.Raycast(_ray, out _hit, 100, buildMask);
+            if (_validSpawn)
             {
                 _spawnPoint = _hit.point;
                 _placementIndicator.transform.position = _hit.point;
                 _placementIndicator.SetActive(true);
             }
-        }
-        if (Input.GetKeyUp(placeKey) && placing)
-        {
-            placing = false;
-            Instantiate(_buildSiteBeingPlaced, _spawnPoint, Quaternion.identity);
-            _placementIndicator.SetActive(false);
         }
     }    
 }
