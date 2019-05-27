@@ -83,7 +83,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 19.18, z: 13.4}
+  m_Size: {x: 15, y: 19, z: 7}
   m_Center: {x: 0, y: 9.68, z: 1.35}
 --- !u!1001 &1481253836696971338
 PrefabInstance:
@@ -258,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 7514997623823182820, guid: 92b3c1f8e5f9cb74daf41083c2c2b3cf,
         type: 3}
       propertyPath: m_Name
-      value: TurbinePillar
+      value: TurbineShaft
       objectReference: {fileID: 0}
     - target: {fileID: 3313797764501950760, guid: 92b3c1f8e5f9cb74daf41083c2c2b3cf,
         type: 3}
