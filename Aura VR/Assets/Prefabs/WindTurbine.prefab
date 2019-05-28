@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bb9c05d5db5f044a1f9c65e178d3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _powerOutputMinMax: {x: 10, y: 100}
+  _powerOutputMinMax: {x: 1, y: 10}
   _distanceMinMax: {x: 1, y: 100}
   _positionToScaleFrom: {fileID: 1527238720767385975}
 --- !u!1 &6985086397358968479
