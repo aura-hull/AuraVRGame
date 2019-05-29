@@ -1,74 +1,97 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using RootMotion;
 using UnityEngine;
+using VRTK;
 
 public class BuildSitePlacer : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _buildSiteBeingPlaced;
-    [SerializeField]
-    GameObject _placementIndicator;
-    public LayerMask buildMask;
-    [SerializeField]
-    private KeyCode placeKey;
+    [SerializeField] private GameObject buildSiteBeingPlaced;
+    [SerializeField] GameObject placementIndicator;
+    [SerializeField] private Material validMaterial;
+    [SerializeField] private Material invalidMaterial;
+    [SerializeField] private float placeRange = 2;
+    [SerializeField] private string buildLayerName;
 
-    [SerializeField]
-    private Material _validMaterial;
-    [SerializeField]
-    private Material _invalidMaterial;
-
-    private bool placing = false;
+    private bool _placing = false;
     private bool _validSpawn = false;
-
-    public float _placeRange = 2;
-    Ray _ray;
-    RaycastHit _hit;
-    Vector3 _spawnPoint;
+    private Vector3 _spawnPoint;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (_placementIndicator != null)
+        VRTK_ControllerEvents controllerEvents = GetComponent<VRTK_ControllerEvents>();
+        if (controllerEvents != null)
         {
-            _placementIndicator = Instantiate(_placementIndicator);
-            _placementIndicator.SetActive(false);
+            controllerEvents.ButtonOnePressed += StartPlacement;
+            controllerEvents.ButtonOneReleased += HaltPlacement;
         }
-        _ray = new Ray(transform.position, Vector3.down);
+
+        if (placementIndicator != null)
+        {
+            placementIndicator.SetActive(false);
+        }
+    }
+
+    private void StartPlacement(object sender, ControllerInteractionEventArgs e)
+    {
+        _placing = true;
+    }
+
+    private void HaltPlacement(object sender, ControllerInteractionEventArgs e)
+    {
+        _placing = false;
+
+        if (placementIndicator)
+        {
+            placementIndicator.SetActive(false);
+        }
+
+        if (_validSpawn)
+        {
+            PhotonNetwork.Instantiate(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(placeKey))
-            placing = true;
-        if (Input.GetKeyUp(placeKey) && placing)
-        {
-            placing = false;
-            if (_validSpawn)
-                Instantiate(_buildSiteBeingPlaced, _spawnPoint, Quaternion.identity);
-            _placementIndicator.SetActive(false);
-        }
-
-        if (placing)
+        if (_placing)
         {
             // Set ray here
-            _ray = new Ray(transform.position, Vector3.down); // replace this for the hand pointer
-
-            _validSpawn = Physics.Raycast(_ray, out _hit, _placeRange, buildMask);
-            _placementIndicator.SetActive(true);
-
-            if (_validSpawn)
+            Ray ray = new Ray(transform.position, transform.forward); // replace this for the hand pointer
+            RaycastHit hitInfo;
+            
+            if (Physics.Raycast(ray, out hitInfo, placeRange))
             {
-                _placementIndicator.GetComponent<Renderer>().material = _validMaterial;
-
-                _spawnPoint = _hit.point;
-                _placementIndicator.transform.position = _hit.point;
+                if (placementIndicator != null)
+                {
+                    placementIndicator.SetActive(true);
+                    placementIndicator.transform.position = hitInfo.point;
+                    placementIndicator.transform.rotation = Quaternion.identity;
+                }
+                
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(buildLayerName))
+                {
+                    _spawnPoint = hitInfo.point;
+                    _validSpawn = true;
+                    placementIndicator.GetComponent<Renderer>().material = validMaterial;
+                }
+                else
+                {
+                    _validSpawn = false;
+                    placementIndicator.GetComponent<Renderer>().material = invalidMaterial;
+                }
             }
             else
             {
-                _placementIndicator.GetComponent<Renderer>().material = _invalidMaterial;
+                _validSpawn = false;
 
-                _placementIndicator.transform.position = _ray.origin + (_ray.direction * _placeRange);
+                if (placementIndicator != null)
+                {
+                    placementIndicator.SetActive(false);
+                }
             }
         }
     }    

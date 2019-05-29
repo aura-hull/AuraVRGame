@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8360237685771893034}
   - component: {fileID: 6683594846874977186}
   - component: {fileID: 2402272678336888849}
+  - component: {fileID: 4322869996535723782}
   m_Layer: 0
   m_Name: TurbineBuild
   m_TagString: Untagged
@@ -85,6 +86,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15, y: 19, z: 7}
   m_Center: {x: 0, y: 9.68, z: 1.35}
+--- !u!114 &4322869996535723782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771215626999058927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1481253836696971338
 PrefabInstance:
   m_ObjectHideFlags: 0

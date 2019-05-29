@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 312800092}
   - component: {fileID: 312800091}
   - component: {fileID: 312800090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WaterColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,8 +491,8 @@ Transform:
   m_Father: {fileID: 1446949050}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &312800090
-CapsuleCollider:
+--- !u!64 &312800090
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -501,10 +501,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &312800091
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d617f75752787499bf97f41654bd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boatPlayerPrefab: {fileID: 3133286319932603436, guid: 79e9a76361cfae34cb02115d5fe9725f,
+  _boatPlayerPrefab: {fileID: 3133286319932603436, guid: d94aefa717d09404ca2e59d55f60142f,
     type: 3}
   _titanPlayerPrefab: {fileID: 3133286319932603436, guid: d94aefa717d09404ca2e59d55f60142f,
     type: 3}
@@ -2058,6 +2058,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1166963176951070140}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2120459432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 0b85318254e8aa040bfe5645a4f75d90,
+    type: 3}
+  m_PrefabInstance: {fileID: 394961155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2120459433
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120459432}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: 0b85318254e8aa040bfe5645a4f75d90, type: 3}
 --- !u!1001 &1166963176951070140
 PrefabInstance:
   m_ObjectHideFlags: 0
