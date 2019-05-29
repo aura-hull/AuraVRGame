@@ -82,6 +82,8 @@ public class OvrAvatarSkinnedMeshPBSV2RenderComponent : OvrAvatarRenderComponent
 
     private void InitializeSingleComponentMaterial(IntPtr renderPart, int lodIndex)
     {
+        return; // FIX: ADDED TO REMOVE ERROR WITH OVR
+
         ovrAvatarPBSMaterialState materialState =
             CAPI.ovrAvatarSkinnedMeshRenderPBSV2_GetPBSMaterialState(renderPart);
 

@@ -7,6 +7,9 @@ using VRTK;
 
 public class BuildSitePlacer : MonoBehaviour
 {
+    public static int idAssignment = 0;
+    public static int controllingId = -1;
+
     [SerializeField] private GameObject buildSiteBeingPlaced;
     [SerializeField] GameObject placementIndicator;
     [SerializeField] private Material validMaterial;
@@ -17,15 +20,18 @@ public class BuildSitePlacer : MonoBehaviour
     private bool _placing = false;
     private bool _validSpawn = false;
     private Vector3 _spawnPoint;
+    private int _id = -1;
 
     // Start is called before the first frame update
     void Awake()
     {
+        _id = idAssignment++;
+
         VRTK_ControllerEvents controllerEvents = GetComponent<VRTK_ControllerEvents>();
         if (controllerEvents != null)
         {
-            controllerEvents.ButtonOnePressed += StartPlacement;
-            controllerEvents.ButtonOneReleased += HaltPlacement;
+            controllerEvents.ButtonTwoPressed += StartPlacement;
+            controllerEvents.ButtonTwoReleased += HaltPlacement;
         }
 
         if (placementIndicator != null)
@@ -36,11 +42,15 @@ public class BuildSitePlacer : MonoBehaviour
 
     private void StartPlacement(object sender, ControllerInteractionEventArgs e)
     {
+        if (controllingId != -1) return;
+        controllingId = _id;
         _placing = true;
     }
 
     private void HaltPlacement(object sender, ControllerInteractionEventArgs e)
     {
+        if (controllingId != _id) return;
+        controllingId = -1;
         _placing = false;
 
         if (placementIndicator)

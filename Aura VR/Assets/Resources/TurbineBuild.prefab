@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6683594846874977186}
   - component: {fileID: 2402272678336888849}
   - component: {fileID: 4322869996535723782}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TurbineBuild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +34,7 @@ Transform:
   - {fileID: 826994394847511580}
   - {fileID: 4702072262095620587}
   - {fileID: 5358886758178572465}
+  - {fileID: 569574319103150327}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,6 +109,50 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &4977475347576507730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569574319103150327}
+  - component: {fileID: 8265218580984373031}
+  m_Layer: 0
+  m_Name: NoPlacey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &569574319103150327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977475347576507730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8901432631870974839}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8265218580984373031
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977475347576507730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 0.2, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1481253836696971338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurbineBlades
+      objectReference: {fileID: 0}
+    - target: {fileID: 2974693420530202692, guid: 969c8c744f8f2cb4aa11ee9ffae12e41,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2302583513278442582, guid: 969c8c744f8f2cb4aa11ee9ffae12e41,
         type: 3}
@@ -202,6 +252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurbineHub
       objectReference: {fileID: 0}
+    - target: {fileID: 8357368196487140694, guid: 6776d69144fde70479b4eafd2d1c9519,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1241238452358489513, guid: 6776d69144fde70479b4eafd2d1c9519,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +337,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TurbineShaft
+      objectReference: {fileID: 0}
+    - target: {fileID: 7514997623823182820, guid: 92b3c1f8e5f9cb74daf41083c2c2b3cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3313797764501950760, guid: 92b3c1f8e5f9cb74daf41083c2c2b3cf,
         type: 3}
