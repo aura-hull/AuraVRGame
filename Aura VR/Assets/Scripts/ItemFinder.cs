@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class ItemFinder
 {
-    public static List<GameObject> FindItems(Transform scanTransform, float scanRadius)
+    public static List<GameObject> FindItems(Transform scanTransform, float scanRadius, string objectTag)
     {
-        GameObject[] items = GameObject.FindGameObjectsWithTag("BuildPart");
+        GameObject[] items = GameObject.FindGameObjectsWithTag(objectTag);
 
         List<GameObject> itemsInRange = new List<GameObject>();
 

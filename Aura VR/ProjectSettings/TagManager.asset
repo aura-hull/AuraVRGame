@@ -8,6 +8,7 @@ TagManager:
   - ExcludeTeleport
   - Bullet
   - TeleportIgnore
+  - BuildPart
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - PostProcessing
   - WorldBoundaries
-  - 
+  - BuildTerrain
   - 
   - 
   - 
