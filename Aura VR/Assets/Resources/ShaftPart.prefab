@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7086797777932614321}
   - component: {fileID: 5933117036059259720}
   - component: {fileID: 3560811593079716286}
+  - component: {fileID: 6808645240472021933}
   - component: {fileID: 8127642500428706909}
   m_Layer: 0
   m_Name: ShaftPart
@@ -147,6 +148,18 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &6808645240472021933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7086797777932614322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4437a1174adba4a8ae73f8910a21c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8127642500428706909
 MonoBehaviour:
   m_ObjectHideFlags: 0
