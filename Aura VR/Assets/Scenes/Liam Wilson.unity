@@ -1721,6 +1721,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerFactory: {fileID: 823633316}
+  _partSpawners:
+  - {fileID: 1634665490}
+  - {fileID: 1505952636}
+  - {fileID: 1339009190}
 --- !u!114 &1260462564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,7 +1907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
     type: 3}
-  spawnPoint: {fileID: 1993507629}
+  spawnPoint: {fileID: 898159795}
 --- !u!1 &1357638201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
     type: 3}
-  spawnPoint: {fileID: 1993507629}
+  spawnPoint: {fileID: 2100340177}
 --- !u!1 &1588232186
 GameObject:
   m_ObjectHideFlags: 0
