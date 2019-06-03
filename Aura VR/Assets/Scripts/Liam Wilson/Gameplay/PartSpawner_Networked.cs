@@ -5,20 +5,36 @@ using UnityEngine;
 
 public class PartSpawner_Networked : MonoBehaviour
 {
-    [SerializeField] private Object partPrefab;
+    [SerializeField] private Object[] partPrefabs;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private float distanceBeforeNextSpawn = 10.0f;
 
-    private PhotonView currentPart;
+    private Transform trackedPart;
+    private int nextPartIndex = 0;
 
     public void SpawnIfReady()
     {
-        if (currentPart != null) return;
-        if (partPrefab == null) return;
+        if (trackedPart != null) return;
+        if (partPrefabs == null) return;
 
         if (PhotonNetwork.IsMasterClient)
         {
-            GameObject partInstance = PhotonNetwork.Instantiate(partPrefab.name, spawnPoint.position, Quaternion.identity);
-            currentPart = partInstance.GetPhotonView();
+            GameObject partInstance = PhotonNetwork.Instantiate(partPrefabs[nextPartIndex].name, spawnPoint.position, Quaternion.identity);
+            nextPartIndex = (nextPartIndex + 1) % partPrefabs.Length;
+            trackedPart = partInstance.transform;
+        }
+    }
+
+    void Update()
+    {
+        if (trackedPart == null) return;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (Vector3.Distance(trackedPart.position, spawnPoint.position) > distanceBeforeNextSpawn)
+            {
+                trackedPart = null;
+            }
         }
     }
 }

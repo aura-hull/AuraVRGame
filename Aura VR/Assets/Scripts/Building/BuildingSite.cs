@@ -69,6 +69,12 @@ public class BuildingSite : MonoBehaviour
             NetworkController.Instance.NotifyTurbinePartBuilt(part.Name);
             part.Use(); // Destroy the GameObject used as the part
         }
+
+        // If the the build is complete, delete the site and make the build
+        if (_numOfPartsOwned >= _parts.Length)
+        {
+            NetworkController.Instance.NotifyTurbineBuilt(gameObject.GetPhotonView().ViewID, _objectToBecome.name);
+        }
     }
 
     private void ConstructPartNetworked(int actorNumber, string partName)

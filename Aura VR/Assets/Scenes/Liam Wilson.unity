@@ -1905,9 +1905,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
-    type: 3}
+  partPrefabs:
+  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
+  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
+  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
   spawnPoint: {fileID: 898159795}
+  distanceBeforeNextSpawn: 10
 --- !u!1 &1357638201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,9 +2122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
-    type: 3}
+  partPrefabs:
+  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
+  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
+  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
   spawnPoint: {fileID: 2100340177}
+  distanceBeforeNextSpawn: 10
 --- !u!1 &1588232186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,9 +2277,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
-    type: 3}
+  partPrefabs:
+  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
+  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
+  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
   spawnPoint: {fileID: 1993507629}
+  distanceBeforeNextSpawn: 10
 --- !u!1 &1687704865
 GameObject:
   m_ObjectHideFlags: 0

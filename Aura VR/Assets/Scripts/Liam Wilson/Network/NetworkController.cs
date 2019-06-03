@@ -12,7 +12,8 @@ namespace AuraHull.AuraVRGame
     public enum NetworkEvent
     {
         BUILD_SITE_PLACED,
-        TURBINE_PART_BUILT
+        TURBINE_PART_BUILT,
+        TURBINE_BUILT
     }
 
     public class NetworkController : MonoBehaviour, IOnEventCallback, IInRoomCallbacks, IMatchmakingCallbacks
@@ -24,6 +25,7 @@ namespace AuraHull.AuraVRGame
 
         public static event Action OnGameConnected;
         public static event Action<int, string> OnTurbinePartBuilt;
+        public static event Action<int, string> OnTurbineBuilt;
         public static event Action<Player> OnSomePlayerConnected;
         public static event Action<Player> OnSomePlayerDisconnected;
         public static event Action<Player> OnRoundEnded;
@@ -83,17 +85,35 @@ namespace AuraHull.AuraVRGame
             );
         }
 
+        public void NotifyTurbineBuilt(int buildSiteViewId, string turbinePrefabName)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.TURBINE_BUILT,
+                eventContent: new object[2] { buildSiteViewId, turbinePrefabName },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
         public void OnEvent(EventData photonEvent)
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
             var content = photonEvent[ParameterCode.CustomEventContent];
+            object[] serialize = null;
+
+            if (content != null)
+            {
+                serialize = (object[])content;
+            }
 
             switch (receivedNetworkEvent)
             {
                 case NetworkEvent.BUILD_SITE_PLACED:
                     if (PhotonNetwork.IsMasterClient)
                     {
-                        object[] serialize = (object[])content;
                         PhotonNetwork.InstantiateSceneObject((string) serialize[0], (Vector3) serialize[1], Quaternion.identity);
                     }
                     break;
@@ -101,8 +121,24 @@ namespace AuraHull.AuraVRGame
                 case NetworkEvent.TURBINE_PART_BUILT:
                     if (OnTurbinePartBuilt != null)
                     {
-                        object[] serialize = (object[])content;
                         OnTurbinePartBuilt((int)serialize[0], (string)serialize[1]);
+                    }
+                    break;
+
+                case NetworkEvent.TURBINE_BUILT:
+                    serialize = (object[])content;
+
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        PhotonView buildSite = PhotonView.Find((int)serialize[0]);
+
+                        PhotonNetwork.InstantiateSceneObject((string)serialize[1], buildSite.transform.position, buildSite.transform.rotation);
+                        PhotonNetwork.Destroy(buildSite);
+                    }
+
+                    if (OnTurbineBuilt != null)
+                    {
+                        // power stuff
                     }
                     break;
             }
