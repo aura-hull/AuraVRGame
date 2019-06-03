@@ -62,9 +62,9 @@ public class BuildingSite : MonoBehaviour
         BuildPart part = other.GetComponent<BuildPart>();
         if (part == null) return;
 
-        if (ConstructPart(part.name))
+        if (ConstructPart(part.Name))
         {
-            NetworkController.Instance.NotifyTurbinePartBuilt();
+            NetworkController.Instance.NotifyTurbinePartBuilt(part.Name);
             part.Use(); // Destroy the GameObject used as the part
         }
     }
@@ -81,23 +81,24 @@ public class BuildingSite : MonoBehaviour
         // Ensure it has a part script
         for (int i = 0; i < _parts.Length; i++)
         {
-            if (_parts[i] == null) continue;
-
-            // Check if the part is wanted
-            if (partName == _parts[i].name)
+            if (_parts[i] != null)
             {
-                // Check the part isn't already owned
-                if (_partIsOwned[i] == false)
+                // Check if the part is wanted
+                if (partName == _parts[i].name)
                 {
-                    _partIsOwned[i] = true; // Set part as owned
-                    _numOfPartsOwned++; // Increase the number of owned parts
-
-                    // Change part to use filled material
-                    Renderer partRend = _parts[i].GetComponent<Renderer>();
-                    if (partRend != null)
+                    // Check the part isn't already owned
+                    if (_partIsOwned[i] == false)
                     {
-                        partRend.material = _filledMaterial;
-                        return true;
+                        _partIsOwned[i] = true; // Set part as owned
+                        _numOfPartsOwned++; // Increase the number of owned parts
+
+                        // Change part to use filled material
+                        Renderer partRend = _parts[i].GetComponent<Renderer>();
+                        if (partRend != null)
+                        {
+                            partRend.material = _filledMaterial;
+                            return true;
+                        }
                     }
                 }
             }

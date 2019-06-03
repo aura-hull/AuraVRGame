@@ -11,7 +11,7 @@ namespace AuraHull.AuraVRGame
 {
     public enum NetworkEvent
     {
-        TURBINE_BUILT
+        TURBINE_PART_BUILT
     }
 
     public class NetworkController : MonoBehaviour, IOnEventCallback, IInRoomCallbacks, IMatchmakingCallbacks
@@ -56,14 +56,14 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
-        public void NotifyTurbinePartBuilt()
+        public void NotifyTurbinePartBuilt(string partName)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
-                (byte)NetworkEvent.TURBINE_BUILT,
-                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, "" },
+                (byte)NetworkEvent.TURBINE_PART_BUILT,
+                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, partName },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -76,12 +76,11 @@ namespace AuraHull.AuraVRGame
 
             switch (receivedNetworkEvent)
             {
-                case NetworkEvent.TURBINE_BUILT:
+                case NetworkEvent.TURBINE_PART_BUILT:
                     if (OnTurbinePartBuilt != null)
                     {
-                        string contentStr = content.ToString();
-                        Debug.Log(contentStr);
-                        //OnTurbinePartBuilt((int)content[0], (string)content[1]);
+                        object[] serialize = (object[])content;
+                        OnTurbinePartBuilt((int)serialize[0], (string)serialize[1]);
                     }
                     break;
             }
