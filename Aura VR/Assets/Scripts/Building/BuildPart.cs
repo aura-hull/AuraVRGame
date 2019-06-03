@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class BuildPart : MonoBehaviour
@@ -30,7 +31,9 @@ public class BuildPart : MonoBehaviour
         _numOfUsesLeft--;
         if (_numOfUsesLeft <= 0)
         {
-            gameObject.SetActive(false);
+            PhotonView view = GetComponent<PhotonView>();
+            if (view.Owner != PhotonNetwork.LocalPlayer) return;
+            PhotonNetwork.Destroy(view);
         }
     }
 }
