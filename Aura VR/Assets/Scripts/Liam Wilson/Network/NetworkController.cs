@@ -102,12 +102,7 @@ namespace AuraHull.AuraVRGame
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
             var content = photonEvent[ParameterCode.CustomEventContent];
-            object[] serialize = null;
-
-            if (content != null)
-            {
-                serialize = (object[])content;
-            }
+            object[] serialize = content as object[];
 
             switch (receivedNetworkEvent)
             {
