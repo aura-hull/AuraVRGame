@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2114570970554864340}
   - component: {fileID: 1281496618528740599}
   - component: {fileID: 1779067394815014182}
+  - component: {fileID: 7643244444787433273}
   - component: {fileID: 168346397805055914}
   m_Layer: 0
   m_Name: HubPart
@@ -147,6 +148,18 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &7643244444787433273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114570970554864341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4437a1174adba4a8ae73f8910a21c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &168346397805055914
 MonoBehaviour:
   m_ObjectHideFlags: 0
