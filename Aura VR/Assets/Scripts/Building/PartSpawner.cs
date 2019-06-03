@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PartSpawner : MonoBehaviour
@@ -30,6 +31,7 @@ public class PartSpawner : MonoBehaviour
 
         // Create pools for items
         poolManager = PoolManager.Instance;
+
         for (int i = 0; i < _spawnObjects.Count; i += 1)
         {
             poolManager.CreatePool(_spawnObjects[i].name, _spawnObjects[i], 5);
