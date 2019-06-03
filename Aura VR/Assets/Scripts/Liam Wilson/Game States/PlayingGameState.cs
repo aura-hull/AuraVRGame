@@ -30,8 +30,8 @@ namespace AuraHull.AuraVRGame
             {
                 return;
             }
-
-            // Master Client only code
+            
+            GameModel.Instance.SpawnParts();
         }
 
         void SomeoneConnectedMessage(Player somePlayer)

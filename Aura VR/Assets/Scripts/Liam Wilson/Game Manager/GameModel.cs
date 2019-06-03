@@ -7,8 +7,8 @@ namespace AuraHull.AuraVRGame
 {
     public class GameModel : MonoBehaviour
     {
-        [SerializeField]
-        PlayerFactory _playerFactory;
+        [SerializeField] private PlayerFactory _playerFactory;
+        [SerializeField] private PartSpawner_Networked[] _partSpawners;
 
         BaseGameState _activeGameState;
 
@@ -48,6 +48,14 @@ namespace AuraHull.AuraVRGame
         public void BuildPlayer()
         {
             this._playerFactory.Build();
+        }
+
+        public void SpawnParts()
+        {
+            for (int i = 0; i < _partSpawners.Length; i++)
+            {
+                _partSpawners[i].SpawnIfReady();
+            }
         }
     }
 }

@@ -8,23 +8,17 @@ public class PartSpawner_Networked : MonoBehaviour
     [SerializeField] private Object partPrefab;
     [SerializeField] private Transform spawnPoint;
 
-    void Awake()
-    {
+    private bool isSpawned = false;
 
-    }
-
-    void Start()
+    public void SpawnIfReady()
     {
+        if (isSpawned) return;
         if (partPrefab == null) return;
 
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Instantiate(partPrefab.name, spawnPoint.position, Quaternion.identity);
+            isSpawned = true;
         }
-    }
-
-    void Update()
-    {
-
     }
 }
