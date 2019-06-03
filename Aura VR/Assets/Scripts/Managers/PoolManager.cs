@@ -77,7 +77,7 @@ class Pool
 
         for (int i = 0; i < poolSize; i += 1)
         {
-            GameObject newObject = Object.Instantiate(prefab);
+            GameObject newObject = Photon.Pun.PhotonNetwork.Instantiate(prefab.name, Vector3.zero, Quaternion.identity);
             newObject.SetActive(false);
 
             _objectPool.Enqueue(newObject);
