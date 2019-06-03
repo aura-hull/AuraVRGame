@@ -32,7 +32,7 @@ public class PartSpawner : MonoBehaviour
         poolManager = PoolManager.Instance;
         for (int i = 0; i < _spawnObjects.Count; i += 1)
         {
-            poolManager.CreatePool(_spawnObjects[i].name, _spawnObjects[i], 10);
+            poolManager.CreatePool(_spawnObjects[i].name, _spawnObjects[i], 5);
         }
 
         IsPowered = true;
