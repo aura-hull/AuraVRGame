@@ -11,6 +11,7 @@ namespace AuraHull.AuraVRGame
 {
     public enum NetworkEvent
     {
+        BUILD_SITE_PLACED,
         TURBINE_PART_BUILT
     }
 
@@ -56,6 +57,19 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
+        public void NotifyBuildSitePlaced(string prefabName, Vector3 position)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.BUILD_SITE_PLACED,
+                eventContent: new object[2] { prefabName, position },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
         public void NotifyTurbinePartBuilt(string partName)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
@@ -76,6 +90,14 @@ namespace AuraHull.AuraVRGame
 
             switch (receivedNetworkEvent)
             {
+                case NetworkEvent.BUILD_SITE_PLACED:
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        object[] serialize = (object[])content;
+                        PhotonNetwork.InstantiateSceneObject((string) serialize[0], (Vector3) serialize[1], Quaternion.identity);
+                    }
+                    break;
+
                 case NetworkEvent.TURBINE_PART_BUILT:
                     if (OnTurbinePartBuilt != null)
                     {

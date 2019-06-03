@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AuraHull.AuraVRGame;
 using Photon.Pun;
 using RootMotion;
 using UnityEngine;
@@ -60,7 +61,8 @@ public class BuildSitePlacer : MonoBehaviour
 
         if (_validSpawn)
         {
-            PhotonNetwork.InstantiateSceneObject(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
+            NetworkController.Instance.NotifyBuildSitePlaced(buildSiteBeingPlaced.name, _spawnPoint);
+            //PhotonNetwork.InstantiateSceneObject(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
         }
     }
 
