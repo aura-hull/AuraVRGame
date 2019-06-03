@@ -20,11 +20,7 @@ public class BuildingSite : MonoBehaviour
     void Awake()
     {
         NetworkController.OnTurbinePartBuilt += ConstructPartNetworked;
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         _numOfPartsOwned = 0;
         if (_parts == null)
             _parts = new GameObject[0];
@@ -33,7 +29,7 @@ public class BuildingSite : MonoBehaviour
         for (int i = 0; i < _parts.Length; i++)
         {
             if (_parts[i] != null)
-            { 
+            {
                 // Change part to use holographic material
                 Renderer partRend = _parts[i].GetComponent<Renderer>();
                 if (partRend != null)
@@ -42,6 +38,12 @@ public class BuildingSite : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -72,7 +74,6 @@ public class BuildingSite : MonoBehaviour
     private void ConstructPartNetworked(int actorNumber, string partName)
     {
         if (actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) return;
-        Debug.Log("netodfsdfsdfsdf");
         ConstructPart(partName);
     }
 
