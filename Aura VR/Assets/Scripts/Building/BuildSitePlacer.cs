@@ -60,7 +60,7 @@ public class BuildSitePlacer : MonoBehaviour
 
         if (_validSpawn)
         {
-            PhotonNetwork.Instantiate(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
+            PhotonNetwork.InstantiateSceneObject(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
         }
     }
 
