@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
+using Oculus.Platform.Samples.VrHoops;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using Player = Photon.Realtime.Player;
 
 namespace AuraHull.AuraVRGame
 {
@@ -20,7 +22,7 @@ namespace AuraHull.AuraVRGame
         Connection _connection;
 
         public static event Action OnGameConnected;
-        public static event Action OnTurbineBuilt;
+        public static event Action<int, string> OnTurbinePartBuilt;
         public static event Action<Player> OnSomePlayerConnected;
         public static event Action<Player> OnSomePlayerDisconnected;
         public static event Action<Player> OnRoundEnded;
@@ -54,14 +56,14 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
-        public void NotifyTurbineBuilt()
+        public void NotifyTurbinePartBuilt()
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TURBINE_BUILT,
-                eventContent: null,
+                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, "" },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -70,14 +72,14 @@ namespace AuraHull.AuraVRGame
         public void OnEvent(EventData photonEvent)
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
-            var content = photonEvent[ParameterCode.CustomEventContent];
+            var content = (object[])photonEvent[ParameterCode.CustomEventContent];
 
             switch (receivedNetworkEvent)
             {
                 case NetworkEvent.TURBINE_BUILT:
-                    if (OnTurbineBuilt != null)
+                    if (OnTurbinePartBuilt != null)
                     {
-                        OnTurbineBuilt();
+                        OnTurbinePartBuilt((int)content[0], (string)content[1]);
                     }
                     break;
             }

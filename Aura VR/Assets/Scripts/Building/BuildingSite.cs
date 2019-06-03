@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AuraHull.AuraVRGame;
+using Photon.Pun;
 using UnityEngine;
 
 public class BuildingSite : MonoBehaviour
@@ -14,6 +16,11 @@ public class BuildingSite : MonoBehaviour
     Material _holoMaterial;
     [SerializeField]
     Material _filledMaterial;
+
+    void Awake()
+    {
+        NetworkController.OnTurbinePartBuilt += ConstructPartNetworked;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -51,41 +58,51 @@ public class BuildingSite : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("collision with: " + other.name);
+
         BuildPart part = other.GetComponent<BuildPart>();
-        // Ensure it has a part script
-        if (part != null)
+        if (part == null) return;
+
+        if (ConstructPart(part.name))
         {
-            // Get the name of the part
-            string partName = part.Name;
+            NetworkController.Instance.NotifyTurbinePartBuilt();
+            part.Use(); // Destroy the GameObject used as the part
+        }
+    }
 
-            for (int i = 0; i < _parts.Length; i++)
+    private void ConstructPartNetworked(int actorNumber, string partName)
+    {
+        if (actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) return;
+        Debug.Log("netodfsdfsdfsdf");
+        ConstructPart(partName);
+    }
+
+    private bool ConstructPart(string partName)
+    {
+        // Ensure it has a part script
+        for (int i = 0; i < _parts.Length; i++)
+        {
+            if (_parts[i] == null) continue;
+
+            // Check if the part is wanted
+            if (partName == _parts[i].name)
             {
-                if (_parts[i] != null)
+                // Check the part isn't already owned
+                if (_partIsOwned[i] == false)
                 {
-                    // Check if the part is wanted
-                    if (partName == _parts[i].name)
+                    _partIsOwned[i] = true; // Set part as owned
+                    _numOfPartsOwned++; // Increase the number of owned parts
+
+                    // Change part to use filled material
+                    Renderer partRend = _parts[i].GetComponent<Renderer>();
+                    if (partRend != null)
                     {
-                        // Check the part isn't already owned
-                        if (_partIsOwned[i] == false)
-                        {
-                            // Set part as owned
-                            _partIsOwned[i] = true;
-                            // Increase the number of owned parts
-                            _numOfPartsOwned++;
-
-                            // Change part to use filled material
-                            Renderer partRend = _parts[i].GetComponent<Renderer>();
-                            if (partRend != null)
-                            {
-                                partRend.material = _filledMaterial;
-                            }
-
-                            // Destroy the GameObject used as the part
-                            part.Use();
-                        }
+                        partRend.material = _filledMaterial;
+                        return true;
                     }
                 }
             }
         }
+
+        return false;
     }
 }
