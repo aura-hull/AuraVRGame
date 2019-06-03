@@ -72,14 +72,16 @@ namespace AuraHull.AuraVRGame
         public void OnEvent(EventData photonEvent)
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
-            var content = (object[])photonEvent[ParameterCode.CustomEventContent];
+            var content = photonEvent[ParameterCode.CustomEventContent];
 
             switch (receivedNetworkEvent)
             {
                 case NetworkEvent.TURBINE_BUILT:
                     if (OnTurbinePartBuilt != null)
                     {
-                        OnTurbinePartBuilt((int)content[0], (string)content[1]);
+                        string contentStr = content.ToString();
+                        Debug.Log(contentStr);
+                        //OnTurbinePartBuilt((int)content[0], (string)content[1]);
                     }
                     break;
             }
