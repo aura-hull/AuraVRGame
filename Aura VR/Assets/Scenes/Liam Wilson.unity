@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890166708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 168.9, y: 0, z: -114.8}
+  m_LocalPosition: {x: 47.4, y: 0, z: -143.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1273423761}
@@ -1898,16 +1898,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1339009185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df472afe9a6d2d449ed6a66ec93b98b, type: 3}
+  m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _respawnTime: 5
-  _spawnObjects:
-  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
-  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
-  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
-  _spawnLocation: {fileID: 898159795}
-  _lookingForTag: Player
+  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
+    type: 3}
+  spawnPoint: {fileID: 1993507629}
 --- !u!1 &1357638201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,16 +2112,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1505952631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df472afe9a6d2d449ed6a66ec93b98b, type: 3}
+  m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _respawnTime: 5
-  _spawnObjects:
-  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
-  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
-  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
-  _spawnLocation: {fileID: 2100340177}
-  _lookingForTag: Player
+  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
+    type: 3}
+  spawnPoint: {fileID: 1993507629}
 --- !u!1 &1588232186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,7 +2143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588232186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 184, y: 0, z: -92.7}
+  m_LocalPosition: {x: 97.8, y: 0, z: -137.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1273423761}
@@ -2182,7 +2174,7 @@ GameObject:
   - component: {fileID: 1634665487}
   - component: {fileID: 1634665486}
   - component: {fileID: 1634665485}
-  - component: {fileID: 1634665489}
+  - component: {fileID: 1634665490}
   m_Layer: 0
   m_Name: Siemens Gamesa
   m_TagString: Untagged
@@ -2263,7 +2255,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 82.097, z: 0}
---- !u!114 &1634665489
+--- !u!114 &1634665490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2272,16 +2264,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634665484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df472afe9a6d2d449ed6a66ec93b98b, type: 3}
+  m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _respawnTime: 5
-  _spawnObjects:
-  - {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb, type: 3}
-  - {fileID: 2114570970554864341, guid: 01f48e06993437a44b33b340088f0a0a, type: 3}
-  - {fileID: 624845336152241281, guid: b4f45185ee7c72449898893648dffb0c, type: 3}
-  _spawnLocation: {fileID: 1993507629}
-  _lookingForTag: Player
+  partPrefab: {fileID: 7086797777932614322, guid: 6aed10b70502ad843a9e0dfbbe03bdbb,
+    type: 3}
+  spawnPoint: {fileID: 1993507629}
 --- !u!1 &1687704865
 GameObject:
   m_ObjectHideFlags: 0
