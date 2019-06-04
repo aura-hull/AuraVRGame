@@ -8,13 +8,11 @@ public class ScoreboardManager
 {
     #region Singleton
     private static ScoreboardManager _instance;
-
     public static ScoreboardManager Instance
     {
         get
         {
-            if (_instance == null)
-                _instance = new ScoreboardManager();
+            if (_instance == null) _instance = new ScoreboardManager();
             return _instance;
         }
     }
@@ -28,7 +26,7 @@ public class ScoreboardManager
 
     private ScoreboardManager()
     {
-        GameManager.Instance.OnGameOver += SaveScores;
+        AuraGameManager.Instance.OnGameOver += SaveScores;
         _scores = new List<ScoreData>();
     }
 

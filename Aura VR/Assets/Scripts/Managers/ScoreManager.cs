@@ -11,10 +11,7 @@ public class ScoreManager
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new ScoreManager();
-            }
+            if (_instance == null) _instance = new ScoreManager();
             return _instance;
         }
     }
@@ -22,7 +19,7 @@ public class ScoreManager
 
     private ScoreManager()
     {
-
+        
     }
 
     private float _score;
@@ -34,7 +31,7 @@ public class ScoreManager
         {
             return _score;
         }
-        private set
+        set
         {
             _score = value;
             OnScoreChange?.Invoke(_score);

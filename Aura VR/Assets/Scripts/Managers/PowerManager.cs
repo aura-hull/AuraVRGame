@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class PowerManager
 {
-    #region Instancing
+    #region Singleton
     private static PowerManager _instance;
     public static PowerManager Instance
     {
         get
         {
-            if (_instance == null)
-                _instance = new PowerManager();
+            if (_instance == null) _instance = new PowerManager();
             return _instance;
         }
     }
@@ -20,7 +19,7 @@ public class PowerManager
 
     private PowerManager()
     {
-
+        
     }
 
     private float _powerProduced = 0;
@@ -34,7 +33,7 @@ public class PowerManager
         {
             return _powerProduced;
         }
-        private set
+        set
         {
             _powerProduced = value;
             OnPowerProducedChanged?.Invoke(_powerProduced);
@@ -47,7 +46,7 @@ public class PowerManager
         {
             return _powerUsed;
         }
-        private set
+        set
         {
             _powerUsed = value;
             OnPowerUsedChanged?.Invoke(_powerUsed);

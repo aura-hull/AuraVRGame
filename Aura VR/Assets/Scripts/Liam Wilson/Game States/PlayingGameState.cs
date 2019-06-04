@@ -32,6 +32,7 @@ namespace AuraHull.AuraVRGame
             }
             
             GameModel.Instance.SpawnParts();
+            AuraGameManager.Instance.Execute();
         }
 
         void SomeoneConnectedMessage(Player somePlayer)
