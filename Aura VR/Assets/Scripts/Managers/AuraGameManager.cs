@@ -51,6 +51,8 @@ public class AuraGameManager
         if (PhotonNetwork.IsMasterClient) return;
 
         _playDuration = playDuration;
+        OnPlayDurationChanged?.Invoke(_playDuration, _playDurationLimit);
+
         _scoreManager.Score = score;
         _powerManager.PowerProduced = powerProduced;
         _powerManager.PowerUsed = powerUsed;

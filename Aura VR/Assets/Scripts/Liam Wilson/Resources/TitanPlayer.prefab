@@ -807,10 +807,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3133286319932603435}
     m_Modifications:
-    - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: cachedSystemSDKInfo.typeName
-      value: VRTK.SDK_OculusSystem
+    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
+      propertyPath: m_Name
+      value: '[VRTK_SDKManager]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4693252548441896, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -868,14 +871,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
-      propertyPath: m_Name
-      value: '[VRTK_SDKManager]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
       propertyPath: setups.Array.size
@@ -906,6 +901,11 @@ PrefabInstance:
       propertyPath: scriptAliasRightController
       value: 
       objectReference: {fileID: 886335442123669728}
+    - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: cachedSystemSDKInfo.typeName
+      value: VRTK.SDK_OculusSystem
+      objectReference: {fileID: 0}
     - target: {fileID: 224723330078676568, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1856,6 +1856,31 @@ PrefabInstance:
       propertyPath: m_Pivot.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
+        type: 3}
+      propertyPath: powerUsedDisplay
+      value: 
+      objectReference: {fileID: 8806300695395550257}
+    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
+        type: 3}
+      propertyPath: powerProducedDisplay
+      value: 
+      objectReference: {fileID: 3389498163775490470}
+    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
+        type: 3}
+      propertyPath: scoreDisplay
+      value: 
+      objectReference: {fileID: 7149935767066575961}
+    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
+        type: 3}
+      propertyPath: timeLeftDisplay
+      value: 
+      objectReference: {fileID: 760717555361167148}
+    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
+        type: 3}
+      propertyPath: netPowerSlider
+      value: 
+      objectReference: {fileID: 7149935767180282749}
     - target: {fileID: 5631757742426540331, guid: cba5e1aa96456fb4895d9893f9d2fe38,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1956,31 +1981,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
-        type: 3}
-      propertyPath: powerUsedDisplay
-      value: 
-      objectReference: {fileID: 8806300695395550257}
-    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
-        type: 3}
-      propertyPath: powerProducedDisplay
-      value: 
-      objectReference: {fileID: 3389498163775490470}
-    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
-        type: 3}
-      propertyPath: scoreDisplay
-      value: 
-      objectReference: {fileID: 7149935767066575961}
-    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
-        type: 3}
-      propertyPath: timeLeftDisplay
-      value: 
-      objectReference: {fileID: 760717555361167148}
-    - target: {fileID: 2106329495180190477, guid: cba5e1aa96456fb4895d9893f9d2fe38,
-        type: 3}
-      propertyPath: netPowerSlider
-      value: 
-      objectReference: {fileID: 7149935767180282749}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cba5e1aa96456fb4895d9893f9d2fe38, type: 3}
 --- !u!114 &8806300695395550257 stripped
