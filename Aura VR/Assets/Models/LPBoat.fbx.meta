@@ -205,8 +205,11 @@ ModelImporter:
     400198: Tugboat:Boat_default
     2100000: lambert1
     2300000: pCube15
+    2300002: //RootNode
     3300000: pCube15
+    3300002: //RootNode
     4300000: pCube15
+    4300002: boat
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -238,7 +241,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
