@@ -2074,10 +2074,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3133286319932603435}
     m_Modifications:
-    - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: cachedSystemSDKInfo.typeName
-      value: VRTK.SDK_OculusSystem
+    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
+      propertyPath: m_Name
+      value: '[VRTK_SDKManager]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4693252548441896, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2135,14 +2138,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
-      propertyPath: m_Name
-      value: '[VRTK_SDKManager]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1963167942611880, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
       propertyPath: setups.Array.size
@@ -2173,6 +2168,11 @@ PrefabInstance:
       propertyPath: scriptAliasRightController
       value: 
       objectReference: {fileID: 886335442123669728}
+    - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: cachedSystemSDKInfo.typeName
+      value: VRTK.SDK_OculusSystem
+      objectReference: {fileID: 0}
     - target: {fileID: 224723330078676568, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2624,6 +2624,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704094331205424120, guid: 69dae458131603449a054332acca4e05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704094330373916721, guid: 69dae458131603449a054332acca4e05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69dae458131603449a054332acca4e05, type: 3}
