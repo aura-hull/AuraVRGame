@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: b0fcb3834b5d27c4394064cc66f85c46
+guid: a4f1be1901cccaf44b5dbffbdceb2bcd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material
+    2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Aura_TheDeep
+    4300000: hull_base
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 15
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
