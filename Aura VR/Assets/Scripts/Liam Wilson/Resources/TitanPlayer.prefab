@@ -1042,6 +1042,11 @@ PrefabInstance:
       propertyPath: objectControlScript
       value: 
       objectReference: {fileID: 886335442123669733}
+    - target: {fileID: 2479203731850518348, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dae7ce5d516cb64b8efa5c4810731c6, type: 3}
 --- !u!1 &5851469867816369661 stripped
@@ -1664,6 +1669,21 @@ PrefabInstance:
     - target: {fileID: 3704094330373916721, guid: 69dae458131603449a054332acca4e05,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704094330373916717, guid: 69dae458131603449a054332acca4e05,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704094330373916719, guid: 69dae458131603449a054332acca4e05,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704094330373916718, guid: 69dae458131603449a054332acca4e05,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
