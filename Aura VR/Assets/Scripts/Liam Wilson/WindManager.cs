@@ -8,6 +8,11 @@ public class WindManager : MonoBehaviour
     private WindSource[] _windSources;
     public float defaultSpeedKmH = 0.0f;
 
+    public float MaxKmH
+    {
+        get { return _windSources[0].speedKmH; }
+    }
+
     void Awake()
     {
         _windSources = GetComponentsInChildren<WindSource>();

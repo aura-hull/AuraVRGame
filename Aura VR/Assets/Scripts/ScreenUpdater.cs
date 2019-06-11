@@ -6,7 +6,7 @@ using TMPro;
 
 public class ScreenUpdater : MonoBehaviour
 {
-    [SerializeField] private string powerSuffix = "kW/h";
+    [SerializeField] private string powerSuffix = "MW/h";
     [SerializeField] private string timeSuffix = "s";
 
     [SerializeField] private Text powerProducedDisplay;

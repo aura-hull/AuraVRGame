@@ -68,9 +68,9 @@ public class PowerManager
         PowerUsed += usage;
     }
 
-    public float CalculatePowerOutput(Vector3 position, Vector3 orientation)
+    public float CalculatePowerOutput(Vector3 position, Vector3 orientation, float maxValue)
     {
         if (activeWindManager == null) return 0.0f;
-        return activeWindManager.GetWindSpeedKmH(position, orientation);
+        return maxValue * (activeWindManager.GetWindSpeedKmH(position, orientation) / activeWindManager.MaxKmH);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerOutput : MonoBehaviour
 {
-    [SerializeField] private Vector2 _powerOutputMinMax = new Vector2(1, 100);
+    [SerializeField] private float maxPowerOutput = 10.0f;
     [SerializeField] private BladeAnimate _bladeAnimate;
 
     private float _powerOutput;
@@ -14,8 +14,7 @@ public class PowerOutput : MonoBehaviour
     {
         transform.forward = PowerManager.Instance.activeWindManager.OptimalRotation(transform.position);
 
-        _powerOutput = PowerManager.Instance.CalculatePowerOutput(transform.position, transform.forward);
-        _powerOutput = Mathf.Clamp(_powerOutput, _powerOutputMinMax.x, _powerOutputMinMax.y);
+        _powerOutput = PowerManager.Instance.CalculatePowerOutput(transform.position, transform.forward, maxPowerOutput);
 
         if (_bladeAnimate != null)
         {
