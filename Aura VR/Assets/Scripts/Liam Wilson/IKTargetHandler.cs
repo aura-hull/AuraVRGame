@@ -67,4 +67,9 @@ public class IKTargetHandler : MonoBehaviour
         //VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
         //DestroyImmediate(this.gameObject);
     }
+
+    void OnDestroy()
+    {
+        VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
+    }
 }

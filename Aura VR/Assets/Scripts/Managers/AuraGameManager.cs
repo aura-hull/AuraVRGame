@@ -38,7 +38,11 @@ public class AuraGameManager
     private AuraGameManager()
     {
         _powerManager = PowerManager.Instance;
+        _powerManager.PowerProduced = 0;
+        _powerManager.PowerUsed = 0;
+
         _scoreManager = ScoreManager.Instance;
+        _scoreManager.Score = 0;
         //_scoreboardManager = ScoreboardManager.Instance;
 
         _currentState = GameState.Gameplay;

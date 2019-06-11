@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class BladeAnimate : MonoBehaviour
 {
-    [SerializeField]
-    private float rotateSpeed = 30;
-
-    // Start is called before the first frame update
-    void Start()
+    private float _maxRotateSpeed = 0.0f;
+    public float maxRotateSpeed
     {
-        
+        get { return _maxRotateSpeed; }
+        set
+        {
+            if (_co != null) StopCoroutine(_co);
+            _co = StartCoroutine(LerpToSpeed(value, 5.0f));
+        }
     }
 
-    // Update is called once per frame
+    private float _currentSpeed = 0.0f;
+    private Coroutine _co;
+    
+    
     void Update()
     {
         // Rotate blades around Z
-        transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, _currentSpeed * Time.deltaTime);
+    }
+
+    private IEnumerator LerpToSpeed(float target, float durationSeconds)
+    {
+        float degreesPerTick = (target - _currentSpeed) / durationSeconds;
+
+        while (durationSeconds > 0.0f)
+        {
+            durationSeconds -= Time.deltaTime;
+            _currentSpeed += degreesPerTick * Time.deltaTime;
+            yield return null;
+        }
+
+        _currentSpeed = target;
+        yield return null;
     }
 }

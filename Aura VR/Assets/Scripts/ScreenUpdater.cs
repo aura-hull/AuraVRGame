@@ -6,15 +6,14 @@ using TMPro;
 
 public class ScreenUpdater : MonoBehaviour
 {
-    public TextMeshProUGUI scoreDisplay;
-    public TextMeshProUGUI powerUsedDisplay;
-    public TextMeshProUGUI powerProducedDisplay;
-    public TextMeshProUGUI timeLeftDisplay;
-    public Slider netPowerSlider;
+    [SerializeField] private string powerSuffix = "kW/h";
+    [SerializeField] private string timeSuffix = "s";
 
-    private float _powerProduced = 0;
-    private float _powerUsed = 0;
-    private float _netPower = 0;
+    [SerializeField] private Text powerProducedDisplay;
+    [SerializeField] private Text powerUsedDisplay;
+    [SerializeField] private Text netPowerDisplay;
+    [SerializeField] private Text timeLeftDisplay;
+    [SerializeField] private Text scoreDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -24,18 +23,6 @@ public class ScreenUpdater : MonoBehaviour
         PowerManager.Instance.OnPowerProducedChanged += PowerProducedChanged;
         PowerManager.Instance.OnPowerUsedChanged += PowerUsedChanged;
         AuraGameManager.Instance.OnPlayDurationChanged += GameTimeChanged;
-
-        scoreDisplay.text = "0";
-        powerUsedDisplay.text = "0";
-        powerProducedDisplay.text = "0";
-        timeLeftDisplay.text = "0";
-        netPowerSlider.value = 100;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void ScoreChanged(float score)
@@ -45,16 +32,14 @@ public class ScreenUpdater : MonoBehaviour
 
     private void PowerProducedChanged(float powerProduced)
     {
-        _powerProduced = powerProduced;
-        _netPower = _powerProduced - _powerUsed;
-        powerProducedDisplay.text = _powerProduced.ToString();
+        powerProducedDisplay.text = Powerify(powerProduced);
+        netPowerDisplay.text = $"{Powerify(PowerManager.Instance.NetPower)} ({Percentify(PowerManager.Instance.NetPercentage)})";
     }
 
     private void PowerUsedChanged(float powerUsed)
     {
-        _powerUsed = powerUsed;
-        _netPower = _powerProduced - _powerUsed;
-        powerUsedDisplay.text = _powerUsed.ToString();
+        powerUsedDisplay.text = Powerify(powerUsed);
+        netPowerDisplay.text = $"{Powerify(PowerManager.Instance.NetPower)} ({Percentify(PowerManager.Instance.NetPercentage)})";
     }
 
     private void GameTimeChanged(float timeSinceStart, float timeLimit)
@@ -65,6 +50,21 @@ public class ScreenUpdater : MonoBehaviour
         if (timeLeft < 0)
             timeLeft = 0;
 
-        timeLeftDisplay.text = timeLeft.ToString();
+        timeLeftDisplay.text = Timeify(timeLeft);
+    }
+
+    private string Powerify(float value)
+    {
+        return $"{value} {powerSuffix}";
+    }
+
+    private string Timeify(float value)
+    {
+        return $"{value} {timeSuffix}";
+    }
+
+    private string Percentify(float value)
+    {
+        return $"{value}%";
     }
 }

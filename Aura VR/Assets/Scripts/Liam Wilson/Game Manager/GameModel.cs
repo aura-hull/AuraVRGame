@@ -52,6 +52,7 @@ namespace AuraHull.AuraVRGame
 
         public void SpawnParts()
         {
+            return;
             for (int i = 0; i < _partSpawners.Length; i++)
             {
                 _partSpawners[i].SpawnIfReady();

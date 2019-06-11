@@ -2,19 +2,15 @@
 using System.ComponentModel;
 using Photon.Pun;
 using UnityEngine;
+using VRTK;
 
 namespace AuraHull.AuraVRGame
 {
 	public class AuraBasePlayer : MonoBehaviour, IAuraPlayer, IPunInstantiateMagicCallback
 	{
-		[SerializeField]
-		protected GameObject vrtkRig;
-
-		[SerializeField]
-		protected PhotonView photonView;
-
-        [SerializeField]
-        protected GameObject localOnlyBehaviour;
+		[SerializeField] protected GameObject vrtkRig;
+		[SerializeField] protected PhotonView photonView;
+        [SerializeField] protected GameObject localOnlyBehaviour;
 
         public virtual GameObject GameObject
 		{
@@ -29,11 +25,6 @@ namespace AuraHull.AuraVRGame
                 localOnlyBehaviour.SetActive(false);
                 return;
 			}
-		}
-
-		void Update()
-		{
-			
 		}
 		
 		public virtual void GameSetup()
