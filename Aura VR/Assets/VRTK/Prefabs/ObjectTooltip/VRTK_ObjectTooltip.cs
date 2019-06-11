@@ -89,7 +89,7 @@ namespace VRTK
         {
             SetContainer();
             SetText("UITextFront");
-            SetText("UITextReverse");
+            //SetText("UITextReverse");
             SetLine();
             if (drawLineTo == null && transform.parent != null)
             {

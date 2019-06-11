@@ -4,33 +4,24 @@ using UnityEngine;
 
 public class PowerOutput : MonoBehaviour
 {
+    [SerializeField] private Vector2 _powerOutputMinMax = new Vector2(1, 100);
+    [SerializeField] private BladeAnimate _bladeAnimate;
+
     private float _powerOutput;
-    [SerializeField]
-    private Vector2 _powerOutputMinMax = new Vector2(10, 100);
-    [SerializeField]
-    private Vector2 _distanceMinMax = new Vector2(1, 100);
-    public Transform _positionToScaleFrom;
 
     // Start is called before the first frame update
     void Start()
     {
-        CalculateOutput();
+        transform.forward = PowerManager.Instance.activeWindManager.OptimalRotation(transform.position);
+
+        _powerOutput = PowerManager.Instance.CalculatePowerOutput(transform.position, transform.forward);
+        _powerOutput = Mathf.Clamp(_powerOutput, _powerOutputMinMax.x, _powerOutputMinMax.y);
+
+        if (_bladeAnimate != null)
+        {
+            _bladeAnimate.maxRotateSpeed = _powerOutput;
+        }
+
         PowerManager.Instance.IncreasePowerOutput(_powerOutput);
-        //Debug.Log("Power Output: " + _powerOutput);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void CalculateOutput()
-    {
-        float distance = Vector3.Distance(_positionToScaleFrom.position, transform.position);
-        distance = Mathf.Clamp(distance, _distanceMinMax.x, _distanceMinMax.y);
-        float scale = MathsTools.Map(distance, _distanceMinMax.x, _distanceMinMax.y, 0, 1);
-
-        _powerOutput = Mathf.Lerp(_powerOutputMinMax.x, _powerOutputMinMax.y, scale);
     }
 }
