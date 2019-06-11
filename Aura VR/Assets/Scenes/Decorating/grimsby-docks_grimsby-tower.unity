@@ -119,10 +119,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Element_02 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 407690, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -254.1
@@ -179,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.6839998
       objectReference: {fileID: 0}
+    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Element_02 (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
 --- !u!4 &75043368 stripped
@@ -194,10 +194,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Element_02 (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 407690, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -260.1
@@ -254,6 +250,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.6839998
       objectReference: {fileID: 0}
+    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Element_02 (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
 --- !u!4 &242354975 stripped
@@ -269,10 +269,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 167164, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Train Station_Props_01
-      objectReference: {fileID: 0}
     - target: {fileID: 493646, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.7
@@ -329,6 +325,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 167164, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Train Station_Props_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
 --- !u!4 &249728339 stripped
@@ -344,10 +344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Element_02
-      objectReference: {fileID: 0}
     - target: {fileID: 407690, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -248.5
@@ -404,6 +400,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2.684
       objectReference: {fileID: 0}
+    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Element_02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
 --- !u!4 &332309434 stripped
@@ -419,10 +419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Element_02 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 407690, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -255
@@ -478,6 +474,10 @@ PrefabInstance:
     - target: {fileID: 407690, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
       propertyPath: m_LocalScale.y
       value: 2.6839998
+      objectReference: {fileID: 0}
+    - target: {fileID: 172986, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Element_02 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1da7f97f82671a41808122cf5035fd8, type: 3}
@@ -661,10 +661,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 103696, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Bldg_02 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 410962, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -132.8
@@ -708,6 +704,10 @@ PrefabInstance:
     - target: {fileID: 410962, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 103696, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Bldg_02 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
@@ -875,10 +875,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 103696, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Factory_Bldg_02
-      objectReference: {fileID: 0}
     - target: {fileID: 410962, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -32.8
@@ -935,6 +931,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 103696, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Factory_Bldg_02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebbb3533201cd19489907741bd2e59b6, type: 3}
 --- !u!4 &1095729939 stripped
@@ -948,7 +948,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1858490041}
     m_Modifications:
     - target: {fileID: 2743606570938097553, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
@@ -958,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.74
+      value: -75.799995
       objectReference: {fileID: 0}
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
@@ -968,7 +968,7 @@ PrefabInstance:
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.26
+      value: -130.86665
       objectReference: {fileID: 0}
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
@@ -993,7 +993,7 @@ PrefabInstance:
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
         type: 3}
@@ -1010,8 +1010,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 30.255001
       objectReference: {fileID: 0}
+    - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.3333344
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.3333347
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b362af9d58a37294fbc6363883918db1, type: 3}
+--- !u!4 &1164503420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2743606570938450865, guid: b362af9d58a37294fbc6363883918db1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1164503419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1604932515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,10 +1190,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1858490041}
     m_Modifications:
-    - target: {fileID: 167164, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Train Station_Props_01
-      objectReference: {fileID: 0}
     - target: {fileID: 493646, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 196.5
@@ -1221,6 +1238,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 2.3459
       objectReference: {fileID: 0}
+    - target: {fileID: 167164, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Train Station_Props_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9697353a368e404599be7d1ad6195fa, type: 3}
 --- !u!4 &1793239372 stripped
@@ -1268,8 +1289,9 @@ Transform:
   - {fileID: 1604932516}
   - {fileID: 2139534952}
   - {fileID: 1662926479}
+  - {fileID: 1164503420}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2139534951
 PrefabInstance:
