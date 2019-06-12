@@ -83,7 +83,7 @@ public class IKTargetHandler : MonoBehaviour
         rightTarget.transform.localEulerAngles = rightTargetEuler;
 
         // Set local names.
-        SetLocalNames(_photonView.GetInstanceID());
+        SetLocalNames(_photonView.OwnerActorNr);
 
         // Set IK links.
         if (finalIKSetup == null) return;
@@ -91,19 +91,19 @@ public class IKTargetHandler : MonoBehaviour
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
 
-        NetworkController.Instance.NotifyIKHandlesSet(_photonView.GetInstanceID(), headTarget.GetInstanceID(), leftTarget.GetInstanceID(), rightTarget.GetInstanceID());
+        NetworkController.Instance.NotifyIKHandlesSet(_photonView.OwnerActorNr, headTarget.ViewID, leftTarget.ViewID, rightTarget.ViewID);
     }
 
-    public void OnIKHandlesSet(int otherViewId, int headPunId, int leftPunId, int rightPunId)
+    public void OnIKHandlesSet(int otherActorNr, int headPunId, int leftPunId, int rightPunId)
     {
-        if (_photonView.GetInstanceID() == otherViewId) return;
+        if (_photonView.OwnerActorNr == otherActorNr) return;
 
         headTarget = PhotonView.Find(headPunId);
         leftTarget = PhotonView.Find(leftPunId);
         rightTarget = PhotonView.Find(rightPunId);
 
         // Set local names.
-        SetLocalNames(otherViewId);
+        SetLocalNames(otherActorNr);
 
         // Set IK links.
         if (finalIKSetup == null) return;
