@@ -27,7 +27,7 @@ public class IKTargetHandler : MonoBehaviour
 
     void Awake()
     {
-        VRTK_SDKManager.SubscribeLoadedSetupChanged(OnLoadedSetupChanged);
+        vrtkManager.LoadedSetupChanged += OnLoadedSetupChanged;
     }
 
     public void OnLoadedSetupChanged(VRTK_SDKManager sender, VRTK_SDKManager.LoadedSetupChangeEventArgs e)
@@ -75,6 +75,6 @@ public class IKTargetHandler : MonoBehaviour
 
     void OnDestroy()
     {
-        VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
+        vrtkManager.LoadedSetupChanged -= OnLoadedSetupChanged;
     }
 }
