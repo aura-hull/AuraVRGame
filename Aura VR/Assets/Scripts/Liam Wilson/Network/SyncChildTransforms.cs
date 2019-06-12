@@ -40,13 +40,9 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
                     stream.SendNext(o.localScale.z);
                 }
             }
-
-            Debug.Log("sent: " + stream.Count);
         }
         else
         {
-            Debug.Log("received: " + stream.Count);
-
             foreach (Transform o in observed)
             {
                 if (syncPositions)
