@@ -121,7 +121,7 @@ namespace AuraHull.AuraVRGame
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
-                (byte)NetworkEvent.SYNC_MANAGERS,
+                (byte)NetworkEvent.IK_HANDLES_SET,
                 eventContent: new object[4] { positionIndex, headPunId, leftPunId, rightPunId },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
