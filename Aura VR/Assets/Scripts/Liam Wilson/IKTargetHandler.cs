@@ -9,7 +9,7 @@ using VRTK;
 using Object = System.Object;
 
 [RequireComponent(typeof(PhotonView))]
-public class IKTargetHandler : MonoBehaviour
+public class IKTargetHandler : MonoBehaviour, IPunObservable
 {
     private static Vector3 headTargetPosition = new Vector3(0, -0.07827437f, -0.1492147f);
     private static Vector3 headTargetEuler = new Vector3(0, -90, -90);
@@ -29,6 +29,7 @@ public class IKTargetHandler : MonoBehaviour
     public PhotonView rightTarget { get; private set; } = null;
 
     private PhotonView _photonView = null;
+    private bool isSetup = false;
 
     void Awake()
     {
@@ -38,7 +39,6 @@ public class IKTargetHandler : MonoBehaviour
     void Start()
     {
         _photonView = GetComponent<PhotonView>();
-        NetworkController.OnIKHandlesSet += OnIKHandlesSet;
     }
 
     // Only happens locally because of the event subscription.
@@ -81,42 +81,43 @@ public class IKTargetHandler : MonoBehaviour
         rightTarget.transform.SetParent(setup.actualRightController.transform);
         rightTarget.transform.localPosition = rightTargetPosition;
         rightTarget.transform.localEulerAngles = rightTargetEuler;
-
-        // Set local names.
-        SetLocalNames(_photonView.OwnerActorNr);
-
-        // Set IK links.
-        if (finalIKSetup == null) return;
-        finalIKSetup.solver.spine.headTarget = headTarget.transform;
-        finalIKSetup.solver.leftArm.target = leftTarget.transform;
-        finalIKSetup.solver.rightArm.target = rightTarget.transform;
-
-        NetworkController.Instance.NotifyIKHandlesSet(_photonView.OwnerActorNr, headTarget.ViewID, leftTarget.ViewID, rightTarget.ViewID);
+        
+        LocalSetup(_photonView.OwnerActorNr);
+        isSetup = true;
     }
 
-    public void OnIKHandlesSet(int otherActorNr, int headPunId, int leftPunId, int rightPunId)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (_photonView.OwnerActorNr != otherActorNr) return;
+        if (stream.IsWriting && isSetup)
+        {
+            stream.SendNext(headTarget.ViewID);
+            stream.SendNext(leftTarget.ViewID);
+            stream.SendNext(rightTarget.ViewID);
+        }
+        else if (stream.IsReading && !isSetup)
+        {
+            // Set IK targets using serialized data.
+            headTarget = PhotonView.Find((int)stream.ReceiveNext());
+            leftTarget = PhotonView.Find((int)stream.ReceiveNext());
+            rightTarget = PhotonView.Find((int)stream.ReceiveNext());
 
-        headTarget = PhotonView.Find(headPunId);
-        leftTarget = PhotonView.Find(leftPunId);
-        rightTarget = PhotonView.Find(rightPunId);
-
-        // Set local names.
-        SetLocalNames(otherActorNr);
-
-        // Set IK links.
-        if (finalIKSetup == null) return;
-        finalIKSetup.solver.spine.headTarget = headTarget.transform;
-        finalIKSetup.solver.leftArm.target = leftTarget.transform;
-        finalIKSetup.solver.rightArm.target = rightTarget.transform;
+            LocalSetup(headTarget.OwnerActorNr);
+            isSetup = true;
+        }
     }
 
-    private void SetLocalNames(int id)
+    private void LocalSetup(int id)
     {
+        // Set local names.
         headTarget.name = $"HeadTarget ({id})";
         leftTarget.name = $"LeftTarget ({id})";
         rightTarget.name = $"RightTarget ({id})";
+
+        // Set IK links.
+        if (finalIKSetup == null) return;
+        finalIKSetup.solver.spine.headTarget = headTarget.transform;
+        finalIKSetup.solver.leftArm.target = leftTarget.transform;
+        finalIKSetup.solver.rightArm.target = rightTarget.transform;
     }
 
     void OnDestroy()
