@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using RootMotion.FinalIK;
 using UnityEngine;
 using VRTK;
+using Object = System.Object;
 
 public class IKTargetHandler : MonoBehaviour
 {
@@ -18,10 +20,11 @@ public class IKTargetHandler : MonoBehaviour
 
     [SerializeField] private VRTK_SDKManager vrtkManager;
     [SerializeField] private VRIK finalIKSetup;
+    [SerializeField] private GameObject photonTrackedObjectPrefab;
 
-    public GameObject headTarget { get; private set; } = null;
-    public GameObject leftTarget { get; private set; } = null;
-    public GameObject rightTarget { get; private set; } = null;
+    public PhotonView headTarget { get; private set; } = null;
+    public PhotonView leftTarget { get; private set; } = null;
+    public PhotonView rightTarget { get; private set; } = null;
 
     public Action OnIKTargetsSetup = null;
 
@@ -32,33 +35,32 @@ public class IKTargetHandler : MonoBehaviour
 
     public void OnLoadedSetupChanged(VRTK_SDKManager sender, VRTK_SDKManager.LoadedSetupChangeEventArgs e)
     {
-        // Instantiate IK targets.
+        if (photonTrackedObjectPrefab == null) return;
+
         VRTK_SDKSetup setup = sender.loadedSetup;
         if (setup == null) return;
 
+        // Instantiate IK targets.
         if (headTarget == null)
         {
-            headTarget = new GameObject("HeadTarget");
-            headTarget.transform.SetParent(setup.actualHeadset.transform);
-            headTarget.transform.localPosition = headTargetPosition;
-            headTarget.transform.localEulerAngles = headTargetEuler;
+            GameObject headTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
+            headTarget = headTargetObj.GetPhotonView();
         }
-
+        
         if (leftTarget == null)
         {
-            leftTarget = new GameObject("LeftTarget");
-            leftTarget.transform.SetParent(setup.actualLeftController.transform);
-            leftTarget.transform.localPosition = leftTargetPosition;
-            leftTarget.transform.localEulerAngles = leftTargetEuler;
+            GameObject leftTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
+            leftTarget = leftTargetObj.GetPhotonView();
         }
-
+        
         if (rightTarget == null)
         {
-            rightTarget = new GameObject("RightTarget");
-            rightTarget.transform.SetParent(setup.actualRightController.transform);
-            rightTarget.transform.localPosition = rightTargetPosition;
-            rightTarget.transform.localEulerAngles = rightTargetEuler;
+            GameObject rightTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
+            rightTarget = rightTargetObj.GetPhotonView();
         }
+
+        // Setup local values
+        SetLocalValues(setup);
 
         // Set up IK links.
         if (finalIKSetup == null) return;
@@ -71,6 +73,24 @@ public class IKTargetHandler : MonoBehaviour
 
         //VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
         //DestroyImmediate(this.gameObject);
+    }
+
+    private void SetLocalValues(VRTK_SDKSetup setup)
+    {
+        headTarget.name = "HeadTarget";
+        headTarget.transform.SetParent(setup.actualHeadset.transform);
+        headTarget.transform.localPosition = headTargetPosition;
+        headTarget.transform.localEulerAngles = headTargetEuler;
+
+        leftTarget.name = "LeftTarget";
+        leftTarget.transform.SetParent(setup.actualLeftController.transform);
+        leftTarget.transform.localPosition = leftTargetPosition;
+        leftTarget.transform.localEulerAngles = leftTargetEuler;
+
+        rightTarget.name = "RightTarget";
+        rightTarget.transform.SetParent(setup.actualRightController.transform);
+        rightTarget.transform.localPosition = rightTargetPosition;
+        rightTarget.transform.localEulerAngles = rightTargetEuler;
     }
 
     void OnDestroy()

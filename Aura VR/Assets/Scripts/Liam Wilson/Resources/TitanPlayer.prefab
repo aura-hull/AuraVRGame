@@ -205,6 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrtkManager: {fileID: 3092949586841991465}
   finalIKSetup: {fileID: 463571408162353751}
+  photonTrackedObjectPrefab: {fileID: 9209738300935125333, guid: 7ee429b1f279afd4dbc20ce6fecffb4d,
+    type: 3}
 --- !u!114 &3547571189381892473
 MonoBehaviour:
   m_ObjectHideFlags: 0
