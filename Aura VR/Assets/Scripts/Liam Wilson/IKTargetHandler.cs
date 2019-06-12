@@ -83,7 +83,7 @@ public class IKTargetHandler : MonoBehaviour
         rightTarget.transform.localEulerAngles = rightTargetEuler;
 
         // Set local names.
-        SetLocalNames(positionIndex);
+        SetLocalNames(_photonView.ViewID);
 
         // Set IK links.
         if (finalIKSetup == null) return;
@@ -91,21 +91,19 @@ public class IKTargetHandler : MonoBehaviour
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
 
-        NetworkController.Instance.NotifyIKHandlesSet(positionIndex, headTarget.ViewID, leftTarget.ViewID, rightTarget.ViewID);
+        NetworkController.Instance.NotifyIKHandlesSet(_photonView.ViewID, headTarget.ViewID, leftTarget.ViewID, rightTarget.ViewID);
     }
 
-    public void OnIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
+    public void OnIKHandlesSet(int otherViewId, int headPunId, int leftPunId, int rightPunId)
     {
-        if (headTarget != null) return;
-        if (leftTarget != null) return;
-        if (rightTarget != null) return;
+        if (_photonView.ViewID == otherViewId) return;
 
         headTarget = PhotonView.Find(headPunId);
         leftTarget = PhotonView.Find(leftPunId);
         rightTarget = PhotonView.Find(rightPunId);
 
         // Set local names.
-        SetLocalNames(positionIndex);
+        SetLocalNames(otherViewId);
 
         // Set IK links.
         if (finalIKSetup == null) return;
@@ -114,11 +112,11 @@ public class IKTargetHandler : MonoBehaviour
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
     }
 
-    private void SetLocalNames(int positionIndex)
+    private void SetLocalNames(int id)
     {
-        headTarget.name = $"HeadTarget ({positionIndex})";
-        leftTarget.name = $"LeftTarget ({positionIndex})";
-        rightTarget.name = $"RightTarget ({positionIndex})";
+        headTarget.name = $"HeadTarget ({id})";
+        leftTarget.name = $"LeftTarget ({id})";
+        rightTarget.name = $"RightTarget ({id})";
     }
 
     void OnDestroy()
