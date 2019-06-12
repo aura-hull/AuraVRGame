@@ -96,7 +96,7 @@ public class IKTargetHandler : MonoBehaviour
 
     public void OnIKHandlesSet(int otherActorNr, int headPunId, int leftPunId, int rightPunId)
     {
-        if (_photonView.OwnerActorNr == otherActorNr) return;
+        if (_photonView.OwnerActorNr != otherActorNr) return;
 
         headTarget = PhotonView.Find(headPunId);
         leftTarget = PhotonView.Find(leftPunId);
