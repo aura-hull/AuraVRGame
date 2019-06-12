@@ -277,10 +277,7 @@ MonoBehaviour:
   syncRotations: 1
   syncScales: 0
   observed:
-  - {fileID: 3128602284058240983}
-  - {fileID: 7824468177652276633}
   - {fileID: 5641179499375278808}
-  - {fileID: 7972272582802480383}
 --- !u!114 &4142455485716718125
 MonoBehaviour:
   m_ObjectHideFlags: 0
