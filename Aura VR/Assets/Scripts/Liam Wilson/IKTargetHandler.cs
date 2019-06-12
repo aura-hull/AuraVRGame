@@ -96,8 +96,10 @@ public class IKTargetHandler : MonoBehaviour
 
     public void OnIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
     {
-        if (_photonView.Controller.IsLocal) return;
-        
+        if (headTarget != null) return;
+        if (leftTarget != null) return;
+        if (rightTarget != null) return;
+
         headTarget = PhotonView.Find(headPunId);
         leftTarget = PhotonView.Find(leftPunId);
         rightTarget = PhotonView.Find(rightPunId);
