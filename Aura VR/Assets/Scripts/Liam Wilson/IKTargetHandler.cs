@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AuraHull.AuraVRGame;
 using Photon.Pun;
 using RootMotion.FinalIK;
 using UnityEngine;
 using VRTK;
 using Object = System.Object;
 
+[RequireComponent(typeof(PhotonView))]
 public class IKTargetHandler : MonoBehaviour
 {
     private static Vector3 headTargetPosition = new Vector3(0, -0.07827437f, -0.1492147f);
@@ -26,16 +28,25 @@ public class IKTargetHandler : MonoBehaviour
     public PhotonView leftTarget { get; private set; } = null;
     public PhotonView rightTarget { get; private set; } = null;
 
-    public Action OnIKTargetsSetup = null;
+    private PhotonView _photonView = null;
 
     void Awake()
     {
         vrtkManager.LoadedSetupChanged += OnLoadedSetupChanged;
     }
 
+    void Start()
+    {
+        _photonView = GetComponent<PhotonView>();
+        NetworkController.OnIKHandlesSet += OnIKHandlesSet;
+    }
+
+    // Only happens locally because of the event subscription.
     public void OnLoadedSetupChanged(VRTK_SDKManager sender, VRTK_SDKManager.LoadedSetupChangeEventArgs e)
     {
         if (photonTrackedObjectPrefab == null) return;
+
+        int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
 
         VRTK_SDKSetup setup = sender.loadedSetup;
         if (setup == null) return;
@@ -46,51 +57,65 @@ public class IKTargetHandler : MonoBehaviour
             GameObject headTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
             headTarget = headTargetObj.GetPhotonView();
         }
-        
+
+        headTarget.transform.SetParent(setup.actualHeadset.transform);
+        headTarget.transform.localPosition = headTargetPosition;
+        headTarget.transform.localEulerAngles = headTargetEuler;
+
         if (leftTarget == null)
         {
             GameObject leftTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
             leftTarget = leftTargetObj.GetPhotonView();
         }
-        
+
+        leftTarget.transform.SetParent(setup.actualLeftController.transform);
+        leftTarget.transform.localPosition = leftTargetPosition;
+        leftTarget.transform.localEulerAngles = leftTargetEuler;
+
         if (rightTarget == null)
         {
             GameObject rightTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
             rightTarget = rightTargetObj.GetPhotonView();
         }
 
-        // Setup local values
-        SetLocalValues(setup);
-
-        // Set up IK links.
-        if (finalIKSetup == null) return;
-
-        finalIKSetup.solver.spine.headTarget = headTarget.transform;
-        finalIKSetup.solver.leftArm.target = leftTarget.transform;
-        finalIKSetup.solver.rightArm.target = rightTarget.transform;
-
-        OnIKTargetsSetup?.Invoke();
-
-        //VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
-        //DestroyImmediate(this.gameObject);
-    }
-
-    private void SetLocalValues(VRTK_SDKSetup setup)
-    {
-        headTarget.name = "HeadTarget";
-        headTarget.transform.SetParent(setup.actualHeadset.transform);
-        headTarget.transform.localPosition = headTargetPosition;
-        headTarget.transform.localEulerAngles = headTargetEuler;
-
-        leftTarget.name = "LeftTarget";
-        leftTarget.transform.SetParent(setup.actualLeftController.transform);
-        leftTarget.transform.localPosition = leftTargetPosition;
-        leftTarget.transform.localEulerAngles = leftTargetEuler;
-
-        rightTarget.name = "RightTarget";
         rightTarget.transform.SetParent(setup.actualRightController.transform);
         rightTarget.transform.localPosition = rightTargetPosition;
         rightTarget.transform.localEulerAngles = rightTargetEuler;
+
+        // Set local names.
+        SetLocalNames(positionIndex);
+
+        // Set IK links.
+        if (finalIKSetup == null) return;
+        finalIKSetup.solver.spine.headTarget = headTarget.transform;
+        finalIKSetup.solver.leftArm.target = leftTarget.transform;
+        finalIKSetup.solver.rightArm.target = rightTarget.transform;
+    }
+
+    public void OnIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
+    {
+        int localPositionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
+        if (localPositionIndex == positionIndex) return;
+        
+        headTarget = PhotonView.Find(headPunId);
+        leftTarget = PhotonView.Find(leftPunId);
+        rightTarget = PhotonView.Find(rightPunId);
+
+        // Set local names.
+        SetLocalNames(positionIndex);
+
+        // Set IK links.
+        if (finalIKSetup == null) return;
+        finalIKSetup.solver.spine.headTarget = headTarget.transform;
+        finalIKSetup.solver.leftArm.target = leftTarget.transform;
+        finalIKSetup.solver.rightArm.target = rightTarget.transform;
+    }
+
+    private void SetLocalNames(int positionIndex)
+    {
+        headTarget.name = $"HeadTarget ({positionIndex})";
+        leftTarget.name = $"LeftTarget ({positionIndex})";
+        rightTarget.name = $"RightTarget ({positionIndex})";
     }
 
     void OnDestroy()

@@ -14,7 +14,8 @@ namespace AuraHull.AuraVRGame
         BUILD_SITE_PLACED,
         TURBINE_PART_BUILT,
         TURBINE_BUILT,
-        SYNC_MANAGERS
+        SYNC_MANAGERS,
+        IK_HANDLES_SET
     }
 
     public class NetworkController : MonoBehaviour, IOnEventCallback, IInRoomCallbacks, IMatchmakingCallbacks
@@ -28,6 +29,7 @@ namespace AuraHull.AuraVRGame
         public static event Action<int, string> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float> OnSyncManagers;
+        public static event Action<int, int, int, int> OnIKHandlesSet;
         public static event Action<Player> OnSomePlayerConnected;
         public static event Action<Player> OnSomePlayerDisconnected;
         public static event Action<Player> OnRoundEnded;
@@ -113,6 +115,19 @@ namespace AuraHull.AuraVRGame
             );
         }
 
+        public void NotifyIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.SYNC_MANAGERS,
+                eventContent: new object[4] { positionIndex, headPunId, leftPunId, rightPunId },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
         public void OnEvent(EventData photonEvent)
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
@@ -149,6 +164,10 @@ namespace AuraHull.AuraVRGame
 
                 case NetworkEvent.SYNC_MANAGERS:
                     OnSyncManagers?.Invoke((float)serialize[0], (float)serialize[1], (float)serialize[2], (float)serialize[3]);
+                    break;
+
+                case NetworkEvent.IK_HANDLES_SET:
+                    OnIKHandlesSet?.Invoke((int) serialize[0], (int) serialize[1], (int) serialize[2], (int)serialize[3]);
                     break;
             }
         }
