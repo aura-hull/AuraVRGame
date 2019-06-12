@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
-public class SyncChildTransforms : MonoBehaviourPun
+public class SyncChildTransforms : MonoBehaviour, IPunObservable
 {
     [SerializeField] private bool syncPositions = true;
     [SerializeField] private bool syncRotations = true;
@@ -12,7 +12,7 @@ public class SyncChildTransforms : MonoBehaviourPun
 
     public List<Transform> observed;
 
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
