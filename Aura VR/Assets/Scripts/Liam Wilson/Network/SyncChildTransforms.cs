@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -9,11 +10,26 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
     [SerializeField] private bool syncPositions = true;
     [SerializeField] private bool syncRotations = true;
     [SerializeField] private bool syncScales = false;
+    [SerializeField, Range(0.05f, 1.0f)] private float syncFrequency = 0.05f;
 
     public List<Transform> observed;
 
+    private float _timeUntilSync;
+
+    void Start()
+    {
+        _timeUntilSync = syncFrequency;
+    }
+
+    void Update()
+    {
+        _timeUntilSync -= Time.deltaTime;
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        if (_timeUntilSync > 0.0f) return;
+
         if (stream.IsWriting)
         {
             foreach (Transform o in observed)
@@ -50,7 +66,8 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
                     float x = (float)stream.ReceiveNext();
                     float y = (float)stream.ReceiveNext();
                     float z = (float)stream.ReceiveNext();
-                    o.position = new Vector3(x, y, z);
+
+                    StartCoroutine(LerpPosition(o, new Vector3(x, y, z), _timeUntilSync));
                 }
 
                 if (syncRotations)
@@ -59,7 +76,8 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
                     float y = (float)stream.ReceiveNext();
                     float z = (float)stream.ReceiveNext();
                     float w = (float)stream.ReceiveNext();
-                    o.rotation = new Quaternion(x, y, z, w);
+
+                    StartCoroutine(LerpRotation(o, new Quaternion(x, y, z, w), _timeUntilSync));
                 }
 
                 if (syncScales)
@@ -67,9 +85,57 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
                     float x = (float)stream.ReceiveNext();
                     float y = (float)stream.ReceiveNext();
                     float z = (float)stream.ReceiveNext();
-                    o.localScale = new Vector3(x, y, z);
+
+                    StartCoroutine(LerpScale(o, new Vector3(x, y, z), _timeUntilSync));
                 }
             }
         }
+
+        _timeUntilSync = syncFrequency;
+    }
+    
+    private IEnumerator LerpPosition(Transform target, Vector3 end, float duration)
+    {
+        Vector3 start = target.position;
+        float t = 0.0f;
+
+        while (t < duration)
+        {
+            t += (Time.deltaTime / duration);
+            target.position = Vector3.Lerp(start, end, t);
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator LerpRotation(Transform target, Quaternion end, float duration)
+    {
+        Quaternion start = target.rotation;
+        float t = 0.0f;
+
+        while (t < duration)
+        {
+            t += (Time.deltaTime / duration);
+            target.rotation = Quaternion.Lerp(start, end, t);
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator LerpScale(Transform target, Vector3 end, float duration)
+    {
+        Vector3 start = target.localScale;
+        float t = 0.0f;
+
+        while (t < duration)
+        {
+            t += (Time.deltaTime / duration);
+            target.localScale = Vector3.Lerp(start, end, t);
+            yield return null;
+        }
+
+        yield return null;
     }
 }
