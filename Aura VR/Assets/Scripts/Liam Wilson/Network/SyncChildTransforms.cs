@@ -41,11 +41,39 @@ public class SyncChildTransforms : MonoBehaviour, IPunObservable
                 }
             }
 
-            Debug.Log("sent.");
+            Debug.Log("sent: " + stream.Count);
         }
         else
         {
-            Debug.Log("received.");
+            Debug.Log("received: " + stream.Count);
+
+            foreach (Transform o in observed)
+            {
+                if (syncPositions)
+                {
+                    float x = (float)stream.ReceiveNext();
+                    float y = (float)stream.ReceiveNext();
+                    float z = (float)stream.ReceiveNext();
+                    o.position = new Vector3(x, y, z);
+                }
+
+                if (syncRotations)
+                {
+                    float x = (float)stream.ReceiveNext();
+                    float y = (float)stream.ReceiveNext();
+                    float z = (float)stream.ReceiveNext();
+                    float w = (float)stream.ReceiveNext();
+                    o.rotation = new Quaternion(x, y, z, w);
+                }
+
+                if (syncScales)
+                {
+                    float x = (float)stream.ReceiveNext();
+                    float y = (float)stream.ReceiveNext();
+                    float z = (float)stream.ReceiveNext();
+                    o.localScale = new Vector3(x, y, z);
+                }
+            }
         }
     }
 }
