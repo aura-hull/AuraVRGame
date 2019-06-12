@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using RootMotion.FinalIK;
 using UnityEngine;
@@ -18,9 +19,11 @@ public class IKTargetHandler : MonoBehaviour
     [SerializeField] private VRTK_SDKManager vrtkManager;
     [SerializeField] private VRIK finalIKSetup;
 
-    private GameObject headTarget = null;
-    private GameObject leftTarget = null;
-    private GameObject rightTarget = null;
+    public GameObject headTarget { get; private set; } = null;
+    public GameObject leftTarget { get; private set; } = null;
+    public GameObject rightTarget { get; private set; } = null;
+
+    public Action OnIKTargetsSetup = null;
 
     void Awake()
     {
@@ -63,6 +66,8 @@ public class IKTargetHandler : MonoBehaviour
         finalIKSetup.solver.spine.headTarget = headTarget.transform;
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
+
+        OnIKTargetsSetup?.Invoke();
 
         //VRTK_SDKManager.UnsubscribeLoadedSetupChanged(OnLoadedSetupChanged);
         //DestroyImmediate(this.gameObject);

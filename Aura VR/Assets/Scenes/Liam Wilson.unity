@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 312800089}
   - component: {fileID: 312800092}
   - component: {fileID: 312800091}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WaterColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316735204}
   - component: {fileID: 316735205}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: All
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d617f75752787499bf97f41654bd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boatPlayerPrefab: {fileID: 3133286319932603436, guid: 79e9a76361cfae34cb02115d5fe9725f,
+  _boatPlayerPrefab: {fileID: 3133286319932603436, guid: d94aefa717d09404ca2e59d55f60142f,
     type: 3}
   _titanPlayerPrefab: {fileID: 3133286319932603436, guid: d94aefa717d09404ca2e59d55f60142f,
     type: 3}
