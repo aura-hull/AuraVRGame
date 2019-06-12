@@ -90,6 +90,8 @@ public class IKTargetHandler : MonoBehaviour
         finalIKSetup.solver.spine.headTarget = headTarget.transform;
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
+
+        NetworkController.Instance.NotifyIKHandlesSet(positionIndex, headTarget.ViewID, leftTarget.ViewID, rightTarget.ViewID);
     }
 
     public void OnIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
