@@ -4,7 +4,7 @@ namespace AuraHull.AuraVRGame
 {
     public class Boundary : MonoBehaviour
     {
-        public static float MIN_DISTANCE = 20.0f;
+        public static float MIN_DISTANCE = 500.0f;
 
         private Material _materialInstance;
         private float sinceLastUpdateVisual = 0.0f;

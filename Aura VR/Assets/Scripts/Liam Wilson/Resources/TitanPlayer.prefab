@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 3133286319932603436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 3128602284058240983}
   - {fileID: 7824468177652276633}
@@ -1074,12 +1074,12 @@ PrefabInstance:
     - target: {fileID: 2479203731850518346, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: maximumSpeed
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2479203731850518346, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: deceleration
-      value: 0.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2479203731850518346, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
@@ -1089,12 +1089,12 @@ PrefabInstance:
     - target: {fileID: 2479203731850518347, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: maximumSpeed
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2479203731850518347, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: deceleration
-      value: 0.3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2479203731850518347, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
@@ -1327,6 +1327,26 @@ PrefabInstance:
         type: 3}
       propertyPath: playerMoveMultiplier
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 20233699360078248, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20044939616229044, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 224025683014901206, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}

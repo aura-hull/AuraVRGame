@@ -7,6 +7,7 @@
             base.InitState();
 
             GameModel.Instance.BuildPlayer();
+            GameModel.Instance.ConfigureColliders();
 
             GameModel.Instance.ChangeGameState(new PlayingGameState());
         }

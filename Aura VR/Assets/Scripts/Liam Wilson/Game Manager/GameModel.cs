@@ -9,6 +9,7 @@ namespace AuraHull.AuraVRGame
     {
         [SerializeField] private PlayerFactory _playerFactory;
         [SerializeField] private PartSpawner_Networked[] _partSpawners;
+        [SerializeField] private ColliderManager _colliderManager;
 
         BaseGameState _activeGameState;
 
@@ -48,6 +49,11 @@ namespace AuraHull.AuraVRGame
         public void BuildPlayer()
         {
             this._playerFactory.Build();
+        }
+
+        public void ConfigureColliders()
+        {
+            this._colliderManager.Configure();
         }
 
         public void SpawnParts()
