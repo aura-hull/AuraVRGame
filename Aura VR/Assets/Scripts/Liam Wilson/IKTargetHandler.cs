@@ -96,8 +96,7 @@ public class IKTargetHandler : MonoBehaviour
 
     public void OnIKHandlesSet(int positionIndex, int headPunId, int leftPunId, int rightPunId)
     {
-        int localPositionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
-        if (localPositionIndex == positionIndex) return;
+        if (_photonView.Controller.IsLocal) return;
         
         headTarget = PhotonView.Find(headPunId);
         leftTarget = PhotonView.Find(leftPunId);
