@@ -21,6 +21,7 @@ public class PointerInteractions : MonoBehaviour
     private int _id = -1;
 
     // Building variables
+    [SerializeField] private bool canPlaceBuildSites = true;
     [SerializeField] private GameObject buildSitePrefab;
     [SerializeField] private GameObject placementIndicator;
     [SerializeField] private Material validMaterial;
@@ -46,6 +47,8 @@ public class PointerInteractions : MonoBehaviour
             controllerEvents.ButtonTwoReleased += HaltPointing;
         }
 
+        if (!canPlaceBuildSites) return;
+
         if (placementIndicator != null)
         {
             placementIndicator.SetActive(false);
@@ -64,6 +67,8 @@ public class PointerInteractions : MonoBehaviour
         if (controllingId != _id) return;
         controllingId = -1;
         _pointing = false;
+
+        if (!canPlaceBuildSites) return;
 
         if (placementIndicator)
         {
@@ -100,7 +105,7 @@ public class PointerInteractions : MonoBehaviour
                     _currentSelection = selection;
                     _currentSelection.Selected();
                 }
-                else
+                else if (canPlaceBuildSites)
                 {
                     if (distance <= placeRange)
                     {

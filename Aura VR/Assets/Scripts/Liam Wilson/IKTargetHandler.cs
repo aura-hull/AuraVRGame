@@ -22,6 +22,7 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
 
     [SerializeField] private VRTK_SDKManager vrtkManager;
     [SerializeField] private VRIK finalIKSetup;
+    [SerializeField] private VRTK_BodyPhysics bodyPhysics;
     [SerializeField] private GameObject photonTrackedObjectPrefab;
 
     public PhotonView headTarget { get; private set; } = null;
@@ -118,6 +119,10 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
         finalIKSetup.solver.spine.headTarget = headTarget.transform;
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
+
+        // Set body physics link.
+        if (bodyPhysics == null) return;
+        finalIKSetup.transform.SetParent(bodyPhysics.GetBodyColliderContainer().transform);
     }
 
     void OnDestroy()
