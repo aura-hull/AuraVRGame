@@ -1,40 +1,86 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class PartSpawner_Networked : MonoBehaviour
 {
-    [SerializeField] private Object[] partPrefabs;
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float distanceBeforeNextSpawn = 10.0f;
+    [SerializeField] private GameObject partPrefab;
+    [SerializeField] private Text timeRemainingText;
+    [SerializeField] private float timeBetweenSpawns = 10.0f;
+    
+    private float _timeRemaining = 0.0f;
+    private bool _partIsReady = false;
+    private PartCollector _activeCollector = null;
 
-    private Transform trackedPart;
-    private int nextPartIndex = 0;
-
-    public void SpawnIfReady()
+    void Start()
     {
-        if (trackedPart != null) return;
-        if (partPrefabs == null) return;
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            GameObject partInstance = PhotonNetwork.Instantiate(partPrefabs[nextPartIndex].name, spawnPoint.position, Quaternion.identity);
-            nextPartIndex = (nextPartIndex + 1) % partPrefabs.Length;
-            trackedPart = partInstance.transform;
-        }
+        _timeRemaining = timeBetweenSpawns;
     }
 
     void Update()
     {
-        if (trackedPart == null) return;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (!_partIsReady)
+            {
+                _timeRemaining -= Time.deltaTime;
+
+                if (timeRemainingText != null)
+                    timeRemainingText.text = NeatTime((int)_timeRemaining);
+
+                if (_timeRemaining <= 0.0f)
+                {
+                    _partIsReady = true;
+                    _timeRemaining = timeBetweenSpawns;
+
+                    if (timeRemainingText != null)
+                        timeRemainingText.text = "READY";
+                }
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.attachedRigidbody == null) return;
+        _activeCollector = other.attachedRigidbody.GetComponent<PartCollector>();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (_activeCollector != null && other.attachedRigidbody.gameObject == _activeCollector.gameObject)
+        {
+            _activeCollector = null;
+        }
+    }
+
+    public void SpawnIfReady()
+    {
+        if (partPrefab == null) return;
+        if (_activeCollector == null) return;
+
+        if (!_activeCollector.available) return;
+        if (!_partIsReady) return;
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if (Vector3.Distance(trackedPart.position, spawnPoint.position) > distanceBeforeNextSpawn)
-            {
-                trackedPart = null;
-            }
+            GameObject newPart = PhotonNetwork.Instantiate(partPrefab.name, Vector3.zero, Quaternion.identity);
+            newPart.transform.SetParent(_activeCollector.RestingPoint, false);
+
+            _activeCollector.available = false;
+            _partIsReady = false;
         }
+    }
+
+    private string NeatTime(int seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+
+        if (seconds < 3600) return time.ToString(@"mm\:ss");
+        else return time.ToString(@"hh\:mm\:ss");
     }
 }

@@ -1921,6 +1921,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1274200229227671486, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+        type: 3}
+      propertyPath: powerSuffix
+      value: MW/h
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0080ee2f33c7904f8ec840de61eb7a4, type: 3}
 --- !u!1001 &5809266583104411918
