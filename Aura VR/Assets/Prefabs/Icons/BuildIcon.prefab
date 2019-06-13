@@ -47,8 +47,8 @@ MonoBehaviour:
   variance: 1
   floatSpeed: 0.01
   rotation: {x: 0, y: 1, z: 0}
-  activeColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
-  emissionRamp: 1
+  activeAlpha: 1
+  inactiveAlpha: 0.5
   toggleActive: 0
   meshRenderers:
   - {fileID: 6339087803281810484}
@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: ef8bfe2fb45f2c142b3bd6ed4fa75f4e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ff07605f45c556f4e920b45475bd847d, type: 2}
+      objectReference: {fileID: 2100000, guid: 6a6e07c7490f843498d219a77b64cbb6, type: 2}
     - target: {fileID: 2300000, guid: ef8bfe2fb45f2c142b3bd6ed4fa75f4e, type: 3}
       propertyPath: m_ReceiveShadows
       value: 0

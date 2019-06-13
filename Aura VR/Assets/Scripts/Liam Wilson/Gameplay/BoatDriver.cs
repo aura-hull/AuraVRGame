@@ -13,8 +13,8 @@ public class BoatDriver : MonoBehaviour
     [SerializeField] private float steeringPower = 1.0f;
     [SerializeField] private bool allowReverse = true;
 
-    private float realThrottleZero = 0.0f;
-    private float realThrottleMax = float.MaxValue;
+    public float realThrottleZero { get; private set; } = 0.0f;
+    public float realThrottleMax { get; private set; } = float.MaxValue;
 
     public float Throttle
     {

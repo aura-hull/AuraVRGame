@@ -7,8 +7,8 @@ public class ProSkaterScript : MonoBehaviour
     public float variance;
     public float floatSpeed;
     public Vector3 rotation;
-    public Color activeColor = Color.white;
-    public float emissionRamp = 0.5f;
+    public float activeAlpha = 1.0f;
+    public float inactiveAlpha = 0.5f;
     public bool toggleActive;
 
     [SerializeField] private MeshRenderer[] meshRenderers;
@@ -17,7 +17,7 @@ public class ProSkaterScript : MonoBehaviour
     private float t = 0.5f;
     private Vector3 lowerBound;
     private Vector3 upperBound;
-    private Material[] originalMaterials;
+    private Material[] inactiveMaterials;
     private Material[] activeMaterials;
 
     void Start()
@@ -27,15 +27,22 @@ public class ProSkaterScript : MonoBehaviour
 
         if (meshRenderers != null)
         {
-            originalMaterials = new Material[meshRenderers.Length];
+            inactiveMaterials = new Material[meshRenderers.Length];
             activeMaterials = new Material[meshRenderers.Length];
+
+            Color inactiveMultiplier = new Color(1.0f, 1.0f, 1.0f, inactiveAlpha);
+            Color activeMultiplier = new Color(1.0f, 1.0f, 1.0f, activeAlpha);
 
             for (int i = 0; i < meshRenderers.Length; i++)
             {
-                originalMaterials[i] = meshRenderers[i].material;
-                activeMaterials[i] = new Material(originalMaterials[i]);
-                activeMaterials[i].color = activeColor;
-                activeMaterials[i].SetColor("_EmissionColor", activeColor * emissionRamp);
+                inactiveMaterials[i] = meshRenderers[i].material;
+                activeMaterials[i] = new Material(inactiveMaterials[i]);
+
+                inactiveMaterials[i].color = inactiveMaterials[i].color * inactiveMultiplier;
+                activeMaterials[i].color = activeMaterials[i].color * activeMultiplier;
+
+                inactiveMaterials[i].SetColor("_EmissionColor", inactiveMaterials[i].GetColor("_EmissionColor") * inactiveAlpha);
+                activeMaterials[i].SetColor("_EmissionColor", activeMaterials[i].GetColor("_EmissionColor") * activeAlpha);
             }
         }
 
@@ -63,10 +70,10 @@ public class ProSkaterScript : MonoBehaviour
 
     public void SetActive(bool value)
     {
-        if (triggerCollider != null)
-        {
-            triggerCollider.enabled = value;
-        }
+        //if (triggerCollider != null)
+        //{
+        //    triggerCollider.enabled = value;
+        //}
 
         if (meshRenderers == null) return;
 
@@ -74,7 +81,7 @@ public class ProSkaterScript : MonoBehaviour
         {
             if (meshRenderers[i] != null)
             {
-                meshRenderers[i].material = (value ? activeMaterials[i] : originalMaterials[i]);
+                meshRenderers[i].material = (value ? activeMaterials[i] : inactiveMaterials[i]);
             }
         }
     }

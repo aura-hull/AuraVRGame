@@ -30,6 +30,7 @@ public class PointerInteractions : MonoBehaviour
     
     private bool _validSpawn = false;
     private Vector3 _spawnPoint;
+    private PointerSelectable _currentSelection = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -91,37 +92,47 @@ public class PointerInteractions : MonoBehaviour
             
             if (Physics.Raycast(ray, out hitInfo, maximumPointerDistance))
             {
+                PointerSelectable selection = hitInfo.transform.GetComponent<PointerSelectable>();
                 float distance = Vector3.Distance(transform.position, hitInfo.point);
 
-                if (distance <= placeRange)
+                if (selection != null) // Default selection object behaviours.
                 {
-                    // Placing buildings
-                    if (placementIndicator != null)
-                    {
-                        placementIndicator.SetActive(true);
-                        placementIndicator.transform.position = hitInfo.point;
-                        placementIndicator.transform.rotation = Quaternion.identity;
-                    }
-
-                    if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(buildLayerName))
-                    {
-                        _spawnPoint = hitInfo.point;
-                        _validSpawn = true;
-                        placementIndicator.GetComponent<Renderer>().material = validMaterial;
-                    }
-                    else
-                    {
-                        _validSpawn = false;
-                        placementIndicator.GetComponent<Renderer>().material = invalidMaterial;
-                    }
+                    _currentSelection = selection;
+                    _currentSelection.Selected();
                 }
                 else
                 {
-                    _validSpawn = false;
-
-                    if (placementIndicator != null)
+                    if (distance <= placeRange)
                     {
-                        placementIndicator.SetActive(false);
+                        // Within placement range.
+                        if (placementIndicator != null)
+                        {
+                            placementIndicator.SetActive(true);
+                            placementIndicator.transform.position = hitInfo.point;
+                            placementIndicator.transform.rotation = Quaternion.identity;
+                        }
+
+                        if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(buildLayerName))
+                        {
+                            _spawnPoint = hitInfo.point;
+                            _validSpawn = true;
+                            placementIndicator.GetComponent<Renderer>().material = validMaterial;
+                        }
+                        else
+                        {
+                            _validSpawn = false;
+                            placementIndicator.GetComponent<Renderer>().material = invalidMaterial;
+                        }
+                    }
+                    else
+                    {
+                        // Not within placement range.
+                        _validSpawn = false;
+
+                        if (placementIndicator != null)
+                        {
+                            placementIndicator.SetActive(false);
+                        }
                     }
                 }
 
@@ -129,10 +140,26 @@ public class PointerInteractions : MonoBehaviour
                 _lineRenderer.SetPosition(1, hitInfo.point);
                 return;
             }
+            else
+            {
+                // Deselect all.
+                if (_currentSelection != null)
+                {
+                    _currentSelection.DeSelected();
+                    _currentSelection = null;
+                }
 
-            // Else just draw ray to the tip of the pointer distance.
-            _lineRenderer.SetPosition(1, transform.position + (transform.forward * maximumPointerDistance));
-            return;
+                // Draw ray to the tip of the pointer distance.
+                _lineRenderer.SetPosition(1, transform.position + (transform.forward * maximumPointerDistance));
+                return;
+            }
+        }
+
+        // Deselect all.
+        if (_currentSelection != null)
+        {
+            _currentSelection.DeSelected();
+            _currentSelection = null;
         }
     }    
 }
