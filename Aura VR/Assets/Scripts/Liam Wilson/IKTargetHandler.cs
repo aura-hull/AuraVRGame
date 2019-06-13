@@ -28,6 +28,7 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
     public PhotonView headTarget { get; private set; } = null;
     public PhotonView leftTarget { get; private set; } = null;
     public PhotonView rightTarget { get; private set; } = null;
+    public PhotonView baseTarget { get; private set; } = null;
 
     private PhotonView _photonView = null;
     private bool isSetup = false;
@@ -82,7 +83,19 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
         rightTarget.transform.SetParent(setup.actualRightController.transform);
         rightTarget.transform.localPosition = rightTargetPosition;
         rightTarget.transform.localEulerAngles = rightTargetEuler;
-        
+
+        if (baseTarget == null)
+        {
+            GameObject baseTargetObj = PhotonNetwork.Instantiate(photonTrackedObjectPrefab.name, Vector3.zero, Quaternion.identity);
+            baseTarget = baseTargetObj.GetPhotonView();
+        }
+
+        // Set body physics link.
+        if (bodyPhysics != null)
+        {
+            baseTarget.transform.SetParent(bodyPhysics.GetBodyColliderContainer().transform, false);
+        }
+
         LocalSetup(_photonView.OwnerActorNr);
         isSetup = true;
     }
@@ -94,6 +107,7 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
             stream.SendNext(headTarget.ViewID);
             stream.SendNext(leftTarget.ViewID);
             stream.SendNext(rightTarget.ViewID);
+            stream.SendNext(baseTarget.ViewID);
         }
         else if (stream.IsReading && !isSetup)
         {
@@ -101,6 +115,7 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
             headTarget = PhotonView.Find((int)stream.ReceiveNext());
             leftTarget = PhotonView.Find((int)stream.ReceiveNext());
             rightTarget = PhotonView.Find((int)stream.ReceiveNext());
+            baseTarget = PhotonView.Find((int)stream.ReceiveNext());
 
             LocalSetup(headTarget.OwnerActorNr);
             isSetup = true;
@@ -113,6 +128,7 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
         headTarget.name = $"HeadTarget ({id})";
         leftTarget.name = $"LeftTarget ({id})";
         rightTarget.name = $"RightTarget ({id})";
+        baseTarget.name = $"BaseTarget ({id})";
 
         // Set IK links.
         if (finalIKSetup == null) return;
@@ -120,9 +136,10 @@ public class IKTargetHandler : MonoBehaviour, IPunObservable
         finalIKSetup.solver.leftArm.target = leftTarget.transform;
         finalIKSetup.solver.rightArm.target = rightTarget.transform;
 
-        // Set body physics link.
-        if (bodyPhysics == null) return;
-        finalIKSetup.transform.SetParent(bodyPhysics.GetBodyColliderContainer().transform);
+        // Set base link.
+        finalIKSetup.transform.SetParent(baseTarget.transform);
+        finalIKSetup.transform.localPosition = Vector3.zero;
+        finalIKSetup.transform.localEulerAngles = Vector3.zero;
     }
 
     void OnDestroy()
