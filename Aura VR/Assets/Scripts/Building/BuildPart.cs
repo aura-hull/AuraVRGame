@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class BuildPart : MonoBehaviour
 {
+    [SerializeField] private int partIndex = -1;
+
+    public int PartIndex
+    {
+        get { return partIndex; }
+    }
+
     [SerializeField]
     private string _partName;
     [SerializeField]

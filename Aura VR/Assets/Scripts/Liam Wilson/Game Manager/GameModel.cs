@@ -60,7 +60,10 @@ namespace AuraHull.AuraVRGame
         {
             for (int i = 0; i < _partSpawners.Length; i++)
             {
-                _partSpawners[i].SpawnIfReady();
+                if (_partSpawners[i] != null)
+                {
+                    _partSpawners[i].SpawnIfReady();
+                }
             }
         }
     }

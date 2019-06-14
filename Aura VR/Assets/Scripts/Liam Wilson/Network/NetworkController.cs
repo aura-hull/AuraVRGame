@@ -26,7 +26,7 @@ namespace AuraHull.AuraVRGame
         Connection _connection;
 
         public static event Action OnGameConnected;
-        public static event Action<int, string> OnTurbinePartBuilt;
+        public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float> OnSyncManagers;
         public static event Action<Player> OnSomePlayerConnected;
@@ -75,14 +75,14 @@ namespace AuraHull.AuraVRGame
             );
         }
 
-        public void NotifyTurbinePartBuilt(string partName)
+        public void NotifyTurbinePartBuilt(int matcherIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TURBINE_PART_BUILT,
-                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, partName },
+                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, matcherIndex },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -130,7 +130,7 @@ namespace AuraHull.AuraVRGame
                     break;
 
                 case NetworkEvent.TURBINE_PART_BUILT:
-                    OnTurbinePartBuilt?.Invoke((int)serialize[0], (string)serialize[1]);
+                    OnTurbinePartBuilt?.Invoke((int)serialize[0], (int)serialize[1]);
                     break;
 
                 case NetworkEvent.TURBINE_BUILT:
