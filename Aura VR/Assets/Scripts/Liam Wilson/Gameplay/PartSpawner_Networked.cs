@@ -3,14 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 public class PartSpawner_Networked : MonoBehaviour
 {
-    [SerializeField] private GameObject partPrefab;
+    private enum SpawnMode
+    {
+        Attached,
+        Disperse
+    }
+
+    [SerializeField] private SpawnMode spawnMode = SpawnMode.Attached;
+    [SerializeField] private bool destroyOnSpawn = false;
+    [SerializeField] private GameObject[] partPrefabs;
     [SerializeField] private Text timeRemainingText;
     [SerializeField] private float timeBetweenSpawns = 10.0f;
+    [SerializeField] private float dispersionRadius = 2.0f;
     
     private float _timeRemaining = 0.0f;
     private bool _partIsReady = false;
@@ -47,7 +58,16 @@ public class PartSpawner_Networked : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody == null) return;
-        _activeCollector = other.attachedRigidbody.GetComponent<PartCollector>();
+
+        _activeCollector = other.GetComponent<PartCollector>();
+
+        if (_activeCollector == null)
+        {
+            _activeCollector = other.attachedRigidbody.GetComponent<PartCollector>();
+        }
+
+        // Means this object doesn't use a timer.
+        if (timeBetweenSpawns <= 0.0f) SpawnIfReady();
     }
 
     void OnTriggerExit(Collider other)
@@ -60,7 +80,7 @@ public class PartSpawner_Networked : MonoBehaviour
 
     public void SpawnIfReady()
     {
-        if (partPrefab == null) return;
+        if (partPrefabs == null) return;
         if (_activeCollector == null) return;
 
         if (!_activeCollector.available) return;
@@ -68,11 +88,32 @@ public class PartSpawner_Networked : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            GameObject newPart = PhotonNetwork.Instantiate(partPrefab.name, Vector3.zero, Quaternion.identity);
-            newPart.transform.SetParent(_activeCollector.RestingPoint, false);
+            for (int i = 0; i < partPrefabs.Length; i++)
+            {
+                GameObject newPart = PhotonNetwork.Instantiate(partPrefabs[i].name, Vector3.zero, Quaternion.identity);
+
+                if (spawnMode == SpawnMode.Attached)
+                {
+                    newPart.transform.SetParent(_activeCollector.RestingPoint);
+                    newPart.transform.localPosition = Vector3.zero;
+                    newPart.transform.localRotation = Quaternion.identity;
+                }
+                else
+                {
+                    float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f);
+                    Vector3 polarPoint = Quaternion.Euler(0, randomAngle, 0) * (Vector3.forward * dispersionRadius);
+                    newPart.transform.position = _activeCollector.transform.position + polarPoint;
+                    newPart.transform.rotation = Quaternion.Euler(randomAngle, randomAngle, randomAngle);
+                }
+            }
 
             _activeCollector.available = false;
             _partIsReady = false;
+
+            if (destroyOnSpawn)
+            {
+                PhotonNetwork.Destroy(gameObject.GetPhotonView());
+            }
         }
     }
 
