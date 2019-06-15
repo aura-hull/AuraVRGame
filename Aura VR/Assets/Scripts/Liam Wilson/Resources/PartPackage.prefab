@@ -110,6 +110,7 @@ MonoBehaviour:
   timeRemainingText: {fileID: 0}
   timeBetweenSpawns: 0
   dispersionRadius: 50
+  requiredCollectorID: 1
 --- !u!1001 &836354414211186773
 PrefabInstance:
   m_ObjectHideFlags: 0

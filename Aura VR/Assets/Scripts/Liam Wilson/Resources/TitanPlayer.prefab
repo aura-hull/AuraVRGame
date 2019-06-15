@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restingPoint: {fileID: 0}
+  collectorID: 1
   available: 1
 --- !u!1 &3133286319932603436
 GameObject:

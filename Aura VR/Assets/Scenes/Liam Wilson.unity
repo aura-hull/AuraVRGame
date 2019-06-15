@@ -4202,6 +4202,16 @@ PrefabInstance:
       propertyPath: timeBetweenSpawns
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredPartCollectorID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredCollectorID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e41efa3b5d13444bbe8b95a3afb27d, type: 3}
 --- !u!1001 &88212552
@@ -27099,6 +27109,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3094132787226294554, guid: 7d3f87823643705419a71ab90243ebed,
         type: 3}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredPartCollectorID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredCollectorID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e41efa3b5d13444bbe8b95a3afb27d, type: 3}
 --- !u!1001 &686703379
@@ -88038,6 +88058,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3094132787226294554, guid: 7d3f87823643705419a71ab90243ebed,
         type: 3}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredPartCollectorID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 540406189356518350, guid: 24e41efa3b5d13444bbe8b95a3afb27d,
+        type: 3}
+      propertyPath: requiredCollectorID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e41efa3b5d13444bbe8b95a3afb27d, type: 3}
 --- !u!1001 &2072593669

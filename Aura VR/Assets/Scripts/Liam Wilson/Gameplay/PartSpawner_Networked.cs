@@ -22,6 +22,7 @@ public class PartSpawner_Networked : MonoBehaviour
     [SerializeField] private Text timeRemainingText;
     [SerializeField] private float timeBetweenSpawns = 10.0f;
     [SerializeField] private float dispersionRadius = 2.0f;
+    [SerializeField] private float requiredCollectorID = -1;
     
     private float _timeRemaining = 0.0f;
     private bool _partIsReady = false;
@@ -57,13 +58,17 @@ public class PartSpawner_Networked : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody == null) return;
+        PartCollector collector = other.GetComponent<PartCollector>();
 
-        _activeCollector = other.GetComponent<PartCollector>();
-
-        if (_activeCollector == null)
+        if (collector == null && other.attachedRigidbody != null)
         {
-            _activeCollector = other.attachedRigidbody.GetComponent<PartCollector>();
+            collector = other.attachedRigidbody.GetComponent<PartCollector>();
+            if (collector == null) return;
+        }
+
+        if (collector.CollectorID == requiredCollectorID)
+        {
+            _activeCollector = collector;
         }
 
         // Means this object doesn't use a timer.
