@@ -28,7 +28,7 @@ namespace AuraHull.AuraVRGame
         public static event Action OnGameConnected;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
-        public static event Action<float, float, float, float> OnSyncManagers;
+        public static event Action<float, float, float, float, float> OnSyncManagers;
         public static event Action<Player> OnSomePlayerConnected;
         public static event Action<Player> OnSomePlayerDisconnected;
         public static event Action<Player> OnRoundEnded;
@@ -101,14 +101,14 @@ namespace AuraHull.AuraVRGame
             );
         }
 
-        public void NotifySyncManagers(float playDuration, float score, float powerProduced, float powerUsed)
+        public void NotifySyncManagers(float powerProduced, float powerUsed, float powerStored, float playDuration, float score)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.SYNC_MANAGERS,
-                eventContent: new object[4] { playDuration, score, powerProduced, powerUsed },
+                eventContent: new object[5] { powerProduced, powerUsed, powerStored, playDuration, score },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -149,7 +149,7 @@ namespace AuraHull.AuraVRGame
                     break;
 
                 case NetworkEvent.SYNC_MANAGERS:
-                    OnSyncManagers?.Invoke((float)serialize[0], (float)serialize[1], (float)serialize[2], (float)serialize[3]);
+                    OnSyncManagers?.Invoke((float)serialize[0], (float)serialize[1], (float)serialize[2], (float)serialize[3], (float)serialize[4]);
                     break;
             }
         }

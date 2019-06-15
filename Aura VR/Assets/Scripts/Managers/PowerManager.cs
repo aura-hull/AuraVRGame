@@ -20,11 +20,13 @@ public class PowerManager
     private PowerManager() { }
 
     private float _powerProduced;
-    public Action<float> OnPowerProducedChanged;
-    private float _powerUsed;
-    public Action<float> OnPowerUsedChanged;
+    public Action OnPowerProducedChanged;
 
-    private float _powerTarget = 100;
+    private float _powerUsed;
+    public Action OnPowerUsedChanged;
+
+    private float _powerStored;
+    public Action OnStoredPowerChanged;
 
     public WindManager activeWindManager;
 
@@ -34,7 +36,7 @@ public class PowerManager
         set
         {
             _powerProduced = value;
-            OnPowerProducedChanged?.Invoke(_powerProduced);
+            OnPowerProducedChanged?.Invoke();
         }
     }
 
@@ -44,20 +46,30 @@ public class PowerManager
         set
         {
             _powerUsed = value;
-            OnPowerUsedChanged?.Invoke(_powerUsed);
+            OnPowerUsedChanged?.Invoke();
         }
     }
 
-    public float NetPower
+    public float PowerNet
     {
         get { return _powerProduced - _powerUsed; }
     }
 
-    public float NetPercentage
+    public float PowerStored
     {
-        get { return (NetPower / _powerTarget) * 100.0f; }
+        get { return _powerStored; }
+        set
+        {
+            _powerStored = value;
+            OnStoredPowerChanged?.Invoke();
+        }
     }
-    
+
+    public void Update()
+    {
+        PowerStored += PowerNet;
+    }
+
     public void IncreasePowerOutput(float amountToIncrease)
     {
         PowerProduced += amountToIncrease;

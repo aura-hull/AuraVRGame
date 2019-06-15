@@ -41,7 +41,7 @@ public class PartSpawner_Networked : MonoBehaviour
                 _timeRemaining -= Time.deltaTime;
 
                 if (timeRemainingText != null)
-                    timeRemainingText.text = NeatTime((int)_timeRemaining);
+                    timeRemainingText.text = UsefulFuncs.NeatTime(_timeRemaining);
 
                 if (_timeRemaining <= 0.0f)
                 {
@@ -115,13 +115,5 @@ public class PartSpawner_Networked : MonoBehaviour
                 PhotonNetwork.Destroy(gameObject.GetPhotonView());
             }
         }
-    }
-
-    private string NeatTime(int seconds)
-    {
-        TimeSpan time = TimeSpan.FromSeconds(seconds);
-
-        if (seconds < 3600) return time.ToString(@"mm\:ss");
-        else return time.ToString(@"hh\:mm\:ss");
     }
 }

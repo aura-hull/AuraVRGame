@@ -25,7 +25,7 @@ public class AuraGameManager
     }
     
     public Action OnGameOver;
-    public Action<float, float> OnPlayDurationChanged;
+    public Action OnPlayDurationChanged;
 
     private GameState _currentState;
     private PowerManager _powerManager;
@@ -34,6 +34,11 @@ public class AuraGameManager
     
     private float _playDurationLimit = 30;
     private float _playDuration = 0;
+
+    public float TimeRemaining
+    {
+        get { return Mathf.Round(_playDurationLimit - _playDuration); }
+    }
 
     private AuraGameManager()
     {
@@ -50,16 +55,18 @@ public class AuraGameManager
         NetworkController.OnSyncManagers += Sync;
     }
 
-    void Sync(float playDuration, float score, float powerProduced, float powerUsed)
+    void Sync(float powerProduced, float powerUsed, float powerStored, float playDuration, float score)
     {
         if (PhotonNetwork.IsMasterClient) return;
-
-        _playDuration = playDuration;
-        OnPlayDurationChanged?.Invoke(_playDuration, _playDurationLimit);
-
-        _scoreManager.Score = score;
+        
         _powerManager.PowerProduced = powerProduced;
         _powerManager.PowerUsed = powerUsed;
+        _powerManager.PowerStored = powerStored;
+
+        _playDuration = playDuration;
+        OnPlayDurationChanged?.Invoke();
+
+        _scoreManager.Score = score;
     }
 
     // Update is called once per frame
@@ -90,7 +97,7 @@ public class AuraGameManager
     private void ExecuteGameplay()
     {
         _playDuration += Time.deltaTime;
-        OnPlayDurationChanged?.Invoke(_playDuration, _playDurationLimit);
+        OnPlayDurationChanged?.Invoke();
 
         if (_playDuration >= _playDurationLimit)
         {
@@ -103,7 +110,7 @@ public class AuraGameManager
             OnGameOver?.Invoke();
         }
 
-        NetworkController.Instance.NotifySyncManagers(_playDuration, _scoreManager.Score, _powerManager.PowerProduced, _powerManager.PowerUsed);
+        NetworkController.Instance.NotifySyncManagers(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
 
     private void ExecuteEnd()

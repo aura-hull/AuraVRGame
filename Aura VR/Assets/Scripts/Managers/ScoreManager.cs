@@ -17,13 +17,10 @@ public class ScoreManager
     }
     #endregion
 
-    private ScoreManager()
-    {
-        
-    }
+    private ScoreManager() { }
 
     private float _score;
-    public Action<float> OnScoreChange;
+    public Action OnScoreChange;
 
     public float Score
     {
@@ -34,7 +31,7 @@ public class ScoreManager
         set
         {
             _score = value;
-            OnScoreChange?.Invoke(_score);
+            OnScoreChange?.Invoke();
         }
     }
 
