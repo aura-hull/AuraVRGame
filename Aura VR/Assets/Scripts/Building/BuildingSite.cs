@@ -30,6 +30,11 @@ public class BuildingSite : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        transform.forward = PowerManager.Instance.activeWindManager.OptimalRotation(transform.position);
+    }
+
     public void BuildPart(BuildPartMatcher matcher)
     {
         if (!ConstructPart(matcher.Index)) return;

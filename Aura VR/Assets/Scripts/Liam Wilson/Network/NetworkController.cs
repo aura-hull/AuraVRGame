@@ -12,6 +12,7 @@ namespace AuraHull.AuraVRGame
     public enum NetworkEvent
     {
         BUILD_SITE_PLACED,
+        BUILD_SITE_DESTROYED,
         TURBINE_PART_BUILT,
         TURBINE_BUILT,
         SYNC_MANAGERS,
@@ -75,6 +76,19 @@ namespace AuraHull.AuraVRGame
             );
         }
 
+        public void NotifyBuildSiteDestroyed(int buildSiteViewId)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.BUILD_SITE_DESTROYED,
+                eventContent: new object[1] { buildSiteViewId },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
         public void NotifyTurbinePartBuilt(int matcherIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
@@ -126,6 +140,14 @@ namespace AuraHull.AuraVRGame
                     if (PhotonNetwork.IsMasterClient)
                     {
                         PhotonNetwork.InstantiateSceneObject((string) serialize[0], (Vector3) serialize[1], Quaternion.identity);
+                    }
+                    break;
+
+                case NetworkEvent.BUILD_SITE_DESTROYED:
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        PhotonView buildSite = PhotonView.Find((int)serialize[0]);
+                        PhotonNetwork.Destroy(buildSite);
                     }
                     break;
 

@@ -225,7 +225,8 @@ GameObject:
   - component: {fileID: 3576256602699361794}
   - component: {fileID: 4774345560926526303}
   - component: {fileID: 9120010342402234882}
-  m_Layer: 0
+  - component: {fileID: 1012288249706296379}
+  m_Layer: 14
   m_Name: AuraTurbineBuild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,6 +292,19 @@ MonoBehaviour:
     type: 3}
   _holoMaterial: {fileID: 2100000, guid: aee1849dd30e2764999c0a5770c0ccda, type: 2}
   _filledMaterial: {fileID: 2100000, guid: eb8af64f91b7430448f8df8d3583812e, type: 2}
+--- !u!65 &1012288249706296379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576256602699592226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 16, z: 5}
+  m_Center: {x: 0, y: 8, z: 0}
 --- !u!1 &3576256602699592228
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,14 +24,19 @@ public class PointerInteractions : MonoBehaviour
     [SerializeField] private bool canPlaceBuildSites = true;
     [SerializeField] private GameObject buildSitePrefab;
     [SerializeField] private GameObject placementIndicator;
+    [SerializeField] private GameObject deleteIndicator;
     [SerializeField] private Material validMaterial;
     [SerializeField] private Material invalidMaterial;
     [SerializeField] private float placeRange = 2.0f;
-    [SerializeField] private string buildLayerName;
+    [SerializeField] private float deleteRange = 3.0f;
+    [SerializeField] private string buildLayer;
+    [SerializeField] private string deleteLayer;
+    [SerializeField] private LayerMask ignoreLayers;
     
     private bool _validSpawn = false;
     private Vector3 _spawnPoint;
     private PointerSelectable _currentSelection = null;
+    private PhotonView targetToDelete = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -70,101 +75,150 @@ public class PointerInteractions : MonoBehaviour
 
         if (!canPlaceBuildSites) return;
 
-        if (placementIndicator)
+        if (_validSpawn)
+        {
+            NetworkController.Instance.NotifyBuildSitePlaced(buildSitePrefab.name, _spawnPoint);
+        }
+
+        if (targetToDelete != null)
+        {
+            NetworkController.Instance.NotifyBuildSiteDestroyed(targetToDelete.ViewID);
+        }
+
+        if (placementIndicator != null)
         {
             placementIndicator.SetActive(false);
         }
 
-        if (_validSpawn)
+        if (deleteIndicator != null)
         {
-            NetworkController.Instance.NotifyBuildSitePlaced(buildSitePrefab.name, _spawnPoint);
-            //PhotonNetwork.InstantiateSceneObject(buildSiteBeingPlaced.name, _spawnPoint, Quaternion.identity);
+            deleteIndicator.SetActive(false);
         }
+    }
+
+    private bool ObjectSelection(RaycastHit hitInfo)
+    {
+        PointerSelectable selection = hitInfo.transform.GetComponent<PointerSelectable>();
+        if (selection == null) return false;
+
+        _currentSelection = selection;
+        _currentSelection.Selected();
+
+        _lineRenderer.SetPosition(1, hitInfo.point);
+
+        return true;
+    }
+
+    private enum Mode { Build, Destroy, Null };
+    private Mode PointerMode(RaycastHit hitInfo)
+    {
+        string hitLayer = LayerMask.LayerToName(hitInfo.transform.gameObject.layer);
+        float distance = Vector3.Distance(transform.position, hitInfo.point);
+
+        if (hitLayer == deleteLayer && distance < deleteRange) return Mode.Destroy;
+        else if (distance < placeRange) return Mode.Build;
+        else return Mode.Null;
+    }
+
+    private void PlaceBuildSite(RaycastHit hitInfo)
+    {
+        if (!canPlaceBuildSites) return;
+
+        if (placementIndicator != null)
+        {
+            placementIndicator.SetActive(true);
+            placementIndicator.transform.position = hitInfo.point;
+            placementIndicator.transform.rotation = Quaternion.identity;
+
+            if (LayerMask.LayerToName(hitInfo.transform.gameObject.layer) == buildLayer)
+            {
+                _validSpawn = true;
+                placementIndicator.GetComponent<Renderer>().material = validMaterial;
+                _spawnPoint = hitInfo.point;
+            }
+            else
+            {
+                placementIndicator.GetComponent<Renderer>().material = invalidMaterial;
+            }
+        }
+
+        _lineRenderer.SetPosition(1, hitInfo.point);
+    }
+
+    private void MarkSiteForDeletion(RaycastHit hitInfo)
+    {
+        if (!canPlaceBuildSites) return;
+
+        if (deleteIndicator != null)
+        {
+            deleteIndicator.SetActive(true);
+            deleteIndicator.transform.position = hitInfo.point - transform.forward;
+            targetToDelete = hitInfo.transform.gameObject.GetPhotonView();
+        }
+
+        _lineRenderer.SetPosition(1, hitInfo.point);
+    }
+
+    private void ResetIndicators()
+    {
+        if (_currentSelection != null)
+        {
+            _currentSelection.DeSelected();
+            _currentSelection = null;
+        }
+
+        _validSpawn = false;
+        if (placementIndicator != null)
+        {
+            placementIndicator.SetActive(false);
+        }
+        
+        targetToDelete = null;
+        if (deleteIndicator != null)
+        {
+            deleteIndicator.SetActive(false);
+        }
+
+        _lineRenderer.SetPosition(1, transform.position + (transform.forward * maximumPointerDistance));
     }
 
     // Update is called once per frame
     void Update()
     {
+        _validSpawn = false;
+
         // Default positions
         _lineRenderer.SetPosition(0, transform.position);
         _lineRenderer.SetPosition(1, transform.position);
 
         if (_pointing)
         {
-            // Set ray here
-            Ray ray = new Ray(transform.position, transform.forward); // replace this for the hand pointer
             RaycastHit hitInfo;
-            
-            if (Physics.Raycast(ray, out hitInfo, maximumPointerDistance))
+            Ray ray = new Ray(transform.position, transform.forward); // replace this for the hand pointer
+            if (!Physics.Raycast(ray, out hitInfo, maximumPointerDistance, ignoreLayers.Inverse()))
             {
-                PointerSelectable selection = hitInfo.transform.GetComponent<PointerSelectable>();
-                float distance = Vector3.Distance(transform.position, hitInfo.point);
-
-                if (selection != null) // Default selection object behaviours.
-                {
-                    _currentSelection = selection;
-                    _currentSelection.Selected();
-                }
-                else if (canPlaceBuildSites)
-                {
-                    if (distance <= placeRange)
-                    {
-                        // Within placement range.
-                        if (placementIndicator != null)
-                        {
-                            placementIndicator.SetActive(true);
-                            placementIndicator.transform.position = hitInfo.point;
-                            placementIndicator.transform.rotation = Quaternion.identity;
-                        }
-
-                        if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(buildLayerName))
-                        {
-                            _spawnPoint = hitInfo.point;
-                            _validSpawn = true;
-                            placementIndicator.GetComponent<Renderer>().material = validMaterial;
-                        }
-                        else
-                        {
-                            _validSpawn = false;
-                            placementIndicator.GetComponent<Renderer>().material = invalidMaterial;
-                        }
-                    }
-                    else
-                    {
-                        // Not within placement range.
-                        _validSpawn = false;
-
-                        if (placementIndicator != null)
-                        {
-                            placementIndicator.SetActive(false);
-                        }
-                    }
-                }
-
-                // Draw the ray to the impact position.
-                _lineRenderer.SetPosition(1, hitInfo.point);
+                ResetIndicators();
                 return;
             }
-            else
+
+            // Object selection takes first priority.
+            if (ObjectSelection(hitInfo)) return;
+
+            Mode ptrMode = PointerMode(hitInfo);
+            switch (ptrMode)
             {
-                // Deselect all.
-                if (_currentSelection != null)
-                {
-                    _currentSelection.DeSelected();
-                    _currentSelection = null;
-                }
+                case Mode.Build:
+                    PlaceBuildSite(hitInfo);
+                    break;
 
-                // Draw ray to the tip of the pointer distance.
-                _lineRenderer.SetPosition(1, transform.position + (transform.forward * maximumPointerDistance));
-                return;
+                case Mode.Destroy:
+                    MarkSiteForDeletion(hitInfo);
+                    break;
+
+                case Mode.Null:
+                    ResetIndicators();
+                    break;
             }
-        }
-
-        // Deselect all.
-        if (_currentSelection != null)
-        {
-            _currentSelection.DeSelected();
-            _currentSelection = null;
         }
     }    
 }
