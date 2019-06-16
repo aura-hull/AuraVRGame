@@ -74562,6 +74562,53 @@ PrefabInstance:
       propertyPath: inactiveAlpha
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6542122214177802873, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892242887214366040, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 650
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892242887214366040, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124437054937420241, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -34.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124437054937420241, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121278948629978000, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: containerSize.x
+      value: 650
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121278948629978000, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: containerSize.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121278948629978000, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: lineWidth
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295744718972332867, guid: 24e74d0f7ad4f7e44a218dc291096872,
+        type: 3}
+      propertyPath: m_Text
+      value: "Port of Immingham\r: \nIs the largest port by tonnage in the UK. It
+        is also home of the \rstate-of-the-art Immingham \nRenewable Fuels Terminal
+        (IRFT), the world\u2019s largest biomass handling \rfacility"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e74d0f7ad4f7e44a218dc291096872, type: 3}
 --- !u!1 &1740826798
