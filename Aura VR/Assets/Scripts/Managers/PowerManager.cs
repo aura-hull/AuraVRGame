@@ -17,7 +17,10 @@ public class PowerManager
     }
     #endregion
 
-    private PowerManager() { }
+    private PowerManager()
+    {
+        _consumers = new List<PowerConsumer>();
+    }
 
     private float _powerProduced;
     public Action OnPowerProducedChanged;
@@ -29,6 +32,9 @@ public class PowerManager
     public Action OnStoredPowerChanged;
 
     public WindManager activeWindManager;
+    public float depletePowerTime = 1.0f;
+
+    private List<PowerConsumer> _consumers;
 
     public float PowerProduced
     {
@@ -65,9 +71,23 @@ public class PowerManager
         }
     }
 
+    private float depletionTimer = 0.0f;
     public void Update()
     {
-        PowerStored += PowerNet;
+        float powerUsedCalc = 0.0f;
+        foreach (PowerConsumer pc in _consumers)
+        {
+            powerUsedCalc += pc.ReportConsumption();
+        }
+
+        PowerUsed = powerUsedCalc;
+
+        depletionTimer += Time.deltaTime;
+        if (depletionTimer >= depletePowerTime)
+        {
+            PowerStored += PowerNet;
+            depletionTimer = 0.0f;
+        }
     }
 
     public void IncreasePowerOutput(float amountToIncrease)
@@ -75,14 +95,27 @@ public class PowerManager
         PowerProduced += amountToIncrease;
     }
 
-    public void IncreasePowerUsage(float usage)
+    public void SubscribeConsumer(PowerConsumer newConsumer)
     {
-        PowerUsed += usage;
+        _consumers.Add(newConsumer);
     }
 
-    public float CalculatePowerOutput(Vector3 position, Vector3 orientation, float maxValue)
+    public void UnsubscribeConsumer(PowerConsumer toRemove)
+    {
+        if (_consumers.Contains(toRemove))
+        {
+            _consumers.Remove(toRemove);
+        }
+    }
+
+    public float CalculatePowerOutput(Vector3 position, Vector3 orientation, float minValue, float maxValue)
     {
         if (activeWindManager == null) return 0.0f;
-        return maxValue * (activeWindManager.GetWindSpeedKmH(position, orientation) / activeWindManager.MaxKmH);
+
+        float min = activeWindManager.MinKmH;
+        float max = activeWindManager.MaxKmH;
+        float kmhNormalized = (activeWindManager.GetWindSpeedKmH(position, orientation) - min) / (max - min);
+
+        return Mathf.Lerp(minValue, maxValue, kmhNormalized);
     }
 }

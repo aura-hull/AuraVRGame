@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bb9c05d5db5f044a1f9c65e178d3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPowerOutput: 10
+  minPowerOutput: 4
+  maxPowerOutput: 12
   bladeAnimate: {fileID: 8280196432532787646}
   bladeSpeedMultiplier: 10
 --- !u!1 &3576256602699592228

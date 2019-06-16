@@ -11412,7 +11412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayLight: {fileID: 1197287291}
   nightLight: {fileID: 274522055}
-  fullCycleDurationSeconds: 60
+  fullCycleDurationSeconds: 1800
   startAtTime: 12
   streetLightsParent: {fileID: 816539198}
 --- !u!1001 &267951998
@@ -13326,7 +13326,7 @@ GameObject:
   - component: {fileID: 316735205}
   m_Layer: 10
   m_Name: All
-  m_TagString: Untagged
+  m_TagString: Effector:Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34488,7 +34488,7 @@ GameObject:
   - component: {fileID: 854214456}
   m_Layer: 12
   m_Name: terrain
-  m_TagString: Untagged
+  m_TagString: Effector:Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -36427,7 +36427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890166708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.6, y: -0.1, z: -147.4}
+  m_LocalPosition: {x: 20.24, y: -0.1, z: -128.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1273423761}

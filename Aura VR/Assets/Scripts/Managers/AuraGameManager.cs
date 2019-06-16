@@ -32,19 +32,32 @@ public class AuraGameManager
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
     
-    private float _playDurationLimit = 30;
+    private float _playDurationLimit = 1800;
     private float _playDuration = 0;
+    private float _dayCyclesPerPlaythrough = 1;
 
     public float TimeRemaining
     {
         get { return Mathf.Round(_playDurationLimit - _playDuration); }
     }
 
+    public float PlayDurationLimit
+    {
+        get { return _playDurationLimit; }
+    }
+
+    public float DayCyclesPerPlaythrough
+    {
+        get { return _dayCyclesPerPlaythrough; }
+    }
+
     private AuraGameManager()
     {
         _powerManager = PowerManager.Instance;
+        _powerManager.depletePowerTime = 86400 / _playDurationLimit / _dayCyclesPerPlaythrough;
         _powerManager.PowerProduced = 0;
         _powerManager.PowerUsed = 0;
+        _powerManager.PowerStored = 600;
 
         _scoreManager = ScoreManager.Instance;
         _scoreManager.Score = 0;
@@ -98,6 +111,8 @@ public class AuraGameManager
     {
         _playDuration += Time.deltaTime;
         OnPlayDurationChanged?.Invoke();
+
+        _powerManager.Update();
 
         if (_playDuration >= _playDurationLimit)
         {

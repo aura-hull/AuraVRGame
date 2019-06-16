@@ -13,6 +13,11 @@ public class WindManager : MonoBehaviour
         get { return _windSources[0].speedKmH; }
     }
 
+    public float MinKmH
+    {
+        get { return Mathf.Min(defaultSpeedKmH, _windSources[_windSources.Length - 1].speedKmH); }
+    }
+
     void Awake()
     {
         _windSources = GetComponentsInChildren<WindSource>();

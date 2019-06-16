@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ScreenUpdater : MonoBehaviour
 {
     [SerializeField] private string netPowerFormat = "{0:f2} MW/s";
+    [SerializeField] private string storedPowerFormat = "{0:f2} MW";
     [SerializeField] private string calcPowerFormat = "{0:f2} | {1:f2} MW/s";
     [SerializeField] private string scoreFormat = "{0}";
 
@@ -23,6 +24,9 @@ public class ScreenUpdater : MonoBehaviour
         PowerManager.Instance.OnPowerProducedChanged += OnNetPowerChanged;
         PowerManager.Instance.OnPowerUsedChanged += OnNetPowerChanged;
         OnNetPowerChanged();
+
+        PowerManager.Instance.OnStoredPowerChanged += OnStoredPowerChanged;
+        OnStoredPowerChanged();
 
         AuraGameManager.Instance.OnPlayDurationChanged += OnGameTimeChanged;
         OnGameTimeChanged();
@@ -41,7 +45,13 @@ public class ScreenUpdater : MonoBehaviour
         float powerUsed = PowerManager.Instance.PowerUsed;
         calcPowerText.text = String.Format(calcPowerFormat, powerProduced, powerUsed);
     }
-    
+
+    private void OnStoredPowerChanged()
+    {
+        float powerStored = PowerManager.Instance.PowerStored;
+        storedPowerText.text = String.Format(storedPowerFormat, powerStored);
+    }
+
     private void OnGameTimeChanged()
     {
         float timeLeft = AuraGameManager.Instance.TimeRemaining;

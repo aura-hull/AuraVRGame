@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - TeleportIgnore
   - BuildPart
+  - Effector:Terrain
+  - Effector:Water
   layers:
   - Default
   - TransparentFX

@@ -193,6 +193,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4023440914041580918}
     m_Modifications:
+    - target: {fileID: 133118, guid: b7da9cc8b3fae0c488122309bcb2c9fe, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Props_Container_Color02
+      objectReference: {fileID: 0}
     - target: {fileID: 459506, guid: b7da9cc8b3fae0c488122309bcb2c9fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -249,10 +253,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.9
       objectReference: {fileID: 0}
-    - target: {fileID: 133118, guid: b7da9cc8b3fae0c488122309bcb2c9fe, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Props_Container_Color02
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7da9cc8b3fae0c488122309bcb2c9fe, type: 3}
 --- !u!4 &2401509277147148500 stripped
@@ -268,6 +268,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4023440914041580918}
     m_Modifications:
+    - target: {fileID: 129376, guid: baff99b5da9867047a0c00f66f4a8348, type: 3}
+      propertyPath: m_Name
+      value: SPW_Urban_Props_Container_Color01
+      objectReference: {fileID: 0}
     - target: {fileID: 421106, guid: baff99b5da9867047a0c00f66f4a8348, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -323,10 +327,6 @@ PrefabInstance:
     - target: {fileID: 421106, guid: baff99b5da9867047a0c00f66f4a8348, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 129376, guid: baff99b5da9867047a0c00f66f4a8348, type: 3}
-      propertyPath: m_Name
-      value: SPW_Urban_Props_Container_Color01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baff99b5da9867047a0c00f66f4a8348, type: 3}
