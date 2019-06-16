@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 540406188199122609}
   - component: {fileID: 540406188199122608}
   - component: {fileID: 540406188199122615}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 540406188219958604}
   - component: {fileID: 540406188219958611}
   - component: {fileID: 540406188219958610}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 540406188246475293}
   - component: {fileID: 540406188246475295}
   - component: {fileID: 540406188246475294}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: TimeRemaining
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 540406189356518348}
   - component: {fileID: 540406189356518350}
   - component: {fileID: 540406189356518353}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PartSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,10 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0db1aff2b81850459014bac0d604dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partPrefab: {fileID: 3094132787226294554, guid: 7d3f87823643705419a71ab90243ebed,
-    type: 3}
+  spawnMode: 0
+  destroyOnSpawn: 0
+  partPrefabs: []
   timeRemainingText: {fileID: 540406188246475294}
   timeBetweenSpawns: 10
+  dispersionRadius: 2
+  requiredCollectorID: -1
 --- !u!54 &540406189356518353
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -361,6 +364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833838519963265504, guid: 123d487671212034a939a1ac0647cf8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4833838519963265506, guid: 123d487671212034a939a1ac0647cf8d,
         type: 3}
@@ -432,10 +440,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4833838518780448690, guid: 123d487671212034a939a1ac0647cf8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4833838519963265505, guid: 123d487671212034a939a1ac0647cf8d,
         type: 3}
       propertyPath: inactiveAlpha
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833838518780448692, guid: 123d487671212034a939a1ac0647cf8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833838518780448688, guid: 123d487671212034a939a1ac0647cf8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 123d487671212034a939a1ac0647cf8d, type: 3}

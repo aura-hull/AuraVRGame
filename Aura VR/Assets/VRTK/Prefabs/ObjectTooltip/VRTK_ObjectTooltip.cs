@@ -37,8 +37,8 @@ namespace VRTK
         public string displayText;
         [Tooltip("The size of the text that is displayed.")]
         public int fontSize = 14;
-        [Tooltip("The size of the tooltip container where `x = width` and `y = height`.")]
-        public Vector2 containerSize = new Vector2(0.1f, 0.03f);
+        //[Tooltip("The size of the tooltip container where `x = width` and `y = height`.")]
+        //public Vector2 containerSize = new Vector2(0.1f, 0.03f);
         [Tooltip("An optional transform of where to start drawing the line from. If one is not provided the centre of the tooltip is used for the initial line position.")]
         public Transform drawLineFrom;
         [Tooltip("A transform of another object in the scene that a line will be drawn from the tooltip to, this helps denote what the tooltip is in relation to. If no transform is provided and the tooltip is a child of another object, then the parent object's transform will be used as this destination position.")]
@@ -143,9 +143,9 @@ namespace VRTK
 
         protected virtual void SetContainer()
         {
-            transform.Find("TooltipCanvas").GetComponent<RectTransform>().sizeDelta = containerSize;
+            //transform.Find("TooltipCanvas").GetComponent<RectTransform>().sizeDelta = containerSize;
             Transform tmpContainer = transform.Find("TooltipCanvas/UIContainer");
-            tmpContainer.GetComponent<RectTransform>().sizeDelta = containerSize;
+            //tmpContainer.GetComponent<RectTransform>().sizeDelta = containerSize;
             tmpContainer.GetComponent<Image>().color = containerColor;
         }
 
