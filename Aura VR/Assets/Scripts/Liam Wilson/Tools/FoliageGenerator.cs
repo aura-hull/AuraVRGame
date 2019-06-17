@@ -6,6 +6,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class FoliageGenerator : MonoBehaviour
 {
+#if UNITY_EDITOR
     [SerializeField] private LayerMask paintLayer;
     [SerializeField] private float range = 200.0f;
     [SerializeField] private float minHeight = 0.0f;
@@ -61,4 +62,5 @@ public class FoliageGenerator : MonoBehaviour
 
         generate = false;
     }
+#endif
 }
