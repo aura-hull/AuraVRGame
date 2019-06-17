@@ -12,6 +12,7 @@ public class BoatDriver : MonoBehaviour
     [SerializeField] private float enginePower = 1.0f;
     [SerializeField] private float steeringPower = 1.0f;
     [SerializeField] private bool allowReverse = true;
+    [SerializeField] private AudioSource engineAudio;
 
     public float realThrottleZero { get; private set; } = 0.0f;
     public float realThrottleMax { get; private set; } = float.MaxValue;
@@ -47,8 +48,15 @@ public class BoatDriver : MonoBehaviour
 
     void Update()
     {
+        float throttle = Throttle;
+
         Transform applyTo = (target == null) ? transform : target;
-        applyTo.position += applyTo.forward * Throttle * enginePower;
+        applyTo.position += applyTo.forward * throttle * enginePower;
         applyTo.Rotate(transform.up, Direction * Throttle * steeringPower);
+
+        if (engineAudio != null)
+        {
+            engineAudio.volume = Mathf.Abs(throttle);
+        }
     }
 }

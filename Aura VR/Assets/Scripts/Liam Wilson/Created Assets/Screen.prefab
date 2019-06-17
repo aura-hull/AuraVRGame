@@ -431,8 +431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a8535a37c73a548a2dd453d39c1c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  netPowerFormat: '{0:f2} MW/s'
-  calcPowerFormat: +{0:f2} | -{1:f2} MW/s
+  netPowerFormat: '{0:f2} MW/h'
+  storedPowerFormat: '{0:f2} MW'
+  calcPowerFormat: +{0:f2} | -{1:f2} MW/h
   scoreFormat: '{0}'
   netPowerText: {fileID: 8144276071718977957}
   calcPowerText: {fileID: 2732561700960279217}

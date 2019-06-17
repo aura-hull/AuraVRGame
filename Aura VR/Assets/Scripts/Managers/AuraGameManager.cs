@@ -32,7 +32,7 @@ public class AuraGameManager
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
     
-    private float _playDurationLimit = 1800;
+    private float _playDurationLimit = 1440;
     private float _playDuration = 0;
     private float _dayCyclesPerPlaythrough = 1;
 
