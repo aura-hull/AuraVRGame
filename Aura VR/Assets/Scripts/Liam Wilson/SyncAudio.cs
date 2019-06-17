@@ -27,8 +27,8 @@ public class SyncAudio : MonoBehaviour, IPunObservable
                     if (isPlaying) src.Play();
                     else src.Stop();
                 }
-                
-                stream.SendNext(src.volume);
+
+                src.volume = (float)stream.ReceiveNext();
             }
         }
     }
