@@ -8,7 +8,6 @@ public class LocalOnlyBehaviours : MonoBehaviour
 {
     [SerializeField] protected VRTK_SDKManager vrtkSdkManager;
     [SerializeField] protected PhotonView photonView;
-    [SerializeField] protected VRTK_BodyPhysics bodyPhysics;
 
     void Awake()
     {
@@ -20,11 +19,6 @@ public class LocalOnlyBehaviours : MonoBehaviour
         if (photonView.IsMine)
         {
             LookAtManager.Instance.lookAtTarget = transform;
-
-            if (bodyPhysics != null)
-            {
-                bodyPhysics.enabled = true;
-            }
         }
     }
 

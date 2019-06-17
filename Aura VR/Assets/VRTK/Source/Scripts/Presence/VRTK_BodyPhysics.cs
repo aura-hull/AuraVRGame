@@ -1,4 +1,7 @@
 ﻿// Body Physics|Presence|70060
+
+using Photon.Pun;
+
 namespace VRTK
 {
     using UnityEngine;
@@ -125,6 +128,8 @@ namespace VRTK
         public GameObject customBodyColliderContainer = null;
         [Tooltip("A GameObject to represent a custom foot collider container. It should contain a collider component that will be used for detecting step collisions. If one isn't provided then it will be auto generated.")]
         public GameObject customFootColliderContainer = null;
+
+        public PhotonView attachedView = null;
 
         /// <summary>
         /// Emitted when a fall begins.
@@ -429,6 +434,8 @@ namespace VRTK
 
         protected override void OnEnable()
         {
+            if (attachedView != null && !attachedView.IsMine) return;
+
             base.OnEnable();
             SetupPlayArea();
             SetupHeadset();

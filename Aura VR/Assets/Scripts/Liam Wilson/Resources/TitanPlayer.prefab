@@ -1131,7 +1131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrtkSdkManager: {fileID: 3092949586841991465}
   photonView: {fileID: 3133286319932603433}
-  bodyPhysics: {fileID: 8957486919196355701}
 --- !u!82 &2521021808588464781
 AudioSource:
   m_ObjectHideFlags: 0
