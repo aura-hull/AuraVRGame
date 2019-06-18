@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class ScoreboardManager
 {
     #region Singleton
@@ -21,7 +22,7 @@ public class ScoreboardManager
     private string _filepath = "scores.txt";
     public string Filepath { get; set; }
 
-    private int _scoreboardSize = 10;
+    [SerializeField] private int _scoreboardSize = 1000;
     private List<ScoreData> _scores;
 
     private ScoreboardManager()

@@ -5,6 +5,7 @@ using AuraHull.AuraVRGame;
 using Photon.Pun;
 using UnityEngine;
 
+[Serializable]
 public class AuraGameManager
 {
     private enum GameState
