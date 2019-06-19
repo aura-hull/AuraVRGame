@@ -23,7 +23,9 @@ public class PartSpawner_Networked : MonoBehaviour
     [SerializeField] private float timeBetweenSpawns = 10.0f;
     [SerializeField] private float dispersionRadius = 2.0f;
     [SerializeField] private float requiredCollectorID = -1;
-    
+
+    public Action OnDestroyed;
+
     private float _timeRemaining = 0.0f;
     private bool _partIsReady = false;
     private PartCollector _activeCollector = null;
@@ -97,30 +99,42 @@ public class PartSpawner_Networked : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            for (int i = 0; i < partPrefabs.Length; i++)
-            {
-                GameObject newPart = PhotonNetwork.Instantiate(partPrefabs[i].name, Vector3.zero, Quaternion.identity);
+            GameObject newPart;
 
-                if (spawnMode == SpawnMode.Attached)
+            if (spawnMode == SpawnMode.Attached)
+            {
+                newPart = PhotonNetwork.Instantiate(partPrefabs[0].name, Vector3.zero, Quaternion.identity);
+
+                newPart.transform.SetParent(_activeCollector.RestingPoint);
+                newPart.transform.localPosition = Vector3.zero;
+                newPart.transform.localRotation = Quaternion.identity;
+
+                _activeCollector.available = false;
+
+                PartSpawner_Networked newSpawner = newPart.GetComponent<PartSpawner_Networked>();
+                if (newSpawner != null)
                 {
-                    newPart.transform.SetParent(_activeCollector.RestingPoint);
-                    newPart.transform.localPosition = Vector3.zero;
-                    newPart.transform.localRotation = Quaternion.identity;
+                    newSpawner.OnDestroyed += _activeCollector.Free;
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < partPrefabs.Length; i++)
                 {
+                    newPart = PhotonNetwork.Instantiate(partPrefabs[i].name, Vector3.zero, Quaternion.identity);
+
                     float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f);
                     Vector3 polarPoint = Quaternion.Euler(0, randomAngle, 0) * (Vector3.forward * dispersionRadius);
                     newPart.transform.position = _activeCollector.transform.position + polarPoint;
                     newPart.transform.rotation = Quaternion.Euler(randomAngle, randomAngle, randomAngle);
                 }
             }
-
-            _activeCollector.available = false;
+            
             _partIsReady = false;
 
             if (destroyOnSpawn)
             {
+                OnDestroyed?.Invoke();
                 PhotonNetwork.Destroy(gameObject.GetPhotonView());
             }
         }

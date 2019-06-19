@@ -7,7 +7,7 @@ public class PartCollector : MonoBehaviour
     [SerializeField] private Transform restingPoint;
     [SerializeField] private int collectorID = -1;
 
-    public bool available = true;
+    public bool available;
 
     public int CollectorID
     {
@@ -17,5 +17,10 @@ public class PartCollector : MonoBehaviour
     public Transform RestingPoint
     {
         get { return restingPoint; }
+    }
+
+    public void Free()
+    {
+        available = true;
     }
 }
