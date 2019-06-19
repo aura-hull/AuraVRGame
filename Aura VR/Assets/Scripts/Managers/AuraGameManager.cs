@@ -12,7 +12,7 @@ public class AuraGameManager
     {
         Tutorial,
         Gameplay,
-        EndScreen
+        GameOver
     }
 
     private static AuraGameManager _instance;
@@ -55,18 +55,13 @@ public class AuraGameManager
     private AuraGameManager()
     {
         _powerManager = PowerManager.Instance;
-        _powerManager.depletePowerTime = 86400 / _playDurationLimit / _dayCyclesPerPlaythrough;
-        _powerManager.PowerProduced = 0;
-        _powerManager.PowerUsed = 0;
-        _powerManager.PowerStored = 600;
-
         _scoreManager = ScoreManager.Instance;
-        _scoreManager.Score = 0;
         //_scoreboardManager = ScoreboardManager.Instance;
 
-        _currentState = GameState.Gameplay;
+        Setup();
 
         NetworkController.OnSyncManagers += Sync;
+        AuraSceneManager.Instance.SubscribeOnSceneReset(Setup);
     }
 
     void Sync(float powerProduced, float powerUsed, float powerStored, float playDuration, float score)
@@ -83,6 +78,22 @@ public class AuraGameManager
         _scoreManager.Score = score;
     }
 
+    void Setup()
+    {
+        _playDuration = 0;
+
+        _powerManager.depletePowerTime = 86400 / _playDurationLimit / _dayCyclesPerPlaythrough;
+        _powerManager.PowerProduced = 0;
+        _powerManager.PowerUsed = 0;
+        _powerManager.PowerStored = 600;
+
+        _scoreManager.Score = 0;
+
+        _currentState = GameState.Tutorial;
+
+        Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
+    }
+
     // Update is called once per frame
     public void Execute()
     {
@@ -96,7 +107,7 @@ public class AuraGameManager
                 case GameState.Gameplay:
                     ExecuteGameplay();
                     break;
-                case GameState.EndScreen:
+                case GameState.GameOver:
                     ExecuteEnd();
                     break;
             }
@@ -105,7 +116,7 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-
+        _currentState = GameState.Gameplay;
     }
 
     private void ExecuteGameplay()
@@ -122,7 +133,7 @@ public class AuraGameManager
             float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
 
             // Game should end
-            _currentState = GameState.EndScreen;
+            _currentState = GameState.GameOver;
             OnGameOver?.Invoke();
         }
 
@@ -131,6 +142,6 @@ public class AuraGameManager
 
     private void ExecuteEnd()
     {
-
+        AuraSceneManager.Instance.SceneReset();
     }
 }

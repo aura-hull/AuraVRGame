@@ -7,7 +7,7 @@ namespace AuraHull.AuraVRGame
     {
         public void Init()
         {
-            
+
         }
 
         public void Connect()
@@ -43,7 +43,12 @@ namespace AuraHull.AuraVRGame
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = NetworkController.MAX_PLAYERS }, null);
+            RoomOptions options = new RoomOptions();
+            options.MaxPlayers = NetworkController.MAX_PLAYERS;
+            options.PlayerTtl = 1;
+            options.EmptyRoomTtl = 2;
+
+            PhotonNetwork.CreateRoom(null, options, null);
         }
         #endregion
     }

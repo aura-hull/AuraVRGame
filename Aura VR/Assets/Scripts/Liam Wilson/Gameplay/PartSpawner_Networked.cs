@@ -60,9 +60,13 @@ public class PartSpawner_Networked : MonoBehaviour
     {
         PartCollector collector = other.GetComponent<PartCollector>();
 
-        if (collector == null && other.attachedRigidbody != null)
+        if (collector == null)
         {
-            collector = other.attachedRigidbody.GetComponent<PartCollector>();
+            if (other.attachedRigidbody != null)
+            {
+                collector = other.attachedRigidbody.GetComponent<PartCollector>();
+            }
+
             if (collector == null) return;
         }
 

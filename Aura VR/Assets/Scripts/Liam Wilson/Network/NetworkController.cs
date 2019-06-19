@@ -5,6 +5,7 @@ using Oculus.Platform.Samples.VrHoops;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Player = Photon.Realtime.Player;
 
 namespace AuraHull.AuraVRGame
@@ -204,7 +205,7 @@ namespace AuraHull.AuraVRGame
 
         public void OnCreatedRoom()
         {
-            Debug.Log("Called on created room");
+            Debug.Log("Created room.");
         }
 
         public void OnJoinedRoom()

@@ -11,7 +11,7 @@ namespace AuraHull.AuraVRGame
         [SerializeField] private PartSpawner_Networked[] _partSpawners;
         [SerializeField] private ColliderManager _colliderManager;
 
-        BaseGameState _activeGameState;
+        private BaseGameState _activeGameState;
 
         public BaseGameState ActiveGameState
         {
