@@ -52,7 +52,9 @@ public class Speaker : MonoBehaviour
     {
         AudioSource source = GetComponent<AudioSource>();
         source.clip = _dialogues[index].Audio;
+        source.Stop();
         source.Play();
+
         OnDialogueStart?.Invoke();
     }
 }
@@ -61,32 +63,19 @@ public class Speaker : MonoBehaviour
 [Serializable]
 public class Dialogue
 {
-    [SerializeField]
-    private string _name;
-    [SerializeField]
-    private AudioClip _audio;
+    [SerializeField] private string _name;
+    [SerializeField] private AudioClip _audio;
 
     public string Name
     {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-        }
+        get { return _name; }
+        set { _name = value; }
     }
+
     public AudioClip Audio
     {
-        get
-        {
-            return _audio;
-        }
-        set
-        {
-            _audio = value;
-        }
+        get {  return _audio; }
+        set { _audio = value; }
     }
 
     public Dialogue(string name, AudioClip audio)
