@@ -37,21 +37,19 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         else
         {
             clientsReady = (int)stream.ReceiveNext();
+
+            if (clientsReady >= 2)
+            {
+                _speaker.Speak();
+                clientsReady = 0;
+            }
         }
     }
 
     public void TutorialClientProgress()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            clientsReady++;
-        }
-
-        if (clientsReady >= 2)
-        {
-            _speaker.Speak();
-            clientsReady = 0;
-        }
+        if (!PhotonNetwork.IsMasterClient) return;
+        clientsReady++;
     }
 
     private void Finish()
