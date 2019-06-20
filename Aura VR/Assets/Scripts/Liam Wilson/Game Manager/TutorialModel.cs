@@ -5,7 +5,7 @@ using AuraHull.AuraVRGame;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialModel : MonoBehaviour
+public class TutorialModel : MonoBehaviour, IPunObservable
 {
     [SerializeField] private GameObject penguinPrefab;
     [SerializeField] private Transform spawnPoint;
@@ -31,9 +31,24 @@ public class TutorialModel : MonoBehaviour
         NetworkController.Instance.NotifyClientProgress();
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(clientsReady);
+        }
+        else
+        {
+            clientsReady = (int)stream.ReceiveNext();
+        }
+    }
+
     public void TutorialClientProgress()
     {
-        clientsReady++;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            clientsReady++;
+        }
 
         if (clientsReady >= 2)
         {
