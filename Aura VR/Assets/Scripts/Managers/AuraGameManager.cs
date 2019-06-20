@@ -116,7 +116,10 @@ public class AuraGameManager
     {
         if (tutorialModel != null)
         {
-            tutorialModel.Initialize();
+            if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+            {
+                tutorialModel.Initialize();
+            }
         }
     }
 
