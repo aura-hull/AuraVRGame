@@ -23,7 +23,9 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     public void Initialize()
     {
         _speaker.OnDialogueFinish += CheckNextTutorialCondition;
+
         NetworkController.OnTutorialClientProgress += TutorialClientProgress;
+        NetworkController.OnTutorialClientProgressAll += TutorialClientProgressAll;
 
         CheckNextTutorialCondition();
     }
@@ -50,6 +52,12 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     {
         if (!PhotonNetwork.IsMasterClient) return;
         clientsReady++;
+    }
+
+    public void TutorialClientProgressAll()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        clientsReady = int.MaxValue;
     }
 
     private void Finish()
