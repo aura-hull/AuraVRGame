@@ -64,7 +64,10 @@ namespace AuraHull.AuraVRGame
         {
             if (penguinSpawned) return;
 
-            PhotonNetwork.Instantiate(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
+            }
 
             penguinSpawned = true;
         }

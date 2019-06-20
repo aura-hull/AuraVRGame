@@ -12,7 +12,6 @@ public class TutorialModel : MonoBehaviour
 
     private Speaker _speaker;
     private PenguinAnimationControl _animator;
-    private bool _isInitialized = false;
 
     private int clientsReady = 0;
 
@@ -20,24 +19,16 @@ public class TutorialModel : MonoBehaviour
     {
         _speaker = GetComponent<Speaker>();
         _animator = GetComponent<PenguinAnimationControl>();
+
+        Initialize();
     }
 
     public void Initialize()
     {
-        if (_isInitialized) return;
-        
         _speaker.OnDialogueFinish += NetworkController.Instance.NotifyClientProgress;
         NetworkController.OnTutorialClientProgress += TutorialClientProgress;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            GameObject penguin = PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
-            NetworkController.Instance.NotifyTutorialStarted(penguin.GetPhotonView().ViewID);
-        }
-
         NetworkController.Instance.NotifyClientProgress();
-
-        _isInitialized = true;
     }
 
     public void TutorialClientProgress()
