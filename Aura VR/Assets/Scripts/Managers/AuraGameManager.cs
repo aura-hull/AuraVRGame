@@ -27,7 +27,6 @@ public class AuraGameManager
     
     public Action OnGameOver;
     public Action OnPlayDurationChanged;
-    public TutorialModel tutorialModel;
 
     private GameState _currentState;
     private PowerManager _powerManager;
@@ -114,13 +113,7 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-        if (tutorialModel != null)
-        {
-            if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-            {
-                tutorialModel.Initialize();
-            }
-        }
+
     }
 
     public void StartGameplay()

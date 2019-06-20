@@ -13,7 +13,7 @@ namespace AuraHull.AuraVRGame
     public enum NetworkEvent
     {
         TUTORIAL_STARTED,
-        TUTORIAL_SPEAK_NEXT,
+        TUTORIAL_CLIENT_PROGRESS,
         BUILD_SITE_PLACED,
         BUILD_SITE_DESTROYED,
         TURBINE_PART_BUILT,
@@ -31,7 +31,7 @@ namespace AuraHull.AuraVRGame
         
         public static event Action OnGameConnected;
         public static event Action<int> OnTutorialStarted;
-        public static event Action OnTutorialSpeakNext;
+        public static event Action OnTutorialClientProgress;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
@@ -81,13 +81,13 @@ namespace AuraHull.AuraVRGame
             );
         }
 
-        public void NotifyTutorialSpeakNext()
+        public void NotifyClientProgress()
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
-                (byte)NetworkEvent.TUTORIAL_SPEAK_NEXT,
+                (byte)NetworkEvent.TUTORIAL_CLIENT_PROGRESS,
                 eventContent: null,
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
@@ -171,8 +171,8 @@ namespace AuraHull.AuraVRGame
                     OnTutorialStarted?.Invoke((int)serialize[0]);
                     break;
 
-                case NetworkEvent.TUTORIAL_SPEAK_NEXT:
-                    OnTutorialSpeakNext?.Invoke();
+                case NetworkEvent.TUTORIAL_CLIENT_PROGRESS:
+                    OnTutorialClientProgress?.Invoke();
                     break;
 
                 case NetworkEvent.BUILD_SITE_PLACED:

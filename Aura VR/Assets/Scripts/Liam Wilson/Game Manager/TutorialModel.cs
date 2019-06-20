@@ -10,43 +10,43 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private GameObject penguinPrefab;
     [SerializeField] private Transform spawnPoint;
 
-    public List<TutorialCondition> specialConditions;
-
-    private Speaker _penguinSpeaker;
-    private PenguinAnimationControl _penguinAnimator;
+    private Speaker _speaker;
+    private PenguinAnimationControl _animator;
     private bool _isInitialized = false;
 
-    void Awake()
+    private int clientsReady = 0;
+
+    void Start()
     {
-        AuraGameManager.Instance.tutorialModel = this;
-        specialConditions = new List<TutorialCondition>();
+        _speaker = GetComponent<Speaker>();
+        _animator = GetComponent<PenguinAnimationControl>();
     }
 
     public void Initialize()
     {
         if (_isInitialized) return;
-
-        NetworkController.OnTutorialStarted += SetReferences;
-        NetworkController.OnTutorialSpeakNext += PlayNextSpeaker;
+        
+        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyClientProgress;
+        NetworkController.OnTutorialClientProgress += TutorialClientProgress;
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if (penguinPrefab == null)
-            {
-                Finish();
-                return;
-            }
-
-            if (spawnPoint == null)
-            {
-                spawnPoint = transform;
-            }
-
             GameObject penguin = PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
             NetworkController.Instance.NotifyTutorialStarted(penguin.GetPhotonView().ViewID);
         }
 
         _isInitialized = true;
+    }
+
+    public void TutorialClientProgress()
+    {
+        clientsReady++;
+
+        if (clientsReady >= 2)
+        {
+            _speaker.Speak();
+            clientsReady = 0;
+        }
     }
 
     private void Finish()
@@ -55,55 +55,27 @@ public class TutorialModel : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Destroy(_penguinSpeaker.gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
-    public void SetupNextTutorialCondition()
+    public void CheckNextTutorialCondition()
     {
-        for (int i = 0; i < specialConditions.Count; i++)
-        {
-            if (specialConditions[i].tutorialIndex == _penguinSpeaker.currentDialogue)
-            {
-                if (specialConditions[i].wasTriggeredEarly)
-                {
-                    NetworkController.Instance.NotifyTutorialSpeakNext();
-                    return;
-                }
+        //for (int i = 0; i < specialConditions.Count; i++)
+        //{
+        //    if (specialConditions[i].tutorialIndex == _penguinSpeaker.currentDialogue)
+        //    {
+        //        if (specialConditions[i].wasTriggeredEarly)
+        //        {
+        //            return;
+        //        }
 
-                specialConditions[i].SetLive();
-                return;
-            }
-        }
+        //        specialConditions[i].SetLive();
+        //        return;
+        //    }
+        //}
 
         // Default conditions
-        NetworkController.Instance.NotifyTutorialSpeakNext();
-    }
 
-    public void PlayNextSpeaker()
-    {
-        _penguinSpeaker.Speak();
-    }
-
-    private void SetReferences(int penguinViewId)
-    {
-        GameObject penguin = PhotonView.Find(penguinViewId).gameObject;
-
-        _penguinSpeaker = penguin.GetComponent<Speaker>();
-        _penguinAnimator = penguin.GetComponent<PenguinAnimationControl>();
-
-        if (_penguinSpeaker == null)
-        {
-            Finish();
-            return;
-        }
-
-        _penguinSpeaker.OnFullCycle += Finish;
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            _penguinSpeaker.OnDialogueFinish += SetupNextTutorialCondition;
-            NetworkController.Instance.NotifyTutorialSpeakNext();
-        }
     }
 }

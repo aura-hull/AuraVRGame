@@ -15,8 +15,8 @@ public class TutorialCondition : MonoBehaviour
 
     void Start()
     {
-        AuraGameManager.Instance.tutorialModel.specialConditions.Add(this);
-        OnConditionMet += AuraGameManager.Instance.tutorialModel.PlayNextSpeaker;
+        TutorialManager.Instance.specialConditions.Add(this);
+        //OnConditionMet += AuraGameManager.Instance.tutorialModel.PlayNextSpeaker;
     }
 
     public void SetLive()
