@@ -22,16 +22,10 @@ public class TutorialModel : MonoBehaviour
         specialConditions = new List<TutorialCondition>();
     }
 
-    public void Execute()
+    public void Initialize()
     {
-        if (!_isInitialized)
-        {
-            Initialize();
-        }
-    }
+        if (_isInitialized) return;
 
-    private void Initialize()
-    {
         NetworkController.OnTutorialStarted += SetReferences;
 
         if (PhotonNetwork.IsMasterClient)
@@ -56,11 +50,12 @@ public class TutorialModel : MonoBehaviour
 
     private void Finish()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
-
-        PhotonNetwork.Destroy(_penguinSpeaker.gameObject);
-
         AuraGameManager.Instance.StartGameplay();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(_penguinSpeaker.gameObject);
+        }
     }
 
     public void SetupNextTutorialCondition()
@@ -102,10 +97,11 @@ public class TutorialModel : MonoBehaviour
             return;
         }
 
+        _penguinSpeaker.OnFullCycle += Finish;
+
         if (PhotonNetwork.IsMasterClient)
         {
             _penguinSpeaker.OnDialogueFinish += SetupNextTutorialCondition;
-            _penguinSpeaker.OnFullCycle += Finish;
         }
     }
 }
