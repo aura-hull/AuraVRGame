@@ -23,10 +23,8 @@ public class Speaker : MonoBehaviour
     {
         _source = GetComponent<AudioSource>();
         _source.loop = false;
-        
-        OnDialogueFinish += DialogueFinish;
 
-        Speak();
+        OnDialogueFinish += DialogueFinish;
     }
 
     void Update()
