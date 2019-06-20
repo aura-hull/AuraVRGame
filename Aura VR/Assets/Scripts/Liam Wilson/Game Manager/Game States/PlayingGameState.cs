@@ -32,6 +32,7 @@ namespace AuraHull.AuraVRGame
             }
             
             GameModel.Instance.SpawnParts();
+            GameModel.Instance.SpawnTutorialPenguin();
             AuraGameManager.Instance.Execute();
         }
 

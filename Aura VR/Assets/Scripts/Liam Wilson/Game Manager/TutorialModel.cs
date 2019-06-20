@@ -35,6 +35,8 @@ public class TutorialModel : MonoBehaviour
             NetworkController.Instance.NotifyTutorialStarted(penguin.GetPhotonView().ViewID);
         }
 
+        NetworkController.Instance.NotifyClientProgress();
+
         _isInitialized = true;
     }
 

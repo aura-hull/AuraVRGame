@@ -10,6 +10,10 @@ namespace AuraHull.AuraVRGame
         [SerializeField] private PlayerFactory _playerFactory;
         [SerializeField] private PartSpawner_Networked[] _partSpawners;
         [SerializeField] private ColliderManager _colliderManager;
+        [SerializeField] private GameObject penguinPrefab;
+        [SerializeField] private Transform spawnPoint;
+
+        private bool penguinSpawned = false;
 
         private BaseGameState _activeGameState;
 
@@ -54,6 +58,15 @@ namespace AuraHull.AuraVRGame
         public void ConfigureColliders()
         {
             this._colliderManager.Configure();
+        }
+
+        public void SpawnTutorialPenguin()
+        {
+            if (penguinSpawned) return;
+
+            PhotonNetwork.Instantiate(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
+
+            penguinSpawned = true;
         }
 
         public void SpawnParts()
