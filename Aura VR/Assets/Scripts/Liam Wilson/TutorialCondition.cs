@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AuraHull.AuraVRGame;
 using UnityEngine;
 
 public class TutorialCondition : MonoBehaviour
@@ -16,7 +17,7 @@ public class TutorialCondition : MonoBehaviour
     void Start()
     {
         TutorialManager.Instance.specialConditions.Add(this);
-        //OnConditionMet += AuraGameManager.Instance.tutorialModel.PlayNextSpeaker;
+        OnConditionMet += NetworkController.Instance.NotifyClientProgress;
     }
 
     public void SetLive()
