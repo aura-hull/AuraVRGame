@@ -30,19 +30,19 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
+        if (PhotonNetwork.IsMasterClient && stream.IsWriting)
         {
             stream.SendNext(clientsReady);
         }
-        else
+        else if (!PhotonNetwork.IsMasterClient)
         {
             clientsReady = (int)stream.ReceiveNext();
+        }
 
-            if (clientsReady >= 2)
-            {
-                _speaker.Speak();
-                clientsReady = 0;
-            }
+        if (clientsReady >= 2)
+        {
+            _speaker.Speak();
+            clientsReady = 0;
         }
     }
 
