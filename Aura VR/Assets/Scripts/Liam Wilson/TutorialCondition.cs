@@ -18,6 +18,7 @@ public class TutorialCondition : MonoBehaviour
     {
         TutorialManager.Instance.specialConditions.Add(this);
         OnConditionMet += NetworkController.Instance.NotifyClientProgress;
+        OnConditionMet += NetworkController.Instance.NotifyClientProgress;
     }
 
     public void SetLive()
