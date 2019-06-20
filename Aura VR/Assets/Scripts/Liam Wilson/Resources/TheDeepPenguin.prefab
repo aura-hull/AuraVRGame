@@ -1,192 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7977243804164611445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7977243804164611450}
-  - component: {fileID: 7977243804164611448}
-  - component: {fileID: 7977243804164611451}
-  m_Layer: 0
-  m_Name: Speaker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7977243804164611450
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977243804164611445}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7977243804698216921}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &7977243804164611448
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977243804164611445}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300001, guid: 1dd706bb85d8aef4e83a6229dbd62c36,
-    type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 0.5
-  MaxDistance: 10
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &7977243804164611451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977243804164611445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 779fd31a18e86e046a58da77c3d81f05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogues:
-  - _name: PenguinIntro
-    _audio: {fileID: 8300000, guid: 5fb68098de654fa43a5d90146811aad3, type: 3}
-  - _name: ScenarioIntro
-    _audio: {fileID: 8300000, guid: f91525b85dc244b429c7f6898fe72fe2, type: 3}
-  - _name: ScenarioGoalIntro
-    _audio: {fileID: 8300000, guid: 704f5c47566e2434fa7bcbbfb55d0fb0, type: 3}
-  - _name: GoalIntro
-    _audio: {fileID: 8300000, guid: 42455dc28d748dc49a050e23e5b394cc, type: 3}
-  - _name: PlayersIntro
-    _audio: {fileID: 8300000, guid: a54cfa3ad70bce546b90e9d74438c5ae, type: 3}
-  - _name: ShipGoal
-    _audio: {fileID: 8300000, guid: 058418d7c48c5aa4c9a193a59715ec33, type: 3}
-  - _name: ShipPacks
-    _audio: {fileID: 8300000, guid: 643c6b3f1b6efcd47a81b1bebfcf3923, type: 3}
-  - _name: ShipControls
-    _audio: {fileID: 8300000, guid: 37cadccd46a77334c9448692d091933d, type: 3}
-  - _name: PlayerControls
-    _audio: {fileID: 8300000, guid: d8fb28a19fb259c48a907599b3055fed, type: 3}
-  - _name: ShipPickup
-    _audio: {fileID: 8300000, guid: 40433ae2d35ab0941828b582ca1b88e7, type: 3}
-  - _name: ShipDelivery
-    _audio: {fileID: 8300000, guid: 3726d8d61d38bac469747ac7d5d30f0f, type: 3}
-  - _name: TitanGoal
-    _audio: {fileID: 8300000, guid: bdb04ad387796454b8733669a1190211, type: 3}
-  - _name: TurbinePlace
-    _audio: {fileID: 8300000, guid: 68493cb1c5471c8498457095f65d2957, type: 3}
-  - _name: TitanPickup
-    _audio: {fileID: 8300000, guid: 143fa9c45ec8be14581b27c3d152a8fd, type: 3}
-  - _name: TitanBuild
-    _audio: {fileID: 8300000, guid: 80d4bd813b4e5744c9bce10d43d387a3, type: 3}
-  - _name: TitanFindScreen
-    _audio: {fileID: 8300000, guid: ae90fd2d37372f344b99546a19910302, type: 3}
-  - _name: PowerProduced
-    _audio: {fileID: 8300000, guid: 4b7df26617d8d984286d8f708e412627, type: 3}
-  - _name: TitanControls
-    _audio: {fileID: 8300000, guid: ecda338d470d84a4689b4c02a970adcf, type: 3}
-  - _name: PowerUsed
-    _audio: {fileID: 8300000, guid: 2ecb3c16d0de706408886189c659516f, type: 3}
-  - _name: TitanAdvice
-    _audio: {fileID: 8300000, guid: 614155d651044a04aa060f832042cc8d, type: 3}
-  - _name: ResearchOutro
-    _audio: {fileID: 8300000, guid: 813a9d66f5345c74191e1c6cb9bbcacb, type: 3}
-  - _name: Outro
-    _audio: {fileID: 8300000, guid: 2caab10c1e6f1bb48a4aa285a16ba81f, type: 3}
-  _currentDialogue: 0
 --- !u!1 &7977243804698437391
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,9 +572,11 @@ GameObject:
   - component: {fileID: 7977243804689167843}
   - component: {fileID: 7977243804701676827}
   - component: {fileID: 7977243804693385927}
-  - component: {fileID: 7977243804687258941}
+  - component: {fileID: 5192783541867899792}
   - component: {fileID: 7977243804687252969}
   - component: {fileID: 7977243804895155329}
+  - component: {fileID: 395761060183136248}
+  - component: {fileID: 1947624114433465339}
   m_Layer: 0
   m_Name: TheDeepPenguin
   m_TagString: Untagged
@@ -778,11 +593,10 @@ Transform:
   m_GameObject: {fileID: 7977243804698517525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children:
   - {fileID: 7977243804698158401}
   - {fileID: 7977243804698249431}
-  - {fileID: 7977243804164611450}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -835,7 +649,7 @@ CapsuleCollider:
   m_Height: 0.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &7977243804687258941
+--- !u!114 &5192783541867899792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,9 +658,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 7977243804698517525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a33ebd6a5d4746dd92e047a481f27b7, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &7977243804687252969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +711,161 @@ MonoBehaviour:
   randomMinFrequency: 3
   randomMaxFrequency: 7
   speak: 0
+--- !u!82 &395761060183136248
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977243804698517525}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1947624114433465339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977243804698517525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779fd31a18e86e046a58da77c3d81f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - _name: PenguinIntro
+    _audio: {fileID: 8300000, guid: 5fb68098de654fa43a5d90146811aad3, type: 3}
+  - _name: ScenarioIntro
+    _audio: {fileID: 8300000, guid: f91525b85dc244b429c7f6898fe72fe2, type: 3}
+  - _name: ScenarioGoalIntro
+    _audio: {fileID: 8300000, guid: 704f5c47566e2434fa7bcbbfb55d0fb0, type: 3}
+  - _name: GoalIntro
+    _audio: {fileID: 8300000, guid: 42455dc28d748dc49a050e23e5b394cc, type: 3}
+  - _name: PlayersIntro
+    _audio: {fileID: 8300000, guid: a54cfa3ad70bce546b90e9d74438c5ae, type: 3}
+  - _name: ShipGoal
+    _audio: {fileID: 8300000, guid: 058418d7c48c5aa4c9a193a59715ec33, type: 3}
+  - _name: ShipPacks
+    _audio: {fileID: 8300000, guid: 643c6b3f1b6efcd47a81b1bebfcf3923, type: 3}
+  - _name: ShipControls
+    _audio: {fileID: 8300000, guid: 37cadccd46a77334c9448692d091933d, type: 3}
+  - _name: PlayerControls
+    _audio: {fileID: 8300000, guid: d8fb28a19fb259c48a907599b3055fed, type: 3}
+  - _name: ShipPickup
+    _audio: {fileID: 8300000, guid: 40433ae2d35ab0941828b582ca1b88e7, type: 3}
+  - _name: ShipDelivery
+    _audio: {fileID: 8300000, guid: 3726d8d61d38bac469747ac7d5d30f0f, type: 3}
+  - _name: TitanGoal
+    _audio: {fileID: 8300000, guid: bdb04ad387796454b8733669a1190211, type: 3}
+  - _name: TurbinePlace
+    _audio: {fileID: 8300000, guid: 68493cb1c5471c8498457095f65d2957, type: 3}
+  - _name: TitanPickup
+    _audio: {fileID: 8300000, guid: 143fa9c45ec8be14581b27c3d152a8fd, type: 3}
+  - _name: TitanBuild
+    _audio: {fileID: 8300000, guid: 80d4bd813b4e5744c9bce10d43d387a3, type: 3}
+  - _name: TitanFindScreen
+    _audio: {fileID: 8300000, guid: ae90fd2d37372f344b99546a19910302, type: 3}
+  - _name: PowerProduced
+    _audio: {fileID: 8300000, guid: 4b7df26617d8d984286d8f708e412627, type: 3}
+  - _name: TitanControls
+    _audio: {fileID: 8300000, guid: ecda338d470d84a4689b4c02a970adcf, type: 3}
+  - _name: PowerUsed
+    _audio: {fileID: 8300000, guid: 2ecb3c16d0de706408886189c659516f, type: 3}
+  - _name: TitanAdvice
+    _audio: {fileID: 8300000, guid: 614155d651044a04aa060f832042cc8d, type: 3}
+  - _name: ResearchOutro
+    _audio: {fileID: 8300000, guid: 813a9d66f5345c74191e1c6cb9bbcacb, type: 3}
+  - _name: Outro
+    _audio: {fileID: 8300000, guid: 2caab10c1e6f1bb48a4aa285a16ba81f, type: 3}
+  currentDialogue: 0
+  autoPlay: 0
 --- !u!1 &7977243804698517545
 GameObject:
   m_ObjectHideFlags: 0

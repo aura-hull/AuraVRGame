@@ -12,6 +12,7 @@ namespace AuraHull.AuraVRGame
 {
     public enum NetworkEvent
     {
+        TUTORIAL_STARTED,
         BUILD_SITE_PLACED,
         BUILD_SITE_DESTROYED,
         TURBINE_PART_BUILT,
@@ -26,8 +27,9 @@ namespace AuraHull.AuraVRGame
         public const int MAX_PLAYERS = 2;
 
         Connection _connection;
-
+        
         public static event Action OnGameConnected;
+        public static event Action<int> OnTutorialStarted;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
@@ -62,6 +64,19 @@ namespace AuraHull.AuraVRGame
         public void EndMultiplayerGame()
         {
             this._connection.Disconnect();
+        }
+
+        public void NotifyTutorialStarted(int penguinViewId)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.TUTORIAL_STARTED,
+                eventContent: new object[1] { penguinViewId },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
         }
 
         public void NotifyBuildSitePlaced(string prefabName, Vector3 position)
@@ -137,6 +152,10 @@ namespace AuraHull.AuraVRGame
 
             switch (receivedNetworkEvent)
             {
+                case NetworkEvent.TUTORIAL_STARTED:
+                    OnTutorialStarted?.Invoke((int)serialize[0]);
+                    break;
+
                 case NetworkEvent.BUILD_SITE_PLACED:
                     if (PhotonNetwork.IsMasterClient)
                     {
