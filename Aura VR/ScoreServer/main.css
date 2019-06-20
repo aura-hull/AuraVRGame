@@ -1,0 +1,89 @@
+body {
+	background-image: url("Images/aura_highscore_bg_1080.png");
+    background-color: lightblue;
+}
+
+ 
+
+h1 {
+    font-family: "Arial Black";
+    text-align: center;
+}
+
+ 
+
+h2 {
+    font-family: "Arial Black";
+    text-align: center;
+}
+
+ 
+
+table {
+    width: 55%;
+    margin-left: 5%;
+    margin-right: 40%;
+	margin-top: 10%;
+    background-color: white;
+    font-weight: bold;
+    font-size: 30px;
+	border: 1px solid black;
+} 
+
+table, tr, td {
+    border-collapse:collapse;
+}
+
+th {
+	border: 1px solid black;
+}
+
+th, td {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+    padding: 5px;
+}
+
+ 
+
+.rankHeader {
+    width: 10%;
+}
+
+ 
+
+.nameHeader {
+    width: 50%;
+}
+
+ 
+
+.scoreHeader {
+    width: 40%;
+}
+
+ 
+
+.rankCell {
+    text-align: center;
+}
+
+ 
+
+.nameCell {
+    text-align: left;
+}
+
+ 
+
+.scoreCell {
+    text-align: center;
+}
+
+ 
+
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
