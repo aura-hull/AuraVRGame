@@ -92370,7 +92370,7 @@ PrefabInstance:
     - target: {fileID: 7048045916025654568, guid: f6da5f3d28425e7438072f041a1349b0,
         type: 3}
       propertyPath: tutorialIndex
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7048045916025654568, guid: f6da5f3d28425e7438072f041a1349b0,
         type: 3}
