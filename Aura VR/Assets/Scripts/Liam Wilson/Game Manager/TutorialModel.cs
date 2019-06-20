@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class TutorialModel : MonoBehaviour, IPunObservable
 {
-    [SerializeField] private GameObject penguinPrefab;
-    [SerializeField] private Transform spawnPoint;
-
     private Speaker _speaker;
     private PenguinAnimationControl _animator;
 
