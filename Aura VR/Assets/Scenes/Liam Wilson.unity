@@ -55039,7 +55039,6 @@ GameObject:
   - component: {fileID: 1260462562}
   - component: {fileID: 1260462564}
   - component: {fileID: 1260462563}
-  - component: {fileID: 1260462565}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -55091,22 +55090,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db1c536eb3a86946a7523745ac09665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1260462565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260462561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e7a967c3a7f084299be2e6b6269e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  penguinPrefab: {fileID: 7977243804698517525, guid: 8d6c9db90b753a745909a0b618749502,
-    type: 3}
-  spawnPoint: {fileID: 1039741178}
-  specialConditions: []
 --- !u!1001 &1260957547
 PrefabInstance:
   m_ObjectHideFlags: 0
