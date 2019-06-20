@@ -13,8 +13,6 @@ namespace AuraHull.AuraVRGame
         [SerializeField] private GameObject penguinPrefab;
         [SerializeField] private Transform spawnPoint;
 
-        private bool penguinSpawned = false;
-
         private BaseGameState _activeGameState;
 
         public BaseGameState ActiveGameState
@@ -62,14 +60,8 @@ namespace AuraHull.AuraVRGame
 
         public void SpawnTutorialPenguin()
         {
-            if (penguinSpawned) return;
-
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
-            }
-
-            penguinSpawned = true;
+            if (!PhotonNetwork.IsMasterClient) return;
+            PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);
         }
 
         public void SpawnParts()
