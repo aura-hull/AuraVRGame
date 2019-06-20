@@ -27,6 +27,7 @@ public class TutorialModel : MonoBehaviour
         if (_isInitialized) return;
 
         NetworkController.OnTutorialStarted += SetReferences;
+        NetworkController.OnTutorialSpeakNext += PlayNextSpeaker;
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -66,7 +67,7 @@ public class TutorialModel : MonoBehaviour
             {
                 if (specialConditions[i].wasTriggeredEarly)
                 {
-                    PlayNextSpeaker();
+                    NetworkController.Instance.NotifyTutorialSpeakNext();
                     return;
                 }
 
@@ -76,7 +77,7 @@ public class TutorialModel : MonoBehaviour
         }
 
         // Default conditions
-        PlayNextSpeaker();
+        NetworkController.Instance.NotifyTutorialSpeakNext();
     }
 
     public void PlayNextSpeaker()
@@ -102,6 +103,7 @@ public class TutorialModel : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             _penguinSpeaker.OnDialogueFinish += SetupNextTutorialCondition;
+            NetworkController.Instance.NotifyTutorialSpeakNext();
         }
     }
 }
