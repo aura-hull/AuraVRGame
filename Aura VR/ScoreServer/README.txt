@@ -9,7 +9,14 @@ To start the web page, call the below from CMD
 where [folderPath] is the path to the parent folder. E.g.
 "C:\Users\lucius laptop\Downloads\ScoreServer"
 
+WILL LAPTOP:
+"C:\Program Files\IIS Express\iisexpress.exe" /path:"C:\Users\lucius laptop\Downloads\ScoreServer" /port:8080
+"C:\Users\lucius laptop\Downloads\ScoreServer"
  
+WILL PC:
+"C:\Program Files\IIS Express\iisexpress.exe" /path:"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\ScoreServer" /port:8080
+"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\ScoreServer"
+
 
 
 The website can then be access through localhost:8080
