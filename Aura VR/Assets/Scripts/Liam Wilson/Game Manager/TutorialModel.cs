@@ -22,10 +22,10 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void Initialize()
     {
-        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyClientProgress;
+        _speaker.OnDialogueFinish += CheckNextTutorialCondition;
         NetworkController.OnTutorialClientProgress += TutorialClientProgress;
 
-        NetworkController.Instance.NotifyClientProgress();
+        CheckNextTutorialCondition();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -64,21 +64,22 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void CheckNextTutorialCondition()
     {
-        //for (int i = 0; i < specialConditions.Count; i++)
-        //{
-        //    if (specialConditions[i].tutorialIndex == _penguinSpeaker.currentDialogue)
-        //    {
-        //        if (specialConditions[i].wasTriggeredEarly)
-        //        {
-        //            return;
-        //        }
+        foreach (TutorialCondition condition in TutorialManager.Instance.specialConditions)
+        {
+            if (condition.tutorialIndex == _speaker.currentDialogue)
+            {
+                if (condition.wasTriggeredEarly)
+                {
+                    NetworkController.Instance.NotifyClientProgress();
+                    return;
+                }
 
-        //        specialConditions[i].SetLive();
-        //        return;
-        //    }
-        //}
+                condition.SetLive();
+                return;
+            }
+        }
 
         // Default conditions
-
+        NetworkController.Instance.NotifyClientProgress();
     }
 }
