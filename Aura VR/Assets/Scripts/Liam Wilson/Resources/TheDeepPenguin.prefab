@@ -881,7 +881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   penguinPrefab: {fileID: 0}
   spawnPoint: {fileID: 0}
-  specialConditions: []
 --- !u!1 &7977243804698517545
 GameObject:
   m_ObjectHideFlags: 0

@@ -55078,6 +55078,9 @@ MonoBehaviour:
   - {fileID: 79791310}
   - {fileID: 1369272979}
   _colliderManager: {fileID: 1777732463}
+  penguinPrefab: {fileID: 7977243804698517525, guid: 8d6c9db90b753a745909a0b618749502,
+    type: 3}
+  spawnPoint: {fileID: 1039741178}
 --- !u!114 &1260462564
 MonoBehaviour:
   m_ObjectHideFlags: 0
