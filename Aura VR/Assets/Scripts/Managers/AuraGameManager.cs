@@ -27,6 +27,7 @@ public class AuraGameManager
     
     public Action OnGameOver;
     public Action OnPlayDurationChanged;
+    public TutorialModel tutorialModel;
 
     private GameState _currentState;
     private PowerManager _powerManager;
@@ -97,30 +98,37 @@ public class AuraGameManager
     // Update is called once per frame
     public void Execute()
     {
-        if (PhotonNetwork.IsMasterClient)
+        switch (_currentState)
         {
-            switch (_currentState)
-            {
-                case GameState.Tutorial:
-                    ExecuteTutorial();
-                    break;
-                case GameState.Gameplay:
-                    ExecuteGameplay();
-                    break;
-                case GameState.GameOver:
-                    ExecuteEnd();
-                    break;
-            }
+            case GameState.Tutorial:
+                ExecuteTutorial();
+                break;
+            case GameState.Gameplay:
+                ExecuteGameplay();
+                break;
+            case GameState.GameOver:
+                ExecuteEnd();
+                break;
         }
     }
 
     private void ExecuteTutorial()
+    {
+        if (tutorialModel != null)
+        {
+            tutorialModel.Initialize();
+        }
+    }
+
+    public void StartGameplay()
     {
         _currentState = GameState.Gameplay;
     }
 
     private void ExecuteGameplay()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         _playDuration += Time.deltaTime;
         OnPlayDurationChanged?.Invoke();
 

@@ -8,16 +8,9 @@ namespace AuraHull.AuraVRGame
 {
     public class PlayerFactory : MonoBehaviour
     {
-        [SerializeField]
-        GameObject _boatPlayerPrefab;
-
-        [SerializeField]
-        GameObject _titanPlayerPrefab;
-
-        [SerializeField]
-        Transform _playerSpawnPoints;
-
-        private GameObject _playerPrefab;
+        [SerializeField] private GameObject _boatPlayerPrefab;
+        [SerializeField] private GameObject _titanPlayerPrefab;
+        [SerializeField] private Transform _playerSpawnPoints;
 
         public Transform PlayerSpawnPoints
         {
@@ -43,11 +36,12 @@ namespace AuraHull.AuraVRGame
             }
 
             int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
-            Vector3 spawnSpoint = PlayerSpawnPoints.GetChild(positionIndex).position;
+            Vector3 spawnPoint = PlayerSpawnPoints.GetChild(positionIndex).position;
+            Quaternion spawnRot = PlayerSpawnPoints.GetChild(positionIndex).rotation;
 
-            _playerPrefab = (positionIndex == 0) ? _boatPlayerPrefab : _titanPlayerPrefab;
+            GameObject _playerPrefab = (positionIndex == 0) ? _boatPlayerPrefab : _titanPlayerPrefab;
 
-            GameObject go = PhotonNetwork.Instantiate(_playerPrefab.name, spawnSpoint, Quaternion.identity, 0);
+            GameObject go = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint, spawnRot, 0);
             GameModel.Instance.CurrentPlayer = (IAuraPlayer)go.GetComponent(typeof(IAuraPlayer));
 
             GameModel.Instance.CurrentPlayer.GameSetup();

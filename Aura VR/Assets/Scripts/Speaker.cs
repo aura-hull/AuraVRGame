@@ -8,54 +8,65 @@ using UnityEngine;
 public class Speaker : MonoBehaviour
 {
     public List<Dialogue> _dialogues;
-    public int _currentDialogue;
+    public int currentDialogue;
+    public bool autoPlay = false;
 
     public Action OnDialogueStart;
+    public Action OnDialogueFinish;
+    public Action OnFullCycle;
+
+    private AudioSource _source;
+    private bool isSpeaking = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource source = GetComponent<AudioSource>();
-        source.loop = false;
+        _source = GetComponent<AudioSource>();
+        _source.loop = false;
+        
+        OnDialogueFinish += DialogueFinish;
+
+        Speak();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (isSpeaking && !_source.isPlaying)
         {
-            Speak();
+            isSpeaking = false;
+            OnDialogueFinish?.Invoke();
         }
     }
 
     public void Speak()
     {
-        if (_currentDialogue >= _dialogues.Count)
-            _currentDialogue = 0;
-
-        Play(_currentDialogue);
-        _currentDialogue += 1;
-    }
-
-    public void SpeakByName(string name)
-    {
-        for (int i = 0; i < _dialogues.Count; i += 1)
-        {
-            if (_dialogues[i].Name == name)
-            {
-                Play(i);
-            }
-        }
+        Play(currentDialogue++);
+        isSpeaking = true;
     }
 
     private void Play(int index)
     {
-        AudioSource source = GetComponent<AudioSource>();
-        source.clip = _dialogues[index].Audio;
-        source.Stop();
-        source.Play();
+        if (index < 0 || index >= _dialogues.Count) return;
+
+        _source.Stop();
+        _source.clip = _dialogues[index].Audio;
+        _source.Play();
 
         OnDialogueStart?.Invoke();
+    }
+    
+    private void DialogueFinish()
+    {
+        if (currentDialogue >= _dialogues.Count)
+        {
+            OnFullCycle?.Invoke();
+            return;
+        }
+
+        if (autoPlay)
+        {
+            Speak();
+        }
     }
 }
 
