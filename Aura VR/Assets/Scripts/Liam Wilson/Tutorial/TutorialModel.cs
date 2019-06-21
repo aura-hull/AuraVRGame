@@ -7,10 +7,22 @@ using UnityEngine;
 
 public class TutorialModel : MonoBehaviour, IPunObservable
 {
+    [SerializeField] private bool localTest = false;
+
     private Speaker _speaker;
     private PenguinAnimationControl _animator;
 
     private int clientsReady = 0;
+    private int RequiredClients
+    {
+        get
+        {
+            if (localTest) return 1;
+            else return NetworkController.MAX_PLAYERS;
+        }
+    }
+
+    private float checkVolumeStep = 0.1f;
 
     void Start()
     {
@@ -30,6 +42,25 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         CheckNextTutorialCondition();
     }
 
+    private float checkVolumeTicks = 0.0f;
+    void Update()
+    {
+        checkVolumeTicks += Time.deltaTime;
+        if (checkVolumeTicks >= checkVolumeStep)
+        {
+            _animator.speaking = (_speaker.GetCurrentLoudness() >= 0.005f);
+            checkVolumeTicks = 0.0f;
+        }
+
+        if (!localTest) return;
+
+        if (clientsReady >= RequiredClients)
+        {
+            _speaker.Speak();
+            clientsReady = 0;
+        }
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (PhotonNetwork.IsMasterClient && stream.IsWriting)
@@ -41,7 +72,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
             clientsReady = (int)stream.ReceiveNext();
         }
 
-        if (clientsReady >= 2)
+        if (clientsReady >= RequiredClients)
         {
             _speaker.Speak();
             clientsReady = 0;

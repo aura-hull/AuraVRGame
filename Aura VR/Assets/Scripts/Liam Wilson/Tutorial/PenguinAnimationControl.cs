@@ -10,7 +10,16 @@ public class PenguinAnimationControl : MonoBehaviour
     [SerializeField, Range(3.0f, 60.0f)] private float randomMinFrequency;
     [SerializeField, Range(3.0f, 60.0f)] private float randomMaxFrequency;
 
-    public bool speak = false;
+    private bool _speaking = false;
+    public bool speaking
+    {
+        get { return _speaking; }
+        set
+        {
+            _speaking = value;
+            animator.SetBool("Speaking", _speaking);
+        }
+    }
 
     private float timeSinceLastRandom = 0.0f;
     private float timeUntilNextRandom;
@@ -28,12 +37,6 @@ public class PenguinAnimationControl : MonoBehaviour
 
     void Update()
     {
-        if (speak)
-        {
-            speak = false;
-            animator.SetTrigger("Speak");
-        }
-
         if (randomTriggerNames != null)
         {
             timeSinceLastRandom += Time.deltaTime;

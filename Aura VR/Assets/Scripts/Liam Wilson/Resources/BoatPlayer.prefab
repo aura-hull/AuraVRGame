@@ -180,7 +180,7 @@ MonoBehaviour:
   directionControl: {fileID: 7756947791864628295}
   target: {fileID: 3133286319932603435}
   enginePower: 0.75
-  steeringPower: 0.5
+  steeringPower: 0.75
   allowReverse: 1
   engineAudio: {fileID: 8278084585060881459}
 --- !u!1 &1459628701476766973

@@ -27,8 +27,7 @@ public class AuraGameManager
     
     public Action OnGameOver;
     public Action OnPlayDurationChanged;
-
-    private GameState _currentState;
+    
     private PowerManager _powerManager;
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
@@ -36,6 +35,8 @@ public class AuraGameManager
     private float _playDurationLimit = 600;
     private float _playDuration = 0;
     private float _dayCyclesPerPlaythrough = 1;
+
+    private GameState _currentState;
 
     private GameOverScreen _gameOverScreen = null;
     public GameOverScreen gameOverScreen
@@ -103,7 +104,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        _currentState = GameState.Gameplay;
+        _currentState = GameState.Tutorial;
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -132,6 +133,11 @@ public class AuraGameManager
 
     public void StartGameplay()
     {
+        if (_currentState == GameState.Tutorial)
+        {
+            TutorialManager.Instance.CleanUp();
+        }
+
         _currentState = GameState.Gameplay;
     }
 

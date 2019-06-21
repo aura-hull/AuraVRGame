@@ -18,6 +18,9 @@ public class Speaker : MonoBehaviour
     private AudioSource _source;
     private bool isSpeaking = false;
 
+    private int sampleDataLength = 256;
+    private float[] clipSampleData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,8 @@ public class Speaker : MonoBehaviour
         _source.loop = false;
 
         OnDialogueFinish += DialogueFinish;
+
+        clipSampleData = new float[sampleDataLength];
     }
 
     void Update()
@@ -65,6 +70,21 @@ public class Speaker : MonoBehaviour
         {
             Speak();
         }
+    }
+    
+    public float GetCurrentLoudness()
+    {
+        if (_source.clip == null) return 0.0f;
+
+        _source.clip.GetData(clipSampleData, _source.timeSamples);
+
+        float loudness = 0.0f;
+        foreach (var sample in clipSampleData)
+        {
+            loudness += Mathf.Abs(sample);
+        }
+
+        return loudness / sampleDataLength;
     }
 }
 

@@ -68523,7 +68523,7 @@ GameObject:
   - component: {fileID: 1580708024}
   - component: {fileID: 1580708027}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

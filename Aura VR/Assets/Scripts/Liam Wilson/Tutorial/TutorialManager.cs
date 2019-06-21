@@ -21,4 +21,14 @@ public class TutorialManager
     {
         specialConditions = new List<TutorialCondition>();
     }
+
+    public void CleanUp()
+    {
+        for (int i = 0; i < specialConditions.Count; i++)
+        {
+            GameObject.Destroy(specialConditions[i]);
+        }
+
+        specialConditions.Clear();
+    }
 }

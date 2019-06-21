@@ -6,6 +6,11 @@ public class TutorialConditionTrigger : TutorialCondition
 {
     [SerializeField] private string searchForName = "";
 
+    void OnEnable()
+    {
+        GetComponent<Collider>().enabled = true;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody == null) return;
@@ -23,5 +28,10 @@ public class TutorialConditionTrigger : TutorialCondition
                 live = false;
             }
         }
+    }
+
+    void OnDisable()
+    {
+        GetComponent<Collider>().enabled = false;
     }
 }
