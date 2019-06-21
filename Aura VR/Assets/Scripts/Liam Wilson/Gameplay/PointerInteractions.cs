@@ -48,8 +48,8 @@ public class PointerInteractions : MonoBehaviour
         VRTK_ControllerEvents controllerEvents = GetComponent<VRTK_ControllerEvents>();
         if (controllerEvents != null)
         {
-            controllerEvents.TriggerPressed += StartPointing;
-            controllerEvents.TriggerReleased += HaltPointing;
+            controllerEvents.ButtonTwoPressed += StartPointing;
+            controllerEvents.ButtonTwoReleased += HaltPointing;
         }
 
         if (!canPlaceBuildSites) return;
