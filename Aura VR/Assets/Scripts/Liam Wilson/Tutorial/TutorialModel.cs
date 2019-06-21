@@ -109,7 +109,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
             {
                 if (condition.wasTriggeredEarly)
                 {
-                    NetworkController.Instance.NotifyClientProgress();
+                    NetworkController.Instance.NotifyClientProgressAll();
                     return;
                 }
 
