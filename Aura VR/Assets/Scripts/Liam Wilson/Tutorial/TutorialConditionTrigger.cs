@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class TutorialConditionTrigger : TutorialCondition
@@ -13,6 +14,8 @@ public class TutorialConditionTrigger : TutorialCondition
 
     void OnTriggerEnter(Collider other)
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         if (other.name.Contains(searchForName) || 
             (other.attachedRigidbody != null && 
              other.attachedRigidbody.name.Contains(searchForName)))
