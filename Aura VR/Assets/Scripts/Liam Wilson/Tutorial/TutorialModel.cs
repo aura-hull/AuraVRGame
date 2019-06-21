@@ -41,7 +41,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         NetworkController.OnTutorialClientProgress += TutorialClientProgress;
         NetworkController.OnTutorialClientProgressAll += TutorialClientProgressAll;
 
-        _speaker.OnFullCycle += Finish;
+        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
 
         CheckNextTutorialCondition();
     }

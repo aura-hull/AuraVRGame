@@ -131,7 +131,7 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-        TutorialManager.Instance.EndTutorial();
+        //TutorialManager.Instance.EndTutorial();
     }
 
     public void StartGameplay()
