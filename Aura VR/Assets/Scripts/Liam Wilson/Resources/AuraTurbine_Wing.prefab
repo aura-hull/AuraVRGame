@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4512945866644195616}
   - component: {fileID: 1073656818187195291}
   - component: {fileID: 4435400713336395754}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 5700229294789509005}
   - component: {fileID: 2946155502180974311}
   - component: {fileID: 4040941164295284560}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: AuraTurbine_Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5674890252758195510}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.00946895
   m_Height: 0.047770143
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 6849858731385854837}
   - component: {fileID: 8355624951942474732}
   - component: {fileID: 1438369663930608558}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

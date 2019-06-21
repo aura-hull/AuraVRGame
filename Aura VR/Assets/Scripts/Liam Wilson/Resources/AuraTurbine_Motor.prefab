@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 1042126129265568734}
   - component: {fileID: 5567980895285497405}
   - component: {fileID: 7857131705303611509}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: AuraTurbine_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2480407024365431930}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.01
   m_Height: 0.03
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 1971844791225980716}
   - component: {fileID: 867037463791451859}
   - component: {fileID: 3756202516251595798}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 4839508846051861936}
   - component: {fileID: 4925192330375023879}
   - component: {fileID: 7982399666341540857}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

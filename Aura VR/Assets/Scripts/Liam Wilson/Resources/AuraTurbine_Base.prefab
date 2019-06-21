@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3942838739909972674}
   - component: {fileID: 1320947678501970465}
   - component: {fileID: 7058422371687510497}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 2707086814103584830}
   - component: {fileID: 457005513061684094}
   - component: {fileID: 7772996662271925810}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: pt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 259675168478713994}
   - component: {fileID: 3705272801874369199}
   - component: {fileID: 5043792688568041844}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: AuraTurbine_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4353299400346323150}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.013036724
   m_Height: 0.1374259
