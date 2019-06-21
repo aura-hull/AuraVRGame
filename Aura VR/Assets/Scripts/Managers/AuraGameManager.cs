@@ -139,6 +139,12 @@ public class AuraGameManager
         _currentState = GameState.Gameplay;
     }
 
+    public void EndGameplay()
+    {
+        _playDuration = _playDurationLimit;
+        OnPlayDurationChanged?.Invoke();
+    }
+
     float temp = 0.0f;
     private void ExecuteGameplay()
     {

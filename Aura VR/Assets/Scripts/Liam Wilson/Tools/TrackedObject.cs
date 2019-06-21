@@ -10,7 +10,7 @@ public class TrackedObject : MonoBehaviour
 
     void Start()
     {
-        originPosition = transform.position;
+        originPosition = transform.localPosition;
         originRotation = transform.rotation;
         originLocalScale = transform.localScale;
 
@@ -19,7 +19,7 @@ public class TrackedObject : MonoBehaviour
 
     public void ResetInstance()
     {
-        transform.position = originPosition;
+        transform.localPosition = originPosition;
         transform.rotation = originRotation;
         transform.localScale = originLocalScale;
     }
