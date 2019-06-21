@@ -8,6 +8,7 @@ public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private InputField nameInput;
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text errorText;
 
     public Action<string, float> OnPlayerDataConfirmed;
 
@@ -46,7 +47,21 @@ public class GameOverScreen : MonoBehaviour
         if (nameInput == null || nameInput.text == "") return;
         if (scoreText == null || scoreText.text == "") return;
 
+        if (ScoreboardManager.Instance.ScoresContainsName(nameInput.text))
+        {
+            SetErrorText("A player with this name already exists.");
+            return;
+        }
+
         OnPlayerDataConfirmed?.Invoke(nameInput.text, float.Parse(scoreText.text));
+    }
+
+    private void SetErrorText(string msg)
+    {
+        if (errorText != null)
+        {
+            errorText.text = $"* {msg}";
+        }
     }
 
     void OnDestroy()

@@ -50,8 +50,13 @@
     <value>668</value>
   </score>
   <score>
-    <name>A</name>
+    <name>L</name>
     <rank>11</rank>
+    <value>0</value>
+  </score>
+  <score>
+    <name>A</name>
+    <rank>12</rank>
     <value>701</value>
   </score>
 </scores>

@@ -126,6 +126,18 @@ public class ScoreboardManager
             Console.WriteLine("Failed to load scores from: " + _filepath);
         }
     }
+
+    public bool ScoresContainsName(string name)
+    {
+        string toLower = name.ToLower();
+
+        foreach (ScoreData data in _scores)
+        {
+            if (data.name.ToLower() == toLower) return true;
+        }
+
+        return false;
+    }
 }
 
 public struct ScoreData
