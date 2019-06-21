@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4295637325957105147}
   - component: {fileID: 1042126129265568734}
   - component: {fileID: 5567980895285497405}
+  - component: {fileID: 7857131705303611509}
   m_Layer: 0
   m_Name: AuraTurbine_Motor
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2480407024365431930}
-  m_Mesh: {fileID: 4300004, guid: 357aaac9fa9bb4644a24d20bf2436949, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ddaf86a424703bb4b9a60cfb16092fd4, type: 3}
 --- !u!23 &1630170411867738019
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ CapsuleCollider:
   m_Radius: 0.01
   m_Height: 0.03
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.001}
+  m_Center: {x: 0, y: 0, z: 0.0005}
 --- !u!114 &5567980895285497405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +248,22 @@ MonoBehaviour:
   matcherIndex: 1
   partPrefab: {fileID: 0}
   linkedSite: {fileID: 0}
+--- !u!114 &7857131705303611509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480407024365431930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6b5bfada01a5b4c99a1dbb6964437a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  density: 500
+  slicesPerAxis: 2
+  isConcave: 0
+  voxelsLimit: 16
 --- !u!1 &4788563344667698220
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +367,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.005
-  m_Center: {x: 0, y: 0, z: -0.015}
+  m_Center: {x: 0, y: 0, z: -0.014}
 --- !u!114 &7982399666341540857
 MonoBehaviour:
   m_ObjectHideFlags: 0

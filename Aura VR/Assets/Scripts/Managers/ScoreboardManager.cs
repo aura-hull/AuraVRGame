@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.UI;
 
 [Serializable]
 public class ScoreboardManager
@@ -14,13 +15,14 @@ public class ScoreboardManager
     {
         get
         {
-            if (_instance == null) _instance = new ScoreboardManager();
+            if (_instance == null)
+                _instance = new ScoreboardManager();
             return _instance;
         }
     }
     #endregion
 
-    private string _filepath = "ScoreServer/scores.txt";
+    private string _filepath = Application.streamingAssetsPath + "/ScoreServer/scores.xml";
     public string Filepath { get; set; }
 
     [SerializeField] private int _scoreboardSize = 1000;
@@ -28,7 +30,6 @@ public class ScoreboardManager
 
     private ScoreboardManager()
     {
-        AuraGameManager.Instance.OnGameOver += SaveScores;
         _scores = new List<ScoreData>();
     }
 
@@ -36,10 +37,10 @@ public class ScoreboardManager
     {
         try
         {
-            if (!System.IO.File.Exists(_filepath))
+            if (!File.Exists(_filepath))
             {
-                string path = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "ScoreServer");
-                System.IO.Directory.CreateDirectory(path);
+                string path = Path.Combine(Application.streamingAssetsPath, "ScoreServer");
+                Directory.CreateDirectory(path);
             }
 
             XmlDocument doc = new XmlDocument();
@@ -66,11 +67,6 @@ public class ScoreboardManager
                 valueNode.InnerText = _scores[i].score.ToString();
                 scoreNode.AppendChild(valueNode);
 
-                // DateTime
-                XmlNode dateTimeNode = doc.CreateElement("dateTime");
-                dateTimeNode.InnerText = _scores[i].time.ToString();
-                scoreNode.AppendChild(dateTimeNode);
-
                 rootNode.AppendChild(scoreNode);
             }
 
@@ -83,39 +79,19 @@ public class ScoreboardManager
         }
     }
 
-    public void AddNewRecord(float score)
+    public void AddNewRecord(float score, string name = "Anon")
     {
-        DateTime time = DateTime.Now;
-        ScoreData newScoreData = new ScoreData("Not Set", -1, score, time);
-
-        if (_scores.Count == 0)
+        int insertAt = _scores.Count - 1;
+        for (int i = 0; i < _scores.Count; i++)
         {
-            _scores.Add(newScoreData);
-        }
-        else
-        {
-            int indexToBe = -1;
-
-            // Find desired rank
-            for (int i = 0; i < _scores.Count; i += 1)
+            if (score > _scores[i].score)
             {
-                if (score > _scores[i].score)
-                {
-                    indexToBe = i;
-                    break;
-                }
+                insertAt = i;
+                break;
             }
-
-            // Place at desired rank
-            if (indexToBe != -1)
-                _scores.Insert(indexToBe, newScoreData);
-            else
-                _scores.Add(newScoreData);
-
-            // remove the excess records
-            if (_scores.Count > _scoreboardSize)
-                _scores.RemoveRange(_scoreboardSize, _scores.Count - _scoreboardSize);
         }
+
+        _scores.Insert(insertAt, new ScoreData(name, -1, score));
     }
 
     public void ClearScores()
@@ -125,12 +101,12 @@ public class ScoreboardManager
 
     public void LoadScores()
     {
-        List<ScoreData> scoresFromFile = new List<ScoreData>();
-
         try
         {
-            if (System.IO.File.Exists(_filepath))
+            if (File.Exists(_filepath))
             {
+                _scores.Clear();
+
                 XmlDocument doc = new XmlDocument();
                 doc.Load(_filepath);
 
@@ -140,12 +116,8 @@ public class ScoreboardManager
                     string name = e.ChildNodes[0].InnerText;
                     int rank = int.Parse(e.ChildNodes[1].InnerText);
                     float score = float.Parse(e.ChildNodes[2].InnerText);
-                    DateTime time = DateTime.Parse(e.ChildNodes[3].InnerText);
-                    //DateTime time = DateTime.Now;
-
-                    ScoreData record = new ScoreData(name, rank, score, time);
-
-                    scoresFromFile.Add(record);
+                    
+                    _scores.Add(new ScoreData(name, rank, score));
                 }
             }
         }
@@ -153,8 +125,6 @@ public class ScoreboardManager
         {
             Console.WriteLine("Failed to load scores from: " + _filepath);
         }
-
-        _scores = scoresFromFile;
     }
 }
 
@@ -164,19 +134,17 @@ public struct ScoreData
     public string name;
     public int rank;
     public float score;
-    public DateTime time;
 
-    public ScoreData(string name, int rank, float score, DateTime time)
+    public ScoreData(string name, int rank, float score)
     {
         valid = true;
         this.name = name;
         this.rank = rank;
         this.score = score;
-        this.time = time;
     }
 
     public override string ToString()
     {
-        return (name + "-" + score + "-" + time);
+        return ($"{rank}. {name} ({score})");
     }
 }
