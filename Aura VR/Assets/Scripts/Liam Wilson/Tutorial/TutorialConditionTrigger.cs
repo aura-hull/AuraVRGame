@@ -13,9 +13,9 @@ public class TutorialConditionTrigger : TutorialCondition
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody == null) return;
-
-        if (other.attachedRigidbody.name.Contains(searchForName))
+        if (other.name.Contains(searchForName) || 
+            (other.attachedRigidbody != null && 
+             other.attachedRigidbody.name.Contains(searchForName)))
         {
             if (canTriggerEarly)
             {
