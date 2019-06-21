@@ -6,6 +6,7 @@
 //
 // Terms of use: do whatever you like
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,63 +37,68 @@ public class Buoyancy : MonoBehaviour
 	/// </summary>
 	private void Start()
     {
+        Initialize();
+    }
+
+    void Initialize()
+    {
         collider = GetComponent<Collider>();
         rigidbody = GetComponent<Rigidbody>();
 
         forces = new List<Vector3[]>(); // For drawing force gizmos
 
-		// Store original rotation and position
-		var originalRotation = transform.rotation;
-		var originalPosition = transform.position;
-		transform.rotation = Quaternion.identity;
-		transform.position = Vector3.zero;
+        // Store original rotation and position
+        var originalRotation = transform.rotation;
+        var originalPosition = transform.position;
+        transform.rotation = Quaternion.identity;
+        transform.position = Vector3.zero;
 
-		// The object must have a collider
-		if (collider == null)
-		{
-			gameObject.AddComponent<MeshCollider>();
-			Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no collider. MeshCollider has been added.", name));
-		}
-		isMeshCollider = GetComponent<MeshCollider>() != null;
+        // The object must have a collider
+        if (collider == null)
+        {
+            gameObject.AddComponent<MeshCollider>();
+            Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no collider. MeshCollider has been added.", name));
+        }
+        isMeshCollider = GetComponent<MeshCollider>() != null;
 
-		var bounds = collider.bounds;
-		if (bounds.size.x < bounds.size.y)
-		{
-			voxelHalfHeight = bounds.size.x;
-		}
-		else
-		{
-			voxelHalfHeight = bounds.size.y;
-		}
-		if (bounds.size.z < voxelHalfHeight)
-		{
-			voxelHalfHeight = bounds.size.z;
-		}
-		voxelHalfHeight /= 2 * slicesPerAxis;
+        var bounds = collider.bounds;
+        if (bounds.size.x < bounds.size.y)
+        {
+            voxelHalfHeight = bounds.size.x;
+        }
+        else
+        {
+            voxelHalfHeight = bounds.size.y;
+        }
+        if (bounds.size.z < voxelHalfHeight)
+        {
+            voxelHalfHeight = bounds.size.z;
+        }
+        voxelHalfHeight /= 2 * slicesPerAxis;
 
-		// The object must have a RidigBody
-		if (rigidbody == null)
-		{
-			gameObject.AddComponent<Rigidbody>();
-			Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no Rigidbody. Rigidbody has been added.", name));
-		}
-		rigidbody.centerOfMass = new Vector3(0, -bounds.extents.y * 0f, 0) + transform.InverseTransformPoint(bounds.center);
+        // The object must have a RidigBody
+        if (rigidbody == null)
+        {
+            gameObject.AddComponent<Rigidbody>();
+            Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no Rigidbody. Rigidbody has been added.", name));
+        }
+        rigidbody.centerOfMass = new Vector3(0, -bounds.extents.y * 0f, 0) + transform.InverseTransformPoint(bounds.center);
 
-		voxels = SliceIntoVoxels(isMeshCollider && isConcave);
+        voxels = SliceIntoVoxels(isMeshCollider && isConcave);
 
-		// Restore original rotation and position
-		transform.rotation = originalRotation;
-		transform.position = originalPosition;
+        // Restore original rotation and position
+        transform.rotation = originalRotation;
+        transform.position = originalPosition;
 
-		float volume = rigidbody.mass / density;
+        float volume = rigidbody.mass / density;
 
-		WeldPoints(voxels, voxelsLimit);
+        WeldPoints(voxels, voxelsLimit);
 
-		float archimedesForceMagnitude = WATER_DENSITY * Mathf.Abs(Physics.gravity.y) * volume;
-		localArchimedesForce = new Vector3(0, archimedesForceMagnitude, 0) / voxels.Count;
+        float archimedesForceMagnitude = WATER_DENSITY * Mathf.Abs(Physics.gravity.y) * volume;
+        localArchimedesForce = new Vector3(0, archimedesForceMagnitude, 0) / voxels.Count;
 
-		Debug.Log(string.Format("[Buoyancy.cs] Name=\"{0}\" volume={1:0.0}, mass={2:0.0}, density={3:0.0}", name, volume, rigidbody.mass, density));
-	}
+        Debug.Log(string.Format("[Buoyancy.cs] Name=\"{0}\" volume={1:0.0}, mass={2:0.0}, density={3:0.0}", name, volume, rigidbody.mass, density));
+    }
 
 	/// <summary>
 	/// Slices the object into number of voxels represented by their center points.

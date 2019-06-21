@@ -122,7 +122,7 @@ MonoBehaviour:
   - {fileID: 5674890252758195510, guid: 6b76c54aec219ee479a75bd07986087e, type: 3}
   timeRemainingText: {fileID: 0}
   timeBetweenSpawns: 0
-  dispersionRadius: 50
+  dispersionRadius: 100
   requiredCollectorID: 1
 --- !u!1001 &836354414211186773
 PrefabInstance:
