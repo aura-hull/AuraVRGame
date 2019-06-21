@@ -23,6 +23,7 @@ public class ScreenUpdater : MonoBehaviour
         // Assign Actions
         PowerManager.Instance.OnPowerProducedChanged += OnNetPowerChanged;
         PowerManager.Instance.OnPowerUsedChanged += OnNetPowerChanged;
+        UpgradeManager.Instance.OnUpgradedOrDowngraded += OnNetPowerChanged;
         OnNetPowerChanged();
 
         PowerManager.Instance.OnStoredPowerChanged += OnStoredPowerChanged;

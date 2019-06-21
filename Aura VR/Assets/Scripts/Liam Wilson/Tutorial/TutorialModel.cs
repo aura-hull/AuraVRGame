@@ -34,6 +34,8 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void Initialize()
     {
+        TutorialManager.Instance.tutorialModel = this;
+
         _speaker.OnDialogueFinish += CheckNextTutorialCondition;
 
         NetworkController.OnTutorialClientProgress += TutorialClientProgress;
@@ -93,10 +95,8 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         clientsReady = int.MaxValue;
     }
 
-    private void Finish()
+    public void Finish()
     {
-        AuraGameManager.Instance.StartGameplay();
-
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Destroy(gameObject);

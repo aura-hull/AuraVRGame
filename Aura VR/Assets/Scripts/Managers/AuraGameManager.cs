@@ -29,6 +29,7 @@ public class AuraGameManager
     public Action OnPlayDurationChanged;
     
     private PowerManager _powerManager;
+    private UpgradeManager _upgradeManager;
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
     
@@ -68,12 +69,14 @@ public class AuraGameManager
     private AuraGameManager()
     {
         _powerManager = PowerManager.Instance;
+        _upgradeManager = UpgradeManager.Instance;
         _scoreManager = ScoreManager.Instance;
         _scoreboardManager = ScoreboardManager.Instance;
 
         Setup();
 
         NetworkController.OnSyncManagers += Sync;
+        NetworkController.OnUpgradedOrDowngraded += _upgradeManager.SyncUpgradeState;
         AuraSceneManager.Instance.SubscribeOnSceneReset(Setup);
     }
 
@@ -128,19 +131,15 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-
+        TutorialManager.Instance.EndTutorial();
     }
 
     public void StartGameplay()
     {
-        if (_currentState == GameState.Tutorial)
-        {
-            TutorialManager.Instance.CleanUp();
-        }
-
         _currentState = GameState.Gameplay;
     }
 
+    float temp = 0.0f;
     private void ExecuteGameplay()
     {
         if (!PhotonNetwork.IsMasterClient) return;
@@ -149,6 +148,14 @@ public class AuraGameManager
         OnPlayDurationChanged?.Invoke();
 
         _powerManager.Update();
+
+        // REMOVE THIS: UPGRADES EVERY 20 SECONDS!!
+        temp += Time.deltaTime;
+        if (temp > 20.0f)
+        {
+            _upgradeManager.Upgrade();
+            temp = 0.0f;
+        }
 
         if (_playDuration >= _playDurationLimit)
         {

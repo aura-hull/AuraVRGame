@@ -38,7 +38,7 @@ public class PowerManager
 
     public float PowerProduced
     {
-        get { return _powerProduced; }
+        get { return _powerProduced * UpgradeManager.Instance.PowerProductionMultiplier; }
         set
         {
             _powerProduced = value;
@@ -48,7 +48,7 @@ public class PowerManager
 
     public float PowerUsed
     {
-        get { return _powerUsed; }
+        get { return _powerUsed * UpgradeManager.Instance.PowerConsumptionMultiplier; }
         set
         {
             _powerUsed = value;
@@ -58,7 +58,7 @@ public class PowerManager
 
     public float PowerNet
     {
-        get { return _powerProduced - _powerUsed; }
+        get { return PowerProduced - PowerUsed; }
     }
 
     public float PowerStored

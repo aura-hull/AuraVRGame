@@ -16,13 +16,25 @@ public class TutorialManager
     }
 
     public List<TutorialCondition> specialConditions;
+    public TutorialModel tutorialModel;
 
     private TutorialManager()
     {
         specialConditions = new List<TutorialCondition>();
     }
 
-    public void CleanUp()
+    public void EndTutorial()
+    {
+        if (tutorialModel != null)
+        {
+            tutorialModel.Finish();
+        }
+
+        AuraGameManager.Instance.StartGameplay();
+        CleanUp();
+    }
+
+    private void CleanUp()
     {
         for (int i = 0; i < specialConditions.Count; i++)
         {

@@ -14,6 +14,7 @@ namespace AuraHull.AuraVRGame
     {
         TUTORIAL_CLIENT_PROGRESS,
         TUTORIAL_CLIENT_PROGRESS_ALL,
+        UPGRADED_OR_DOWNGRADED,
         BUILD_SITE_PLACED,
         BUILD_SITE_DESTROYED,
         TURBINE_PART_BUILT,
@@ -32,6 +33,7 @@ namespace AuraHull.AuraVRGame
         public static event Action OnGameConnected;
         public static event Action OnTutorialClientProgress;
         public static event Action OnTutorialClientProgressAll;
+        public static event Action<float, float, int> OnUpgradedOrDowngraded;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
@@ -89,6 +91,19 @@ namespace AuraHull.AuraVRGame
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TUTORIAL_CLIENT_PROGRESS_ALL,
                 eventContent: null,
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
+        public void NotifyUpgradedOrDowngraded(float powerProductionMultiplier, float powerConsumptionMultiplier, int upgradeLevel)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.UPGRADED_OR_DOWNGRADED,
+                eventContent: new object[3] { powerProductionMultiplier, powerConsumptionMultiplier, upgradeLevel },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -173,6 +188,10 @@ namespace AuraHull.AuraVRGame
 
                 case NetworkEvent.TUTORIAL_CLIENT_PROGRESS_ALL:
                     OnTutorialClientProgressAll?.Invoke();
+                    break;
+
+                case NetworkEvent.UPGRADED_OR_DOWNGRADED:
+                    OnUpgradedOrDowngraded?.Invoke((float)serialize[0], (float)serialize[1], (int)serialize[2]);
                     break;
 
                 case NetworkEvent.BUILD_SITE_PLACED:
