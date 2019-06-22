@@ -55,8 +55,7 @@ public class TutorialManager
     public void StartTutorial()
     {
         if (tutorialModel == null) return;
-
-        tutorialModel.gameObject.SetActive(true);
+        
         tutorialModel.Initialize();
         isRunning = true;
     }
