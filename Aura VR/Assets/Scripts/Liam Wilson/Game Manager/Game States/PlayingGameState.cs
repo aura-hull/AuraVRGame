@@ -25,11 +25,6 @@ namespace AuraHull.AuraVRGame
         public override void ExecuteState()
         {
             base.ExecuteState();
-
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                return;
-            }
             
             GameModel.Instance.SpawnParts();
             AuraGameManager.Instance.Execute();

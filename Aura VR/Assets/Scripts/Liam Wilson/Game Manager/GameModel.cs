@@ -66,6 +66,7 @@ namespace AuraHull.AuraVRGame
 
         public void SpawnParts()
         {
+            if (!PhotonNetwork.IsMasterClient) return;
             for (int i = 0; i < _partSpawners.Length; i++)
             {
                 if (_partSpawners[i] != null)
