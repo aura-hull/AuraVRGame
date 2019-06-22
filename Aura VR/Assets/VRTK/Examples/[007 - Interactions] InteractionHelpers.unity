@@ -565,6 +565,26 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224792751024443172, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224792751024443172, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224533806161329942, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224533806161329942, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 910be6460ba00dc4bb13725c3ff972cb, type: 3}
 --- !u!1 &16360391
@@ -1502,6 +1522,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000014259110642, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455702, guid: 910be6460ba00dc4bb13725c3ff972cb, type: 3}
+      propertyPath: alwaysFaceHeadset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224792751024443172, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224792751024443172, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224533806161329942, guid: 910be6460ba00dc4bb13725c3ff972cb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224533806161329942, guid: 910be6460ba00dc4bb13725c3ff972cb,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -2637,11 +2681,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f35fa249b5008c44ac2998be6f82d4d, type: 2}
---- !u!4 &152299010 stripped
+--- !u!4 &152299010
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 152299009}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428582323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1836022921}
+  m_Father: {fileID: 1375315515}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152501149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,14 +2836,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoManageScriptDefines: 1
-  activeScriptingDefineSymbolsWithoutSDKClasses: []
+  activeScriptingDefineSymbolsWithoutSDKClasses:
+  - symbol: VRTK_DEFINE_SDK_OCULUS_AVATAR
+    buildTargetGroupName: Standalone
   scriptAliasLeftController: {fileID: 1408711848}
   scriptAliasRightController: {fileID: 109582311}
   autoManageVRSettings: 1
   autoLoadSetup: 1
   setups:
-  - {fileID: 830649184}
   - {fileID: 1327989157}
+  - {fileID: 830649184}
   - {fileID: 1375315516}
   - {fileID: 2077054442}
   - {fileID: 54735946}
@@ -2803,15 +2859,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176582143}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.5950619, z: -0, w: 0.8036799}
+  m_LocalPosition: {x: -0.757, y: 0.997, z: 1.541}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039905840}
   - {fileID: 1554977139}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -73.034004, z: 0}
 --- !u!114 &176582146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2904,47 +2960,243 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 11420968, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
---- !u!4 &180540130 stripped
+--- !u!4 &180540130
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540131 stripped
+  m_GameObject: {fileID: 440011001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 180540142}
+  - {fileID: 180540141}
+  - {fileID: 180540140}
+  - {fileID: 180540139}
+  - {fileID: 180540138}
+  - {fileID: 180540137}
+  - {fileID: 184603378}
+  m_Father: {fileID: 1375315515}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &180540131
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 189822, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540132 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540142}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &180540132
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540133 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540141}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &180540133
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540134 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540140}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &180540134
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 147176, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540135 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540139}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &180540135
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 124034, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &180540136 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540138}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &180540136
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 2}
   m_PrefabInstance: {fileID: 180540129}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540137}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &180540137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &180540138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &180540139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &180540140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &180540141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &180540142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180540131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &184603377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184603378}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184603378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184603377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 180540130}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209523672
 GameObject:
   m_ObjectHideFlags: 0
@@ -4975,6 +5227,11 @@ MonoBehaviour:
   SurfaceShaderPBSV2Loading: {fileID: 4800000, guid: 822f5e641dc5dd54ca9555b727b3277f,
     type: 3}
   oculusUserID: 0
+  AssetsDoneLoading:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   LeftHandCustomPose: {fileID: 0}
   RightHandCustomPose: {fileID: 0}
   PacketSettings:
@@ -5150,17 +5407,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1836199417}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Pick up the sphere and touch upwards on the touchpad to bring up the
-        panel menu then move the slider by swiping left or right and then press trigger.
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5250,6 +5496,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Pick up the sphere and touch upwards on the touchpad to bring up the
+        panel menu then move the slider by swiping left or right and then press trigger.
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
@@ -5458,6 +5715,22 @@ Transform:
   m_Father: {fileID: 1094358598}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &440011001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 180540129}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180540130}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &443123167
 GameObject:
   m_ObjectHideFlags: 0
@@ -7149,6 +7422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e19ec58d4a9e844970103e5bd8946a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideOnStart: 0
 --- !u!1 &559075396
 GameObject:
   m_ObjectHideFlags: 0
@@ -7613,18 +7887,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1044140691}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Touch the cube to activate the independent radial menu, then touch the
-        desired radial menu button and press the Use (Trigger by default) button to
-        make a selection.
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7715,6 +7977,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Touch the cube to activate the independent radial menu, then touch the
+        desired radial menu button and press the Use (Trigger by default) button to
+        make a selection.
+      objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -7735,17 +8009,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1189215723}
     m_Modifications:
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Radial Menus offer a way of providing additional options on the controller
-        or a separate interactable object
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7835,6 +8098,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Radial Menus offer a way of providing additional options on the controller
+        or a separate interactable object
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bcebf0300be464cb5f7ef8d78bb36d, type: 3}
@@ -8746,17 +9020,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 694162653}
     m_Modifications:
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: The VRTK_UIPointer can be used to interact with Unity UI elements for
-        simple UI function
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8846,6 +9109,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: The VRTK_UIPointer can be used to interact with Unity UI elements for
+        simple UI function
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bcebf0300be464cb5f7ef8d78bb36d, type: 3}
@@ -9088,6 +9362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e19ec58d4a9e844970103e5bd8946a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideOnStart: 0
 --- !u!1 &742208379
 GameObject:
   m_ObjectHideFlags: 0
@@ -10946,17 +11221,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 926798726}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Pick up the cube and swipe up, down, left or right on the touchpad to
-        activate a specific panel menu.
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11046,6 +11310,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Pick up the cube and swipe up, down, left or right on the touchpad to
+        activate a specific panel menu.
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
@@ -11498,16 +11773,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1579160849}
     m_Modifications:
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Panel menus provide another way of providing additional context to objects
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11597,6 +11862,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Panel menus provide another way of providing additional context to objects
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bcebf0300be464cb5f7ef8d78bb36d, type: 3}
@@ -13191,19 +13466,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2034930079}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: 'Flick the lever to toggle on or off the radial menus on the controllers.
-
-
-        Move the touchpad to activate different button options.'
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13293,6 +13555,19 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Flick the lever to toggle on or off the radial menus on the controllers.
+
+
+        Move the touchpad to activate different button options.'
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
@@ -17008,17 +17283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1822514860}
     m_Modifications:
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Tooltips provide a simple way of conveying what an object or button is
-        for
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17108,6 +17372,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Tooltips provide a simple way of conveying what an object or button is
+        for
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bcebf0300be464cb5f7ef8d78bb36d, type: 3}
@@ -18178,6 +18453,22 @@ Transform:
   m_Father: {fileID: 1375112423}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 75, z: 0}
+--- !u!1 &1428582323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 152299009}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 152299010}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1435794223
 GameObject:
   m_ObjectHideFlags: 0
@@ -22785,6 +23076,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 248691598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1836022920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 152299009}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836022921}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1836022921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 152299009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836022920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 152299010}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836199416
 GameObject:
   m_ObjectHideFlags: 0
@@ -23066,20 +23387,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1344349832}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: 'An object tooltip is applied to this simple cube to provide data about
-        what the object is.
-
-
-        The tooltip always faces the user''s headset.'
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23169,6 +23476,20 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: 'An object tooltip is applied to this simple cube to provide data about
+        what the object is.
+
+
+        The tooltip always faces the user''s headset.'
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
@@ -24095,17 +24416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341647318}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: Pick up the saucer and touch upwards on the touchpad to bring up the
-        panel menu then select an option by swiping left or right and then press trigger.
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24195,6 +24505,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: Pick up the saucer and touch upwards on the touchpad to bring up the
+        panel menu then select an option by swiping left or right and then press trigger.
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
@@ -25170,19 +25491,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 303816000}
     m_Modifications:
-    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
-        type: 3}
-      propertyPath: m_Text
-      value: 'Flick the lever to toggle on or off the tooltips on the controllers.
-
-
-        Looking away from the controller will disable the controller tooltips.'
-      objectReference: {fileID: 0}
     - target: {fileID: 224861586572071280, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25272,6 +25580,19 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224175581045623504, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642603537886326, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Flick the lever to toggle on or off the tooltips on the controllers.
+
+
+        Looking away from the controller will disable the controller tooltips.'
       objectReference: {fileID: 0}
     - target: {fileID: 224435910559421880, guid: 55bcebf0300be464cb5f7ef8d78bb36d,
         type: 3}

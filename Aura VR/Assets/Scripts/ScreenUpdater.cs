@@ -61,7 +61,7 @@ public class ScreenUpdater : MonoBehaviour
 
     private void OnScoreChanged()
     {
-        float score = ScoreManager.Instance.Score;
+        float score = ScoreManager.Instance.ScoreInt;
         scoreText.text = String.Format(scoreFormat, score);
     }
 }

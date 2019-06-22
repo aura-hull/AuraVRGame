@@ -32,7 +32,6 @@ public class PowerManager
     public Action OnStoredPowerChanged;
 
     public WindManager activeWindManager;
-    public float depletePowerTime = 1.0f;
 
     private List<PowerConsumer> _consumers;
 
@@ -81,13 +80,7 @@ public class PowerManager
         }
 
         PowerUsed = powerUsedCalc;
-
-        depletionTimer += Time.deltaTime;
-        if (depletionTimer >= depletePowerTime)
-        {
-            PowerStored += PowerNet;
-            depletionTimer = 0.0f;
-        }
+        PowerStored += (PowerNet / 60.0f) * Time.deltaTime; // Net is lost over 60 seconds.
     }
 
     public void IncreasePowerOutput(float amountToIncrease)

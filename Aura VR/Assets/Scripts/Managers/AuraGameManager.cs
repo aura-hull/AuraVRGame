@@ -35,7 +35,6 @@ public class AuraGameManager
     
     private float _playDurationLimit = 600;
     private float _playDuration = 0;
-    private float _dayCyclesPerPlaythrough = 1;
 
     private GameState _currentState;
 
@@ -59,11 +58,6 @@ public class AuraGameManager
     public float PlayDurationLimit
     {
         get { return _playDurationLimit; }
-    }
-
-    public float DayCyclesPerPlaythrough
-    {
-        get { return _dayCyclesPerPlaythrough; }
     }
 
     private AuraGameManager()
@@ -97,8 +91,7 @@ public class AuraGameManager
     void Setup()
     {
         _playDuration = 0;
-
-        _powerManager.depletePowerTime = 86400 / _playDurationLimit / _dayCyclesPerPlaythrough;
+        
         _powerManager.PowerProduced = 0;
         _powerManager.PowerUsed = 0;
         _powerManager.PowerStored = 600;
@@ -107,7 +100,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        SetState(GameState.Tutorial);
+        SetState(GameState.Gameplay);
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -157,15 +150,11 @@ public class AuraGameManager
 
         if (_playDuration >= _playDurationLimit)
         {
-            // Get final values
-            float finalScore = _scoreManager.Score;
-            float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
-
             // Game should end
             SetState(GameState.GameOver);
         }
 
-        _scoreManager.Score += _powerManager.PowerProduced;
+        _scoreManager.Score = _powerManager.PowerStored;
 
         NetworkController.Instance.NotifySyncManagers(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -174,12 +163,12 @@ public class AuraGameManager
     {
         if (gameOverScreen != null)
         {
-            gameOverScreen.SetScoreText(_scoreManager.Score);
+            gameOverScreen.SetScoreText(_scoreManager.ScoreInt);
             gameOverScreen.gameObject.SetActive(true);
         }
         else
         {
-            SaveAndReset("Anon", _scoreManager.Score);
+            SaveAndReset("Anon", _scoreManager.ScoreInt);
         }
     }
 
@@ -212,7 +201,7 @@ public class AuraGameManager
 
     private void SaveAndReset(string name, float score)
     {
-        _scoreboardManager.AddNewRecord(_scoreManager.Score, name);
+        _scoreboardManager.AddNewRecord(_scoreManager.ScoreInt, name);
         _scoreboardManager.SaveScores();
 
         AuraSceneManager.Instance.SceneReset();

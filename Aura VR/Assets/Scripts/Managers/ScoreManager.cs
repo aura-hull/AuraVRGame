@@ -35,6 +35,14 @@ public class ScoreManager
         }
     }
 
+    public int ScoreInt
+    {
+        get
+        {
+            return Mathf.RoundToInt(_score);
+        }
+    }
+
     public void ResetScore()
     {
         Score = 0;

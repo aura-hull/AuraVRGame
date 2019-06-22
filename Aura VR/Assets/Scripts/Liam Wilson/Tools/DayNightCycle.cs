@@ -31,7 +31,7 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
-        FullCycleDurationSeconds = AuraGameManager.Instance.PlayDurationLimit / AuraGameManager.Instance.DayCyclesPerPlaythrough;
+        //FullCycleDurationSeconds = AuraGameManager.Instance.PlayDurationLimit / AuraGameManager.Instance.DayCyclesPerPlaythrough;
         //FullCycleDurationSeconds = fullCycleDurationSeconds;
 
         _dayIntensity = dayLight.intensity;

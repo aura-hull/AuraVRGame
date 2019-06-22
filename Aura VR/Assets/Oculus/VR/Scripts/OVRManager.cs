@@ -1638,7 +1638,7 @@ public class OVRManager : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		OVRHaptics.Process();
+		//OVRHaptics.Process(); // DISABLED: Haptics to fix error message ("Cannot be null: dest").
 	}
 
 	private void FixedUpdate()
