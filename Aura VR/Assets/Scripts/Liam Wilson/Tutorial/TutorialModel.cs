@@ -37,8 +37,6 @@ public class TutorialModel : MonoBehaviour
 
         NetworkController.OnTutorialClientReady += OnClientReady;
         NetworkController.OnPlayNextTutorial += SpeakWhenReady;
-
-        gameObject.SetActive(false);
     }
 
     public void Initialize()
