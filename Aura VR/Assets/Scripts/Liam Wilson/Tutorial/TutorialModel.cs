@@ -5,7 +5,7 @@ using AuraHull.AuraVRGame;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialModel : MonoBehaviour
+public class TutorialModel : MonoBehaviour, IPunObservable
 {
     [SerializeField] private bool localTest = false;
 
@@ -31,8 +31,12 @@ public class TutorialModel : MonoBehaviour
 
         TutorialManager.Instance.tutorialModel = this;
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
+        }
+
         _speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
-        _speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
         _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
 
         NetworkController.OnTutorialClientReady += OnClientReady;
@@ -62,7 +66,10 @@ public class TutorialModel : MonoBehaviour
 
     private void OnClientReady(int dialogueIndex)
     {
-        _clientsReady++;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _clientsReady++;
+        }
     }
 
     public void ResetTutorial()
@@ -79,6 +86,20 @@ public class TutorialModel : MonoBehaviour
         {
             _animator.speaking = (_speaker.GetCurrentLoudness() >= 0.005f);
             checkVolumeTicks = 0.0f;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (stream.IsWriting)
+                stream.SendNext(_clientsReady);
+        }
+        else
+        {
+            if (stream.IsReading)
+                _clientsReady = (int)stream.ReceiveNext();
         }
     }
 }
