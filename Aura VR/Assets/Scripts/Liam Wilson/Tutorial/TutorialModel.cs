@@ -47,8 +47,8 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     {
         ResetTutorial();
 
-        NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
         SpeakWhenReady();
+        NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
     }
 
     private void SpeakWhenReady()
