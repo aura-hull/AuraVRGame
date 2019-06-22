@@ -217,6 +217,8 @@ public class PointerInteractions : MonoBehaviour
                 return;
             }
 
+
+
             // Object selection takes first priority.
             if (ObjectSelection(hitInfo)) return;
 

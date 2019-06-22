@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using AuraHull.AuraVRGame;
 using Photon.Pun;
@@ -41,6 +42,9 @@ public class TutorialManager
     private List<ConditionPair> specialConditions;
     public bool isRunning { get; private set; } = false;
 
+    public Action OnTutorialStart;
+    public Action OnTutorialEnd;
+
     private TutorialManager()
     {
         specialConditions = new List<ConditionPair>();
@@ -58,12 +62,16 @@ public class TutorialManager
         
         tutorialModel.Initialize();
         isRunning = true;
+
+        OnTutorialStart?.Invoke();
     }
 
     public void EndTutorial()
     {
         AuraGameManager.Instance.SetState(AuraGameManager.GameState.Gameplay);
         isRunning = false;
+
+        OnTutorialEnd?.Invoke();
     }
 
     public void CheckNextTutorialCondition()
