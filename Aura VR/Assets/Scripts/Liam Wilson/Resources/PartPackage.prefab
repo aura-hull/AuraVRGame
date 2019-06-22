@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7038308075141302494}
   - component: {fileID: 7795145742419093143}
   - component: {fileID: 2772958218220751486}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 8844781621807895048}
   - component: {fileID: 1574542373247864968}
   - component: {fileID: 9160356293217780274}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PartPackage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   - {fileID: 5674890252758195510, guid: 6b76c54aec219ee479a75bd07986087e, type: 3}
   timeRemainingText: {fileID: 0}
   timeBetweenSpawns: 0
-  dispersionRadius: 50
+  dispersionRadius: 20
   requiredCollectorID: 1
 --- !u!1 &5864671294463772515
 GameObject:
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 8356722902954752298}
   - component: {fileID: 2211008423475499611}
   - component: {fileID: 7474939986592469988}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 8617538862112219110}
   - component: {fileID: 2184035706796095447}
   - component: {fileID: 3074796285541800434}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 1881180912668733782}
   - component: {fileID: 7230468907923392253}
   - component: {fileID: 71064989833228211}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 3701049338930364366}
   - component: {fileID: 5152739845131440679}
   - component: {fileID: 7827294745614482508}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

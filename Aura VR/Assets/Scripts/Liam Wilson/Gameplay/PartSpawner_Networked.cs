@@ -103,7 +103,7 @@ public class PartSpawner_Networked : MonoBehaviour
 
             if (spawnMode == SpawnMode.Attached)
             {
-                newPart = PhotonNetwork.Instantiate(partPrefabs[0].name, Vector3.zero, Quaternion.identity);
+                newPart = PhotonNetwork.Instantiate(partPrefabs[0].name, Vector3.zero, partPrefabs[0].transform.rotation);
 
                 newPart.transform.SetParent(_activeCollector.RestingPoint);
                 newPart.transform.localPosition = Vector3.zero;
@@ -121,7 +121,7 @@ public class PartSpawner_Networked : MonoBehaviour
             {
                 for (int i = 0; i < partPrefabs.Length; i++)
                 {
-                    newPart = PhotonNetwork.Instantiate(partPrefabs[i].name, Vector3.zero, Quaternion.identity);
+                    newPart = PhotonNetwork.Instantiate(partPrefabs[i].name, Vector3.zero, partPrefabs[i].transform.rotation);
 
                     float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f);
                     Vector3 polarPoint = Quaternion.Euler(0, randomAngle, 0) * (Vector3.forward * dispersionRadius);

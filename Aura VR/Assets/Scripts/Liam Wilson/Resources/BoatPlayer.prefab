@@ -530,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 657972349158217520}
   - component: {fileID: 3065943404156615073}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1983,7 +1983,7 @@ PrefabInstance:
     - target: {fileID: 2574598250278413130, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
         type: 3}
       propertyPath: grabbedFriction
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2574598250278413130, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
         type: 3}
@@ -1998,6 +1998,16 @@ PrefabInstance:
     - target: {fileID: 2574598250278413130, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
         type: 3}
       propertyPath: useFrictionOverrides
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574598250278413130, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
+        type: 3}
+      propertyPath: detachDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574598250278413130, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
+        type: 3}
+      propertyPath: snapToStep
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2574598250087458365, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
@@ -2095,6 +2105,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2574598250278413129, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2574598250819522364, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2123,6 +2138,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2574598251265738342, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e, type: 3}
     - {fileID: 2574598251265738343, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e, type: 3}
+    - {fileID: 2574598250278413129, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fb0011224c965cd4aa0fb3bfcc7d4c3e, type: 3}
 --- !u!4 &3871789450493606001 stripped
 Transform:
@@ -3553,7 +3569,7 @@ PrefabInstance:
     - target: {fileID: 2961478307161333095, guid: 1f715656ebee3404ba71255c96d414e1,
         type: 3}
       propertyPath: precisionGrab
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2961478307161333095, guid: 1f715656ebee3404ba71255c96d414e1,
         type: 3}
@@ -3569,6 +3585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: forceRestingAngleThreshold
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961478307161333095, guid: 1f715656ebee3404ba71255c96d414e1,
+        type: 3}
+      propertyPath: detachDistance
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2961478307218980385, guid: 1f715656ebee3404ba71255c96d414e1,
         type: 3}
@@ -3751,6 +3772,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 031d401658b683a45a714e7f4bc2fee5, type: 3}
       propertyPath: m_Name
       value: Lever
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 031d401658b683a45a714e7f4bc2fee5, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 031d401658b683a45a714e7f4bc2fee5, type: 3}
       propertyPath: m_LocalPosition.x

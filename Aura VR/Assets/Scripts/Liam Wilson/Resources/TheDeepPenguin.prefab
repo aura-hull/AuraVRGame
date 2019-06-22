@@ -835,11 +835,11 @@ MonoBehaviour:
   defaultDelay: 0.2
   delayExceptions:
   - beforeDialogueIndex: 5
-    delay: 1.5
+    delay: 2.5
   - beforeDialogueIndex: 11
-    delay: 1.5
+    delay: 2.5
   - beforeDialogueIndex: 19
-    delay: 1.5
+    delay: 2.5
 --- !u!114 &7205074418517849881
 MonoBehaviour:
   m_ObjectHideFlags: 0
