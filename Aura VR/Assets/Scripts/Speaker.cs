@@ -16,13 +16,12 @@ public class Speaker : MonoBehaviour
 
     public List<Dialogue> _dialogues;
     public int currentDialogue;
-    public bool autoPlay = false;
 
     [SerializeField] private float defaultDelay = 0.5f;
     [SerializeField] private DelayException[] delayExceptions;
 
-    public Action<int> OnDialogueStart;
-    public Action<int> OnDialogueFinish;
+    public Action OnDialogueStart;
+    public Action OnDialogueFinish;
     public Action OnFullCycle;
 
     private AudioSource _source;
@@ -45,12 +44,12 @@ public class Speaker : MonoBehaviour
         if (isSpeaking && !_source.isPlaying)
         {
             isSpeaking = false;
-            OnDialogueFinish?.Invoke(currentDialogue);
+            OnDialogueFinish?.Invoke();
             DialogueFinish();
         }
     }
 
-    public void Speak()
+    public void Speak(int index)
     {
         float delay = defaultDelay;
         foreach (DelayException ex in delayExceptions)
@@ -62,14 +61,14 @@ public class Speaker : MonoBehaviour
             }
         }
 
-        StartCoroutine(DelayedSpeak(delay));
+        StartCoroutine(DelayedSpeak(delay, index));
     }
 
-    private IEnumerator DelayedSpeak(float delay)
+    private IEnumerator DelayedSpeak(float delay, int index)
     {
         yield return new WaitForSeconds(delay);
 
-        Play(currentDialogue++);
+        Play(index);
         isSpeaking = true;
     }
 
@@ -81,7 +80,7 @@ public class Speaker : MonoBehaviour
         _source.clip = _dialogues[index].Audio;
         _source.Play();
 
-        OnDialogueStart?.Invoke(currentDialogue);
+        OnDialogueStart?.Invoke();
     }
     
     private void DialogueFinish()
@@ -90,11 +89,6 @@ public class Speaker : MonoBehaviour
         {
             OnFullCycle?.Invoke();
             return;
-        }
-
-        if (autoPlay)
-        {
-            Speak();
         }
     }
     

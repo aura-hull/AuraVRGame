@@ -9,7 +9,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 {
     [SerializeField] private bool localTest = false;
 
-    private Speaker _speaker;
+    public Speaker speaker { get; private set; }
     private PenguinAnimationControl _animator;
 
     private int _clientsReady = 0;
@@ -26,17 +26,17 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     void Start()
     {
-        _speaker = GetComponent<Speaker>();
+        speaker = GetComponent<Speaker>();
         _animator = GetComponent<PenguinAnimationControl>();
 
         TutorialManager.Instance.tutorialModel = this;
 
-        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
-        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
+        speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
+        speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
 
         if (PhotonNetwork.IsMasterClient)
         {
-            _speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
+            speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
         }
 
         NetworkController.OnTutorialClientReady += OnClientReady;
@@ -47,24 +47,24 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     {
         ResetTutorial();
 
-        TutorialManager.Instance.CheckNextTutorialCondition(_speaker.currentDialogue);
-        NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
+        TutorialManager.Instance.CheckNextTutorialCondition();
+        NetworkController.Instance.NotifyTutorialClientReady();
     }
 
-    private void SpeakWhenReady()
+    private void SpeakWhenReady(int nextSpeakIndex)
     {
-        StartCoroutine(Coroutine_SpeakWhenReady());
+        StartCoroutine(Coroutine_SpeakWhenReady(nextSpeakIndex));
     }
 
-    private IEnumerator Coroutine_SpeakWhenReady()
+    private IEnumerator Coroutine_SpeakWhenReady(int nextSpeakIndex)
     {
         while (_clientsReady < RequiredClients)
             yield return null;
 
-        _speaker.Speak();
+        speaker.Speak(nextSpeakIndex);
     }
 
-    private void OnClientReady(int dialogueIndex)
+    private void OnClientReady()
     {
         if (PhotonNetwork.IsMasterClient)
         {
@@ -75,7 +75,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     public void ResetTutorial()
     {
         _animator.speaking = false;
-        _speaker.currentDialogue = 0;
+        speaker.currentDialogue = 0;
     }
 
     private float checkVolumeTicks = 0.0f;
@@ -84,7 +84,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         checkVolumeTicks += Time.deltaTime;
         if (checkVolumeTicks >= checkVolumeStep)
         {
-            _animator.speaking = (_speaker.GetCurrentLoudness() >= 0.005f);
+            _animator.speaking = (speaker.GetCurrentLoudness() >= 0.005f);
             checkVolumeTicks = 0.0f;
         }
     }

@@ -66,17 +66,17 @@ public class TutorialManager
         isRunning = false;
     }
 
-    public void CheckNextTutorialCondition(int currentDialogue)
+    public void CheckNextTutorialCondition()
     {
         foreach (ConditionPair cp in specialConditions)
         {
-            if (cp.TutorialIndex == currentDialogue)
+            if (cp.TutorialIndex == tutorialModel.speaker.currentDialogue)
             {
                 cp.trigger.SetLive();
                 return;
             }
         }
-
-        NetworkController.Instance.NotifyPlayNextTutorial();
+        
+        NetworkController.Instance.NotifyPlayNextTutorial(tutorialModel.speaker.currentDialogue++);
     }
 }

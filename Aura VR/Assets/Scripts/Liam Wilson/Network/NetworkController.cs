@@ -31,8 +31,8 @@ namespace AuraHull.AuraVRGame
         Connection _connection;
         
         public static event Action OnGameConnected;
-        public static event Action OnPlayNextTutorial;
-        public static event Action<int> OnTutorialClientReady;
+        public static event Action<int> OnPlayNextTutorial;
+        public static event Action OnTutorialClientReady;
         public static event Action<float, float, int> OnUpgradedOrDowngraded;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
@@ -70,27 +70,27 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
-        public void NotifyPlayNextTutorial()
+        public void NotifyPlayNextTutorial(int nextSpeakIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TUTORIAL_NEXT,
-                eventContent: null,
+                eventContent: new object[1] { nextSpeakIndex },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
         }
 
-        public void NotifyTutorialClientReady(int currentDialogue)
+        public void NotifyTutorialClientReady()
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TUTORIAL_CLIENT_READY,
-                eventContent: new object[1] { currentDialogue },
+                eventContent: null,
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -183,11 +183,11 @@ namespace AuraHull.AuraVRGame
             switch (receivedNetworkEvent)
             {
                 case NetworkEvent.TUTORIAL_NEXT:
-                    OnPlayNextTutorial?.Invoke();
+                    OnPlayNextTutorial?.Invoke((int)serialize[0]);
                     break;
 
                 case NetworkEvent.TUTORIAL_CLIENT_READY:
-                    OnTutorialClientReady?.Invoke((int)serialize[0]);
+                    OnTutorialClientReady?.Invoke();
                     break;
 
                 case NetworkEvent.UPGRADED_OR_DOWNGRADED:
