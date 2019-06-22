@@ -69,7 +69,6 @@ public class Speaker : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         Play(index);
-        isSpeaking = true;
     }
 
     private void Play(int index)
@@ -81,11 +80,13 @@ public class Speaker : MonoBehaviour
         _source.Play();
 
         OnDialogueStart?.Invoke();
+
+        isSpeaking = true;
     }
     
     private void DialogueFinish()
     {
-        if (currentDialogue >= _dialogues.Count)
+        if (currentDialogue > _dialogues.Count)
         {
             OnFullCycle?.Invoke();
             return;

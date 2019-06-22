@@ -45,7 +45,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void Initialize()
     {
-        ResetTutorial();
+        //ResetTutorial();
 
         TutorialManager.Instance.CheckNextTutorialCondition();
         NetworkController.Instance.NotifyTutorialClientReady();
