@@ -31,13 +31,13 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
         TutorialManager.Instance.tutorialModel = this;
 
+        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
+        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
+
         if (PhotonNetwork.IsMasterClient)
         {
             _speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
         }
-
-        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
-        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
 
         NetworkController.OnTutorialClientReady += OnClientReady;
         NetworkController.OnPlayNextTutorial += SpeakWhenReady;
@@ -48,7 +48,11 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         ResetTutorial();
 
         NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
-        TutorialManager.Instance.CheckNextTutorialCondition(_speaker.currentDialogue);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            TutorialManager.Instance.CheckNextTutorialCondition(_speaker.currentDialogue);
+        }
     }
 
     private void SpeakWhenReady()
