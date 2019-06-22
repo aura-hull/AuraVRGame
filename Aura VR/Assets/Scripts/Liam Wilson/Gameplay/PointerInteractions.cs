@@ -14,6 +14,7 @@ public class PointerInteractions : MonoBehaviour
     public static int controllingId = -1;
 
     // General variables
+    [SerializeField] private float minimumPointerDistance = 0.0f;
     [SerializeField] private float maximumPointerDistance = 50.0f;
 
     private LineRenderer _lineRenderer;
@@ -48,8 +49,17 @@ public class PointerInteractions : MonoBehaviour
         VRTK_ControllerEvents controllerEvents = GetComponent<VRTK_ControllerEvents>();
         if (controllerEvents != null)
         {
-            controllerEvents.ButtonTwoPressed += StartPointing;
-            controllerEvents.ButtonTwoReleased += HaltPointing;
+            // Trigger
+            controllerEvents.TriggerPressed += StartPointing;
+            controllerEvents.TriggerReleased += HaltPointing;
+
+            // X/A Button
+            //controllerEvents.ButtonOnePressed += StartPointing;
+            //controllerEvents.ButtonOneReleased += HaltPointing;
+
+            // Y/B Button
+            //controllerEvents.ButtonTwoPressed += StartPointing;
+            //controllerEvents.ButtonTwoReleased += HaltPointing;
         }
 
         if (!canPlaceBuildSites) return;
@@ -196,6 +206,12 @@ public class PointerInteractions : MonoBehaviour
             RaycastHit hitInfo;
             Ray ray = new Ray(transform.position, transform.forward); // replace this for the hand pointer
             if (!Physics.Raycast(ray, out hitInfo, maximumPointerDistance, ignoreLayers.Inverse()))
+            {
+                ResetIndicators();
+                return;
+            }
+
+            if (Vector3.Distance(transform.position, hitInfo.point) < minimumPointerDistance)
             {
                 ResetIndicators();
                 return;

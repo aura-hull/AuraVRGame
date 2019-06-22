@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95d0f5d8ca5ea04f82d1ad5730d9686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumPointerDistance: 1000
+  minimumPointerDistance: 0
+  maximumPointerDistance: 1500
   canPlaceBuildSites: 1
   buildSitePrefab: {fileID: 0}
   placementIndicator: {fileID: 0}
@@ -1207,7 +1208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95d0f5d8ca5ea04f82d1ad5730d9686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumPointerDistance: 1000
+  minimumPointerDistance: 0
+  maximumPointerDistance: 1500
   canPlaceBuildSites: 1
   buildSitePrefab: {fileID: 0}
   placementIndicator: {fileID: 0}
