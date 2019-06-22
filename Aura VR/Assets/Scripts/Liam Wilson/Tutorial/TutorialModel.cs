@@ -48,11 +48,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         ResetTutorial();
 
         NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            TutorialManager.Instance.CheckNextTutorialCondition(_speaker.currentDialogue);
-        }
+        SpeakWhenReady();
     }
 
     private void SpeakWhenReady()
