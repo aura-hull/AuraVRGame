@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4512945866644195616}
   - component: {fileID: 1073656818187195291}
   - component: {fileID: 4435400713336395754}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: pt0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +59,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointIndex: 0
   matcher: {fileID: 2946155502180974311}
+--- !u!1 &2542906874134040627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7291056073944420263}
+  m_Layer: 15
+  m_Name: LeftSnapHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7291056073944420263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542906874134040627}
+  m_LocalRotation: {x: 3.5527137e-15, y: 0.8868339, z: -0, w: 0.4620883}
+  m_LocalPosition: {x: 0.0012, y: -0.00646, z: 0.0028}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 688760591228527124}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 124.95601, z: 0}
 --- !u!1 &5674890252758195510
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +110,7 @@ GameObject:
   - component: {fileID: 5700229294789509005}
   - component: {fileID: 2946155502180974311}
   - component: {fileID: 4040941164295284560}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: AuraTurbine_Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,10 +126,12 @@ Transform:
   m_GameObject: {fileID: 5674890252758195510}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: 4.4408916e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 250, y: 250, z: 250}
+  m_LocalScale: {x: 150, y: 150, z: 150}
   m_Children:
   - {fileID: 4512945866644195616}
   - {fileID: 6849858731385854837}
+  - {fileID: 8688539771401047627}
+  - {fileID: 7291056073944420263}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -254,9 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  precisionGrab: 1
-  rightSnapHandle: {fileID: 0}
-  leftSnapHandle: {fileID: 0}
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 8688539771401047627}
+  leftSnapHandle: {fileID: 7291056073944420263}
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
@@ -334,7 +366,7 @@ GameObject:
   - component: {fileID: 6849858731385854837}
   - component: {fileID: 8355624951942474732}
   - component: {fileID: 1438369663930608558}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: pt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,3 +414,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointIndex: 1
   matcher: {fileID: 2946155502180974311}
+--- !u!1 &8005260604488428514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8688539771401047627}
+  m_Layer: 15
+  m_Name: RightSnapHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8688539771401047627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005260604488428514}
+  m_LocalRotation: {x: 3.5527137e-15, y: 0.87126094, z: 7.1054274e-15, w: 0.49082017}
+  m_LocalPosition: {x: -0.0023, y: -0.00646, z: -0.0023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 688760591228527124}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 121.211006, z: 0}

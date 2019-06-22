@@ -58,6 +58,8 @@ public class BuildPartMatcher : MonoBehaviour
         }
 
         _pointsMatched = new bool[_partPoints.Length];
+
+        BodyPhysicsManager.Instance.AddToIgnoredCollisions(gameObject);
     }
 
     public void OnPartPointMatch(int pointIndex)

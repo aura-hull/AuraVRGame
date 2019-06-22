@@ -925,6 +925,34 @@ namespace VRTK
             InitControllerListeners(VRTK_DeviceFinder.GetControllerRightHand(), false);
         }
 
+        public virtual void AddIgnoredCollision(GameObject ignore)
+        {
+            Collider[] objectColliders = ignore.GetComponentsInChildren<Collider>();
+            for (int i = 0; i < objectColliders.Length; i++)
+            {
+                ManagePhysicsCollider(objectColliders[i], true);
+            }
+
+            if (objectColliders.Length > 0)
+            {
+                ignoreCollisionsOnGameObjects.Add(ignore);
+            }
+        }
+
+        public virtual void RemoveIgnoredCollision(GameObject ignore)
+        {
+            Collider[] objectColliders = ignore.GetComponentsInChildren<Collider>();
+            for (int i = 0; i < objectColliders.Length; i++)
+            {
+                ManagePhysicsCollider(objectColliders[i], false);
+            }
+
+            if (ignoreCollisionsOnGameObjects.Contains(ignore))
+            {
+                ignoreCollisionsOnGameObjects.Remove(ignore);
+            }
+        }
+
         protected virtual void SetupIgnoredCollisions()
         {
             ResetIgnoredCollisions();
@@ -958,6 +986,8 @@ namespace VRTK
             {
                 Physics.IgnoreCollision(footCollider, collider, state);
             }
+
+            Debug.Log($"{collider.name} added to ignored collisions ({gameObject.name}.VRTK_BodyPhysics).");
         }
 
         protected virtual void CheckStepUpCollision(Collision collision)

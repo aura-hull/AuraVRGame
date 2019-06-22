@@ -107,7 +107,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        SetState(GameState.Tutorial);
+        SetState(GameState.Gameplay);
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
