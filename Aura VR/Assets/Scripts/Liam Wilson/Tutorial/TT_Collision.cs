@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialConditionTrigger : TutorialCondition
+public class TutorialConditionTrigger : TutorialTrigger
 {
     [SerializeField] private string searchForName = "";
 
@@ -16,15 +16,14 @@ public class TutorialConditionTrigger : TutorialCondition
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        if (other.name.Contains(searchForName) || 
-            (other.attachedRigidbody != null && 
-             other.attachedRigidbody.name.Contains(searchForName)))
+        bool nameMatch = other.name.Contains(searchForName);
+        if (nameMatch == false && other.attachedRigidbody != null)
         {
-            if (canTriggerEarly)
-            {
-                wasTriggeredEarly = true;
-            }
+            nameMatch = other.attachedRigidbody.name.Contains(searchForName);
+        }
 
+        if (nameMatch)
+        {
             if (live)
             {
                 OnConditionMet?.Invoke();

@@ -58,7 +58,7 @@ namespace AuraHull.AuraVRGame
             this._colliderManager.Configure();
         }
 
-        public void SpawnTutorialPenguin()
+        public void BuildTutorialPenguin()
         {
             if (!PhotonNetwork.IsMasterClient) return;
             PhotonNetwork.InstantiateSceneObject(penguinPrefab.name, spawnPoint.position, spawnPoint.rotation);

@@ -7,12 +7,22 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Speaker : MonoBehaviour
 {
+    [Serializable]
+    struct DelayException
+    {
+        public int beforeDialogueIndex;
+        public float delay;
+    }
+
     public List<Dialogue> _dialogues;
     public int currentDialogue;
     public bool autoPlay = false;
 
-    public Action OnDialogueStart;
-    public Action OnDialogueFinish;
+    [SerializeField] private float defaultDelay = 0.5f;
+    [SerializeField] private DelayException[] delayExceptions;
+
+    public Action<int> OnDialogueStart;
+    public Action<int> OnDialogueFinish;
     public Action OnFullCycle;
 
     private AudioSource _source;
@@ -27,8 +37,6 @@ public class Speaker : MonoBehaviour
         _source = GetComponent<AudioSource>();
         _source.loop = false;
 
-        OnDialogueFinish += DialogueFinish;
-
         clipSampleData = new float[sampleDataLength];
     }
 
@@ -37,12 +45,30 @@ public class Speaker : MonoBehaviour
         if (isSpeaking && !_source.isPlaying)
         {
             isSpeaking = false;
-            OnDialogueFinish?.Invoke();
+            OnDialogueFinish?.Invoke(currentDialogue);
+            DialogueFinish();
         }
     }
 
     public void Speak()
     {
+        float delay = defaultDelay;
+        foreach (DelayException ex in delayExceptions)
+        {
+            if (ex.beforeDialogueIndex == currentDialogue)
+            {
+                delay = ex.delay;
+                break;
+            }
+        }
+
+        StartCoroutine(DelayedSpeak(delay));
+    }
+
+    private IEnumerator DelayedSpeak(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         Play(currentDialogue++);
         isSpeaking = true;
     }
@@ -55,7 +81,7 @@ public class Speaker : MonoBehaviour
         _source.clip = _dialogues[index].Audio;
         _source.Play();
 
-        OnDialogueStart?.Invoke();
+        OnDialogueStart?.Invoke(currentDialogue);
     }
     
     private void DialogueFinish()

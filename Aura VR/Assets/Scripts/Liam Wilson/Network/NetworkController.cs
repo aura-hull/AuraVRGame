@@ -12,8 +12,8 @@ namespace AuraHull.AuraVRGame
 {
     public enum NetworkEvent
     {
-        TUTORIAL_CLIENT_PROGRESS,
-        TUTORIAL_CLIENT_PROGRESS_ALL,
+        TUTORIAL_NEXT,
+        TUTORIAL_CLIENT_READY,
         UPGRADED_OR_DOWNGRADED,
         BUILD_SITE_PLACED,
         BUILD_SITE_DESTROYED,
@@ -31,8 +31,8 @@ namespace AuraHull.AuraVRGame
         Connection _connection;
         
         public static event Action OnGameConnected;
-        public static event Action OnTutorialClientProgress;
-        public static event Action OnTutorialClientProgressAll;
+        public static event Action OnPlayNextTutorial;
+        public static event Action<int> OnTutorialClientReady;
         public static event Action<float, float, int> OnUpgradedOrDowngraded;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
@@ -70,27 +70,27 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
-        public void NotifyClientProgress()
+        public void NotifyPlayNextTutorial()
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
-                (byte)NetworkEvent.TUTORIAL_CLIENT_PROGRESS,
+                (byte)NetworkEvent.TUTORIAL_NEXT,
                 eventContent: null,
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
         }
 
-        public void NotifyClientProgressAll()
+        public void NotifyTutorialClientReady(int currentDialogue)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
-                (byte)NetworkEvent.TUTORIAL_CLIENT_PROGRESS_ALL,
-                eventContent: null,
+                (byte)NetworkEvent.TUTORIAL_CLIENT_READY,
+                eventContent: new object[1] { currentDialogue },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -182,12 +182,12 @@ namespace AuraHull.AuraVRGame
 
             switch (receivedNetworkEvent)
             {
-                case NetworkEvent.TUTORIAL_CLIENT_PROGRESS:
-                    OnTutorialClientProgress?.Invoke();
+                case NetworkEvent.TUTORIAL_NEXT:
+                    OnPlayNextTutorial?.Invoke();
                     break;
 
-                case NetworkEvent.TUTORIAL_CLIENT_PROGRESS_ALL:
-                    OnTutorialClientProgressAll?.Invoke();
+                case NetworkEvent.TUTORIAL_CLIENT_READY:
+                    OnTutorialClientReady?.Invoke((int)serialize[0]);
                     break;
 
                 case NetworkEvent.UPGRADED_OR_DOWNGRADED:

@@ -1,9 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AuraHull.AuraVRGame;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public class TutorialManager
 {
+    class ConditionPair
+    {
+        public TutorialTrigger trigger { get; private set; }
+        public bool conditionWasMet { get; private set; }
+
+        public int TutorialIndex
+        {
+            get { return trigger.tutorialIndex; }
+        }
+
+        public ConditionPair(TutorialTrigger trigger)
+        {
+            this.trigger = trigger;
+            this.conditionWasMet = false;
+
+            trigger.OnConditionMet += () => { conditionWasMet = true; };
+        }
+    }
+
     private static TutorialManager _instance;
     public static TutorialManager Instance
     {
@@ -14,33 +36,48 @@ public class TutorialManager
             return _instance;
         }
     }
-
-    public List<TutorialCondition> specialConditions;
+    
     public TutorialModel tutorialModel;
+    private List<ConditionPair> specialConditions;
+    public bool isRunning { get; private set; } = false;
 
     private TutorialManager()
     {
-        specialConditions = new List<TutorialCondition>();
+        specialConditions = new List<ConditionPair>();
+    }
+
+    public bool AddTriggerCondition(TutorialTrigger trigger)
+    {
+        specialConditions.Add(new ConditionPair(trigger));
+        return true;
+    }
+
+    public void StartTutorial()
+    {
+        if (tutorialModel == null) return;
+
+        tutorialModel.gameObject.SetActive(true);
+        tutorialModel.Initialize();
+        isRunning = true;
     }
 
     public void EndTutorial()
     {
-        if (tutorialModel != null)
-        {
-            tutorialModel.Finish();
-        }
-
-        AuraGameManager.Instance.StartGameplay();
-        CleanUp();
+        AuraGameManager.Instance.SetState(AuraGameManager.GameState.Gameplay);
+        isRunning = false;
     }
 
-    private void CleanUp()
+    public void CheckNextTutorialCondition(int currentDialogue)
     {
-        for (int i = 0; i < specialConditions.Count; i++)
+        foreach (ConditionPair cp in specialConditions)
         {
-            GameObject.Destroy(specialConditions[i]);
+            if (cp.TutorialIndex == currentDialogue)
+            {
+                cp.trigger.SetLive();
+                return;
+            }
         }
 
-        specialConditions.Clear();
+        NetworkController.Instance.NotifyPlayNextTutorial();
     }
 }

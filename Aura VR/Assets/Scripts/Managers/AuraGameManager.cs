@@ -8,7 +8,7 @@ using UnityEngine;
 [Serializable]
 public class AuraGameManager
 {
-    private enum GameState
+    public enum GameState
     {
         Tutorial,
         Gameplay,
@@ -107,7 +107,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        _currentState = GameState.Tutorial;
+        SetState(GameState.Tutorial);
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -131,18 +131,10 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-        //TutorialManager.Instance.EndTutorial();
-    }
-
-    public void StartGameplay()
-    {
-        _currentState = GameState.Gameplay;
-    }
-
-    public void EndGameplay()
-    {
-        _playDuration = _playDurationLimit;
-        OnPlayDurationChanged?.Invoke();
+        if (!TutorialManager.Instance.isRunning)
+        {
+            SetState(GameState.Tutorial);
+        }
     }
 
     float temp = 0.0f;
@@ -170,8 +162,7 @@ public class AuraGameManager
             float finalNetPower = _powerManager.PowerProduced - _powerManager.PowerUsed;
 
             // Game should end
-            _currentState = GameState.GameOver;
-            OnGameOver?.Invoke();
+            SetState(GameState.GameOver);
         }
 
         _scoreManager.Score += _powerManager.PowerProduced;
@@ -190,6 +181,33 @@ public class AuraGameManager
         {
             SaveAndReset("Anon", _scoreManager.Score);
         }
+    }
+
+    public void SetState(GameState newState)
+    {
+        _currentState = newState;
+
+        switch (_currentState)
+        {
+            case GameState.Tutorial:
+                ResetManager();
+                TutorialManager.Instance.StartTutorial();
+                break;
+
+            case GameState.Gameplay:
+                ResetManager();
+                break;
+
+            case GameState.GameOver:
+                OnGameOver?.Invoke();
+                break;
+        }
+    }
+
+    private void ResetManager()
+    {
+        _playDuration = 0;
+        OnPlayDurationChanged?.Invoke();
     }
 
     private void SaveAndReset(string name, float score)

@@ -8,6 +8,7 @@
 
             GameModel.Instance.BuildPlayer();
             GameModel.Instance.ConfigureColliders();
+            GameModel.Instance.BuildTutorialPenguin();
 
             GameModel.Instance.ChangeGameState(new PlayingGameState());
         }

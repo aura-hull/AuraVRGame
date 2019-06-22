@@ -12,8 +12,6 @@ namespace AuraHull.AuraVRGame
 
             NetworkController.OnSomePlayerConnected += this.SomeoneConnectedMessage;
             NetworkController.OnSomePlayerDisconnected += this.SomeoneDisconnectedMessage;
-
-            GameModel.Instance.SpawnTutorialPenguin();
         }
 
         public override void FinishState()

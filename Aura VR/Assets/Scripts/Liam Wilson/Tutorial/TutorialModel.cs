@@ -5,14 +5,14 @@ using AuraHull.AuraVRGame;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialModel : MonoBehaviour, IPunObservable
+public class TutorialModel : MonoBehaviour
 {
     [SerializeField] private bool localTest = false;
 
     private Speaker _speaker;
     private PenguinAnimationControl _animator;
 
-    private int clientsReady = 0;
+    private int _clientsReady = 0;
     private int RequiredClients
     {
         get
@@ -29,21 +29,48 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         _speaker = GetComponent<Speaker>();
         _animator = GetComponent<PenguinAnimationControl>();
 
-        Initialize();
+        TutorialManager.Instance.tutorialModel = this;
+
+        _speaker.OnDialogueFinish += NetworkController.Instance.NotifyTutorialClientReady;
+        _speaker.OnDialogueFinish += TutorialManager.Instance.CheckNextTutorialCondition;
+        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
+
+        NetworkController.OnTutorialClientReady += OnClientReady;
+        NetworkController.OnPlayNextTutorial += SpeakWhenReady;
+
+        gameObject.SetActive(false);
     }
 
     public void Initialize()
     {
-        TutorialManager.Instance.tutorialModel = this;
+        ResetTutorial();
 
-        _speaker.OnDialogueFinish += CheckNextTutorialCondition;
+        NetworkController.Instance.NotifyTutorialClientReady(_speaker.currentDialogue);
+        TutorialManager.Instance.CheckNextTutorialCondition(_speaker.currentDialogue);
+    }
 
-        NetworkController.OnTutorialClientProgress += TutorialClientProgress;
-        NetworkController.OnTutorialClientProgressAll += TutorialClientProgressAll;
+    private void SpeakWhenReady()
+    {
+        StartCoroutine(Coroutine_SpeakWhenReady());
+    }
 
-        _speaker.OnFullCycle += TutorialManager.Instance.EndTutorial;
+    private IEnumerator Coroutine_SpeakWhenReady()
+    {
+        while (_clientsReady < RequiredClients)
+            yield return null;
 
-        CheckNextTutorialCondition();
+        _speaker.Speak();
+    }
+
+    private void OnClientReady(int dialogueIndex)
+    {
+        _clientsReady++;
+    }
+
+    public void ResetTutorial()
+    {
+        _animator.speaking = false;
+        _speaker.currentDialogue = 0;
     }
 
     private float checkVolumeTicks = 0.0f;
@@ -55,72 +82,5 @@ public class TutorialModel : MonoBehaviour, IPunObservable
             _animator.speaking = (_speaker.GetCurrentLoudness() >= 0.005f);
             checkVolumeTicks = 0.0f;
         }
-
-        if (!localTest) return;
-
-        if (clientsReady >= RequiredClients)
-        {
-            _speaker.Speak();
-            clientsReady = 0;
-        }
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (PhotonNetwork.IsMasterClient && stream.IsWriting)
-        {
-            stream.SendNext(clientsReady);
-        }
-        else if (!PhotonNetwork.IsMasterClient)
-        {
-            clientsReady = (int)stream.ReceiveNext();
-        }
-
-        if (clientsReady >= RequiredClients)
-        {
-            _speaker.Speak();
-            clientsReady = 0;
-        }
-    }
-
-    public void TutorialClientProgress()
-    {
-        if (!PhotonNetwork.IsMasterClient) return;
-        clientsReady++;
-    }
-
-    public void TutorialClientProgressAll()
-    {
-        if (!PhotonNetwork.IsMasterClient) return;
-        clientsReady = int.MaxValue;
-    }
-
-    public void Finish()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
-
-    public void CheckNextTutorialCondition()
-    {
-        foreach (TutorialCondition condition in TutorialManager.Instance.specialConditions)
-        {
-            if (condition.tutorialIndex == _speaker.currentDialogue)
-            {
-                if (condition.wasTriggeredEarly)
-                {
-                    NetworkController.Instance.NotifyClientProgressAll();
-                    return;
-                }
-
-                condition.SetLive();
-                return;
-            }
-        }
-
-        // Default conditions
-        NetworkController.Instance.NotifyClientProgress();
     }
 }
