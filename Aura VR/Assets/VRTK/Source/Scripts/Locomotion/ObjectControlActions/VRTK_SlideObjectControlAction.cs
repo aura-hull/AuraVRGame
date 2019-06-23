@@ -46,6 +46,11 @@ namespace VRTK
 
         protected float currentSpeed = 0f;
 
+        public float CurrentSpeed
+        {
+            get { return currentSpeed; }
+        }
+
         protected override void Process(GameObject controlledGameObject, Transform directionDevice, Vector3 axisDirection, float axis, float deadzone, bool currentlyFalling, bool modifierActive)
         {
             currentSpeed = CalculateSpeed(axis, currentlyFalling, modifierActive);

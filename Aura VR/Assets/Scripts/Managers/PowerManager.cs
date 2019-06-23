@@ -78,7 +78,7 @@ public class PowerManager
         {
             powerUsedCalc += pc.ReportConsumption();
         }
-
+        
         PowerUsed = powerUsedCalc;
         PowerStored += (PowerNet / 60.0f) * Time.deltaTime; // Net is lost over 60 seconds.
     }

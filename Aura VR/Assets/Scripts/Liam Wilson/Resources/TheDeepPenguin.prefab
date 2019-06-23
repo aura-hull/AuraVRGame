@@ -831,7 +831,7 @@ MonoBehaviour:
     _audio: {fileID: 8300000, guid: 813a9d66f5345c74191e1c6cb9bbcacb, type: 3}
   - _name: Outro
     _audio: {fileID: 8300000, guid: 2caab10c1e6f1bb48a4aa285a16ba81f, type: 3}
-  currentDialogue: 0
+  currentDialogue: 20
   defaultDelay: 0.2
   delayExceptions:
   - beforeDialogueIndex: 6

@@ -13,6 +13,7 @@ public class BoatDriver : MonoBehaviour
     [SerializeField] private float steeringPower = 1.0f;
     [SerializeField] private bool allowReverse = true;
     [SerializeField] private AudioSource engineAudio;
+    [SerializeField] private PowerConsumer powerConsumer;
 
     public float realThrottleZero { get; private set; } = 0.0f;
     public float realThrottleMax { get; private set; } = float.MaxValue;
@@ -57,6 +58,11 @@ public class BoatDriver : MonoBehaviour
         if (engineAudio != null)
         {
             engineAudio.volume = Mathf.Abs(throttle);
+        }
+
+        if (powerConsumer != null)
+        {
+            powerConsumer.consumptionFactor = Mathf.Abs(throttle);
         }
     }
 }

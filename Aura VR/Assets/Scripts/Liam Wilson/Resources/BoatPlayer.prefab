@@ -183,6 +183,7 @@ MonoBehaviour:
   steeringPower: 0.75
   allowReverse: 1
   engineAudio: {fileID: 8278084585060881459}
+  powerConsumer: {fileID: 2766764244527502820}
 --- !u!1 &1459628701476766973
 GameObject:
   m_ObjectHideFlags: 0
