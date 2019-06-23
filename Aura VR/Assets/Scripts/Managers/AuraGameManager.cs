@@ -38,7 +38,7 @@ public class AuraGameManager
     private ScoreboardManager _scoreboardManager;
     private TutorialManager _tutorialManager;
 
-    private float _playDurationLimit = 3;
+    private float _playDurationLimit = 600;
     private float _playDuration = 0;
 
     private GameState _currentState;
