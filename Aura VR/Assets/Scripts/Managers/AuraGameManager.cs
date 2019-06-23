@@ -203,6 +203,8 @@ public class AuraGameManager
 
     private void ExecuteEnd()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         if (gameOverScreen != null)
         {
             gameOverScreen.SetScoreText(_scoreManager.ScoreInt);
