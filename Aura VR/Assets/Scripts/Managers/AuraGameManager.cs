@@ -35,7 +35,7 @@ public class AuraGameManager
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
     
-    private float _playDurationLimit = 600;
+    private float _playDurationLimit = 10;
     private float _playDuration = 0;
 
     private GameState _currentState;
@@ -69,14 +69,15 @@ public class AuraGameManager
         _scoreManager = ScoreManager.Instance;
         _scoreboardManager = ScoreboardManager.Instance;
 
-        OnTutorialStarted += UpgradeManager.Instance.DisableUpgrades;
-        OnGameplayStarted += UpgradeManager.Instance.EnableUpgrades;
-        OnGameOver += UpgradeManager.Instance.DisableUpgrades;
+        OnTutorialStarted += _upgradeManager.DisableUpgrades;
+        OnGameplayStarted += _upgradeManager.EnableUpgrades;
+        OnGameOver += _upgradeManager.DisableUpgrades;
 
         Setup();
 
         NetworkController.OnSyncManagers += Sync;
         NetworkController.OnUpgradedOrDowngraded += _upgradeManager.SyncUpgradeState;
+        NetworkController.OnScoreSaved += _scoreboardManager.SyncNewRecord;
         AuraSceneManager.Instance.SubscribeOnSceneReset(Setup);
     }
 
@@ -106,7 +107,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        SetState(GameState.Gameplay);
+        SetState(GameState.Tutorial);
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -200,9 +201,7 @@ public class AuraGameManager
 
     private void SaveAndReset(string name, float score)
     {
-        _scoreboardManager.AddNewRecord(_scoreManager.ScoreInt, name);
-        _scoreboardManager.SaveScores();
-
+        _scoreboardManager.AddNewRecord(_scoreManager.ScoreInt, name); // Saves automatically
         AuraSceneManager.Instance.SceneReset();
     }
 }

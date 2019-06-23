@@ -38,17 +38,12 @@ public class ScoreboardManager
     {
         Xml.Node rootNode = new Xml.Node("scores");
 
-        _scores.Add(new ScoreData("Liam", 1, 600));
-        _scores.Add(new ScoreData("Meg", 2, 547));
-        _scores.Add(new ScoreData("Bill", 3, 331));
-
         for (int i = 0; i < _scores.Count; i++)
         {
             Xml.Node scoreNode;
             rootNode.AddChild("score", out scoreNode);
             
             scoreNode.AddChild("name", _scores[i].name);
-            scoreNode.AddChild("rank", _scores[i].rank);
             scoreNode.AddChild("value", _scores[i].score);
         }
 
@@ -57,7 +52,7 @@ public class ScoreboardManager
 
     public void AddNewRecord(float score, string name = "Anon")
     {
-        int insertAt = _scores.Count - 1;
+        int insertAt = _scores.Count;
         for (int i = 0; i < _scores.Count; i++)
         {
             if (score > _scores[i].score)
@@ -67,7 +62,16 @@ public class ScoreboardManager
             }
         }
 
-        _scores.Insert(insertAt, new ScoreData(name, -1, score));
+        _scores.Insert(insertAt, new ScoreData(name, score));
+        SaveScores();
+
+        NetworkController.Instance.NotifyScoreSaved(score, name, insertAt);
+    }
+
+    public void SyncNewRecord(float score, string name, int insertAt)
+    {
+        _scores.Insert(insertAt, new ScoreData(name, score));
+        SaveScores();
     }
 
     public void ClearScores()
@@ -83,10 +87,9 @@ public class ScoreboardManager
         foreach (XmlElement e in elementList[0])
         {
             string name = e.ChildNodes[0].InnerText;
-            int rank = int.Parse(e.ChildNodes[1].InnerText);
-            float score = float.Parse(e.ChildNodes[2].InnerText);
+            float score = float.Parse(e.ChildNodes[1].InnerText);
 
-            _scores.Add(new ScoreData(name, rank, score));
+            _scores.Add(new ScoreData(name, score));
         }
     }
 
@@ -107,19 +110,17 @@ public struct ScoreData
 {
     public bool valid;
     public string name;
-    public int rank;
     public float score;
 
-    public ScoreData(string name, int rank, float score)
+    public ScoreData(string name, float score)
     {
         valid = true;
         this.name = name;
-        this.rank = rank;
         this.score = score;
     }
 
     public override string ToString()
     {
-        return ($"{rank}. {name} ({score})");
+        return ($"{name} ({score})");
     }
 }

@@ -1,17 +1,10 @@
 <scores>
   <score>
-    <name>Liam</name>
-    <rank>1</rank>
-    <value>600</value>
-  </score>
-  <score>
-    <name>Meg</name>
-    <rank>2</rank>
-    <value>547</value>
-  </score>
-  <score>
     <name>Bill</name>
-    <rank>3</rank>
-    <value>331</value>
+    <value>596</value>
+  </score>
+  <score>
+    <name>Liam</name>
+    <value>595</value>
   </score>
 </scores>
