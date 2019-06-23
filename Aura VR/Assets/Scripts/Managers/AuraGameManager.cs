@@ -201,9 +201,7 @@ public class AuraGameManager
 
     private void SaveAndReset(string name, float score)
     {
-        _scoreboardManager.AddNewRecord(_scoreManager.ScoreInt, name);
-        _scoreboardManager.SaveScores();
-
+        _scoreboardManager.AddNewRecord(_scoreManager.ScoreInt, name); // Saves automatically
         AuraSceneManager.Instance.SceneReset();
     }
 }
