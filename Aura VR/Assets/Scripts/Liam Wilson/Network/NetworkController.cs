@@ -20,7 +20,8 @@ namespace AuraHull.AuraVRGame
         TURBINE_PART_BUILT,
         TURBINE_BUILT,
         SYNC_MANAGERS,
-        IK_HANDLES_SET
+        IK_HANDLES_SET,
+        SCORE_SAVED
     }
 
     public class NetworkController : MonoBehaviour, IOnEventCallback, IInRoomCallbacks, IMatchmakingCallbacks
@@ -37,6 +38,7 @@ namespace AuraHull.AuraVRGame
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
+        public static event Action<float, string, int> OnScoreSaved;
         public static event Action<Player> OnSomePlayerConnected;
         public static event Action<Player> OnSomePlayerDisconnected;
         public static event Action<Player> OnRoundEnded;
@@ -174,6 +176,19 @@ namespace AuraHull.AuraVRGame
             );
         }
 
+        public void NotifySyncManagers(float score, string name, int insertedIndex)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.SCORE_SAVED,
+                eventContent: new object[3] { score, name, insertedIndex },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
+        }
+
         public void OnEvent(EventData photonEvent)
         {
             NetworkEvent receivedNetworkEvent = (NetworkEvent)photonEvent.Code;
@@ -230,6 +245,13 @@ namespace AuraHull.AuraVRGame
 
                 case NetworkEvent.SYNC_MANAGERS:
                     OnSyncManagers?.Invoke((float)serialize[0], (float)serialize[1], (float)serialize[2], (float)serialize[3], (float)serialize[4]);
+                    break;
+
+                case NetworkEvent.SCORE_SAVED:
+                    if (!PhotonNetwork.IsMasterClient)
+                    {
+                        OnScoreSaved?.Invoke((float)serialize[0], (string)serialize[1], (int)serialize[2]);
+                    }
                     break;
             }
         }
