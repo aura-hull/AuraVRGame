@@ -6,6 +6,7 @@
 //
 // Terms of use: do whatever you like
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -283,11 +284,14 @@ public class Buoyancy : MonoBehaviour
 				}
 
 				var velocity = rigidbody.GetPointVelocity(wp);
-				var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
-				var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
-				rigidbody.AddForceAtPosition(force, wp);
+                if (velocity.x != Double.NaN)
+                {
+                    var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
+                    var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
+                    rigidbody.AddForceAtPosition(force, wp);
 
-				forces.Add(new[] { wp, force }); // For drawing force gizmos
+                    forces.Add(new[] { wp, force }); // For drawing force gizmos
+                }
 			}
 		}
 	}
