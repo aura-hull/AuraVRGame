@@ -127,6 +127,7 @@ public class AuraGameManager
     {
         if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
         {
+            _returnToState = _currentState;
             SetState(GameState.Waiting);
         }
 
