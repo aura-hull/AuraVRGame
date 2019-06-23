@@ -24,11 +24,7 @@ public class TT_Collision : TutorialTrigger
 
         if (nameMatch)
         {
-            if (live)
-            {
-                OnConditionMet?.Invoke();
-                live = false;
-            }
+            Trigger();
         }
     }
 

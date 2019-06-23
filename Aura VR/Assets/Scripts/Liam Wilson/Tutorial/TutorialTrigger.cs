@@ -7,6 +7,7 @@ using UnityEngine;
 public class TutorialTrigger : MonoBehaviour
 {
     public int tutorialIndex;
+    public bool canTriggerEarly = false;
     public Action OnConditionMet;
 
     protected bool live = false;
@@ -19,5 +20,26 @@ public class TutorialTrigger : MonoBehaviour
     public void SetLive(bool value = true)
     {
         live = value;
+    }
+
+    protected void Trigger()
+    {
+        if (canTriggerEarly)
+        {
+            OnConditionMet?.Invoke();
+        }
+        else
+        {
+            TriggerIfLive();
+        }
+    }
+
+    private void TriggerIfLive()
+    {
+        if (live)
+        {
+            OnConditionMet?.Invoke();
+            live = false;
+        }
     }
 }

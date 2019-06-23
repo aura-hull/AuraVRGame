@@ -37,6 +37,7 @@ namespace AuraHull.AuraVRGame
         public static event Action<int> OnPlayNextTutorial;
         public static event Action OnTutorialClientReady;
         public static event Action<float, float, int> OnUpgradedOrDowngraded;
+        public static event Action OnTurbineBuildSitePlaced;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
@@ -238,6 +239,7 @@ namespace AuraHull.AuraVRGame
                     {
                         PhotonNetwork.InstantiateSceneObject((string) serialize[0], (Vector3) serialize[1], Quaternion.identity);
                     }
+                    OnTurbineBuildSitePlaced?.Invoke();
                     break;
 
                 case NetworkEvent.BUILD_SITE_DESTROYED:
@@ -261,10 +263,7 @@ namespace AuraHull.AuraVRGame
                         PhotonNetwork.Destroy(buildSite);
                     }
 
-                    if (OnTurbineBuilt != null)
-                    {
-                        // power stuff
-                    }
+                    OnTurbineBuilt?.Invoke((int)serialize[0], (string)serialize[1]);
                     break;
 
                 case NetworkEvent.SYNC_MANAGERS:
