@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Xml;
 using AuraHull.AuraVRGame;
 using UnityEngine.UI;
+using System.Linq;
 
 [Serializable]
 public class ScoreboardManager
@@ -37,6 +38,9 @@ public class ScoreboardManager
     public void SaveScores()
     {
         Xml.Node rootNode = new Xml.Node("scores");
+
+        // ensure scores are organised
+        _scores = _scores.OrderByDescending(o => o.score).ToList();
 
         for (int i = 0; i < _scores.Count; i++)
         {
