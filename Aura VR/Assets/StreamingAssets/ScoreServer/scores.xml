@@ -1,7 +1,7 @@
 <scores>
   <score>
     <name>Will</name>
-    <value>600</value>
+    <value>601</value>
   </score>
   <score>
     <name>Wankers</name>
@@ -12,23 +12,23 @@
     <value>600</value>
   </score>
   <score>
-    <name>Will</name>
+    <name>Steve</name>
     <value>500</value>
   </score>
   <score>
-    <name>Will</name>
+    <name>Hannah</name>
     <value>400</value>
   </score>
   <score>
-    <name>Will</name>
+    <name>Paul</name>
     <value>300</value>
   </score>
   <score>
-    <name>Will</name>
+    <name>Mike Doe</name>
     <value>200</value>
   </score>
   <score>
-    <name>Will</name>
+    <name>Player</name>
     <value>100</value>
   </score>
 </scores>
