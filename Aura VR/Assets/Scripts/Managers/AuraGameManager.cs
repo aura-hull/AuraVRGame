@@ -26,6 +26,7 @@ public class AuraGameManager
         }
     }
 
+    public Action OnStateWaiting;
     public Action OnTutorialStarted;
     public Action OnGameplayStarted;
     public Action OnGameOver;
@@ -118,6 +119,11 @@ public class AuraGameManager
     // Update is called once per frame
     public void Execute()
     {
+        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
+        {
+            SetState(GameState.Waiting);
+        }
+
         switch (_currentState)
         {
             case GameState.Waiting:
@@ -148,11 +154,14 @@ public class AuraGameManager
 
     private void ExecuteTutorial()
     {
-
+        GameModel.Instance.SpawnParts();
     }
     
     private void ExecuteGameplay()
     {
+        GameModel.Instance.SpawnParts();
+        GameModel.Instance.IssueUpgrades();
+
         if (!PhotonNetwork.IsMasterClient) return;
 
         _playDuration += Time.deltaTime;
@@ -190,6 +199,10 @@ public class AuraGameManager
 
         switch (_currentState)
         {
+            case GameState.Waiting:
+                OnStateWaiting?.Invoke();
+                break;
+
             case GameState.Tutorial:
                 TutorialManager.Instance.StartTutorial();
                 OnTutorialStarted?.Invoke();
