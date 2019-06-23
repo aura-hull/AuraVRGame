@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -84,7 +85,6 @@ public class Buoyancy : MonoBehaviour
             Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no Rigidbody. Rigidbody has been added.", name));
         }
         rigidbody.centerOfMass = new Vector3(0, -bounds.extents.y * 0f, 0) + transform.InverseTransformPoint(bounds.center);
-        rigidbody.velocity = Vector3.zero;
 
         voxels = SliceIntoVoxels(isMeshCollider && isConcave);
 
@@ -264,7 +264,9 @@ public class Buoyancy : MonoBehaviour
 	/// Calculates physics.
 	/// </summary>
 	private void FixedUpdate()
-	{
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
 		forces.Clear(); // For drawing force gizmos
 
 		foreach (var point in voxels)
@@ -287,7 +289,7 @@ public class Buoyancy : MonoBehaviour
 				var velocity = rigidbody.GetPointVelocity(wp);
                 var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
                 var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
-
+                
                 if (force.x != Single.NaN && force.x != Double.NaN &&
                     force.y != Single.NaN && force.y != Double.NaN &&
                     force.z != Single.NaN && force.z != Double.NaN)
