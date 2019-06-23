@@ -76,10 +76,17 @@ public class AuraGameManager
 
         Setup();
 
+        NetworkController.OnGameStateChanged += SyncState;
         NetworkController.OnSyncManagers += Sync;
         NetworkController.OnUpgradedOrDowngraded += _upgradeManager.SyncUpgradeState;
         NetworkController.OnScoreSaved += _scoreboardManager.SyncNewRecord;
         AuraSceneManager.Instance.SubscribeOnSceneReset(Setup);
+    }
+
+    void SyncState(GameState state)
+    {
+        if (PhotonNetwork.IsMasterClient) return;
+        SetState(state);
     }
 
     void Sync(float powerProduced, float powerUsed, float powerStored, float playDuration, float score)
@@ -145,6 +152,8 @@ public class AuraGameManager
 
     private void ExecuteWaiting()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
         {
             if (_returnToState != GameState.Null)
