@@ -84,6 +84,7 @@ public class Buoyancy : MonoBehaviour
             Debug.LogWarning(string.Format("[Buoyancy.cs] Object \"{0}\" had no Rigidbody. Rigidbody has been added.", name));
         }
         rigidbody.centerOfMass = new Vector3(0, -bounds.extents.y * 0f, 0) + transform.InverseTransformPoint(bounds.center);
+        rigidbody.velocity = Vector3.zero;
 
         voxels = SliceIntoVoxels(isMeshCollider && isConcave);
 
