@@ -10,6 +10,7 @@ public class AuraGameManager
 {
     public enum GameState
     {
+        Null,
         Waiting,
         Tutorial,
         Gameplay,
@@ -42,6 +43,7 @@ public class AuraGameManager
     private float _playDuration = 0;
 
     private GameState _currentState;
+    private GameState _returnToState;
 
     private GameOverScreen _gameOverScreen = null;
     public GameOverScreen gameOverScreen
@@ -111,7 +113,9 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
+        _returnToState = GameState.Null;
         SetState(GameState.Waiting);
+        ResetManager();
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -143,12 +147,22 @@ public class AuraGameManager
 
     private void ExecuteWaiting()
     {
-        Debug.Log(NetworkController.ConnectedPlayers);
-        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients) return;
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
         {
-            SetState(GameState.Tutorial);
+            if (_returnToState != GameState.Null)
+            {
+                // This happens if a client disconnected.
+                SetState(_returnToState);
+                _returnToState = GameState.Null;
+            }
+            else
+            {
+                // This happens at the start of a playthrough.
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SetState(GameState.Tutorial);
+                }
+            }
         }
     }
 
