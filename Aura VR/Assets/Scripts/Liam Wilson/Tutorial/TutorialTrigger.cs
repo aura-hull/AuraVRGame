@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AuraHull.AuraVRGame;
+using Photon.Pun;
 using UnityEngine;
 
 public class TutorialTrigger : MonoBehaviour
@@ -24,6 +25,8 @@ public class TutorialTrigger : MonoBehaviour
 
     protected void Trigger()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         if (canTriggerEarly)
         {
             OnConditionMet?.Invoke();
