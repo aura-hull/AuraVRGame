@@ -50,7 +50,6 @@ function renderScores(xml, tableId) {
 		if (x.length > i) {
 			//console.log("x : " + x.length);
 			//console.log("i : " + i);
-			rank = x[i].getElementsByTagName("rank")[0].childNodes[0].nodeValue;
 			name = x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
 			score = x[i].getElementsByTagName("value")[0].childNodes[0].nodeValue;
 		}
