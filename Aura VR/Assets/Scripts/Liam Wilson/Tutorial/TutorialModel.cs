@@ -45,7 +45,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void Initialize()
     {
-        //ResetTutorial();
+        ResetTutorial();
 
         TutorialManager.Instance.CheckNextTutorialCondition();
         NetworkController.Instance.NotifyTutorialClientReady();
@@ -75,7 +75,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     public void ResetTutorial()
     {
         _animator.speaking = false;
-        speaker.currentDialogue = 0;
+        speaker.Reset();
     }
 
     private float checkVolumeTicks = 0.0f;

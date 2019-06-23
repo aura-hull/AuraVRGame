@@ -34,8 +34,9 @@ public class AuraGameManager
     private UpgradeManager _upgradeManager;
     private ScoreManager _scoreManager;
     private ScoreboardManager _scoreboardManager;
-    
-    private float _playDurationLimit = 10;
+    private TutorialManager _tutorialManager;
+
+    private float _playDurationLimit = 3;
     private float _playDuration = 0;
 
     private GameState _currentState;
@@ -68,6 +69,7 @@ public class AuraGameManager
         _upgradeManager = UpgradeManager.Instance;
         _scoreManager = ScoreManager.Instance;
         _scoreboardManager = ScoreboardManager.Instance;
+        _tutorialManager = TutorialManager.Instance;
 
         OnTutorialStarted += _upgradeManager.DisableUpgrades;
         OnGameplayStarted += _upgradeManager.EnableUpgrades;

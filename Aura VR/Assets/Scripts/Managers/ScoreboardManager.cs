@@ -81,6 +81,8 @@ public class ScoreboardManager
 
     public void LoadScores()
     {
+        _scores.Clear();
+
         XmlNodeList[] elementList = Xml.Read(_filepath, "score");
         if (elementList.Length == 0) return;
 

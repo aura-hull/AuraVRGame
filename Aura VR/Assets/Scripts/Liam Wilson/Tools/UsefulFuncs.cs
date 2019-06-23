@@ -144,7 +144,7 @@ namespace AuraHull.AuraVRGame
 
                     rootNodeEl.AppendChild(childNodeEl);
                 }
-
+                
                 doc.Save(filePath);
 
                 return true;

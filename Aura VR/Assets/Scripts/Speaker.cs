@@ -30,6 +30,8 @@ public class Speaker : MonoBehaviour
     private int sampleDataLength = 256;
     private float[] clipSampleData;
 
+    private int resetToDialogue = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class Speaker : MonoBehaviour
         _source.loop = false;
 
         clipSampleData = new float[sampleDataLength];
+        resetToDialogue = currentDialogue;
     }
 
     void Update()
@@ -91,6 +94,11 @@ public class Speaker : MonoBehaviour
             OnFullCycle?.Invoke();
             return;
         }
+    }
+
+    public void Reset()
+    {
+        currentDialogue = resetToDialogue;
     }
     
     public float GetCurrentLoudness()
