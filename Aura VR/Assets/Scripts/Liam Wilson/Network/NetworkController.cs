@@ -72,6 +72,11 @@ namespace AuraHull.AuraVRGame
             this._connection.Disconnect();
         }
 
+        public static int ConnectedPlayers
+        {
+            get { return PhotonNetwork.CurrentRoom.PlayerCount; }
+        }
+
         public void NotifyPlayNextTutorial(int nextSpeakIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();

@@ -13,14 +13,6 @@ public class TutorialModel : MonoBehaviour, IPunObservable
     private PenguinAnimationControl _animator;
 
     private int _clientsReady = 0;
-    private int RequiredClients
-    {
-        get
-        {
-            if (localTest) return 1;
-            else return NetworkController.MAX_PLAYERS;
-        }
-    }
 
     private float checkVolumeStep = 0.1f;
 
@@ -58,7 +50,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     private IEnumerator Coroutine_SpeakWhenReady(int nextSpeakIndex)
     {
-        while (_clientsReady < RequiredClients)
+        while (_clientsReady < GameModel.Instance.RequiredClients)
             yield return null;
 
         speaker.Speak(nextSpeakIndex);

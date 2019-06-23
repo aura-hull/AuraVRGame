@@ -10,6 +10,7 @@ public class AuraGameManager
 {
     public enum GameState
     {
+        Waiting,
         Tutorial,
         Gameplay,
         GameOver
@@ -109,7 +110,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        SetState(GameState.Tutorial);
+        SetState(GameState.Waiting);
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -119,6 +120,9 @@ public class AuraGameManager
     {
         switch (_currentState)
         {
+            case GameState.Waiting:
+                ExecuteWaiting();
+                break;
             case GameState.Tutorial:
                 ExecuteTutorial();
                 break;
@@ -131,12 +135,20 @@ public class AuraGameManager
         }
     }
 
-    private void ExecuteTutorial()
+    private void ExecuteWaiting()
     {
-        if (!TutorialManager.Instance.isRunning)
+        Debug.Log(NetworkController.ConnectedPlayers);
+        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SetState(GameState.Tutorial);
         }
+    }
+
+    private void ExecuteTutorial()
+    {
+
     }
     
     private void ExecuteGameplay()
