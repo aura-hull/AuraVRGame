@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class TT_OnTurbineSite : TutorialTrigger
 {
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         NetworkController.OnTurbineBuildSitePlaced += ConditionMet;
     }
 

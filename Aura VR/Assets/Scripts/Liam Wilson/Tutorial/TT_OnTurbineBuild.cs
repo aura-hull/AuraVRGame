@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class TT_OnTurbineBuild : TutorialTrigger
 {
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         NetworkController.OnTurbineBuilt += ConditionMet;
     }
 

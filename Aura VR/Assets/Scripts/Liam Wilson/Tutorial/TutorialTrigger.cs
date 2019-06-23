@@ -13,7 +13,7 @@ public class TutorialTrigger : MonoBehaviour
 
     protected bool live = false;
 
-    void Start()
+    protected virtual void Start()
     {
         TutorialManager.Instance.AddTriggerCondition(this);
     }

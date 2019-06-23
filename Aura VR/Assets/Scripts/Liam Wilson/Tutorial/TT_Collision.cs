@@ -7,6 +7,11 @@ public class TT_Collision : TutorialTrigger
 {
     [SerializeField] private string searchForName = "";
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     void OnEnable()
     {
         GetComponent<Collider>().enabled = true;
