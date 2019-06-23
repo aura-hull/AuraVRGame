@@ -287,7 +287,9 @@ public class Buoyancy : MonoBehaviour
                 var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
                 var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
 
-                if (force.x != Single.NaN && force.x != Double.NaN)
+                if (force.x != Single.NaN && force.x != Double.NaN &&
+                    force.y != Single.NaN && force.y != Double.NaN &&
+                    force.z != Single.NaN && force.z != Double.NaN)
                 {
                     rigidbody.AddForceAtPosition(force, wp);
                 }
