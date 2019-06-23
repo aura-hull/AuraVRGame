@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using AuraHull.AuraVRGame;
 using UnityEngine.UI;
 
 [Serializable]
@@ -35,48 +36,23 @@ public class ScoreboardManager
 
     public void SaveScores()
     {
-        try
+        Xml.Node rootNode = new Xml.Node("scores");
+
+        _scores.Add(new ScoreData("Liam", 1, 600));
+        _scores.Add(new ScoreData("Meg", 2, 547));
+        _scores.Add(new ScoreData("Bill", 3, 331));
+
+        for (int i = 0; i < _scores.Count; i++)
         {
-            if (!File.Exists(_filepath))
-            {
-                string path = Path.Combine(Application.streamingAssetsPath, "ScoreServer");
-                Directory.CreateDirectory(path);
-            }
-
-            XmlDocument doc = new XmlDocument();
-
-            XmlNode rootNode = doc.CreateElement("scores");
-            doc.AppendChild(rootNode);
-
-            for (int i = 0; i < _scores.Count; i += 1)
-            {
-                XmlNode scoreNode = doc.CreateElement("score");
-
-                // Name
-                XmlNode nameNode = doc.CreateElement("name");
-                nameNode.InnerText = _scores[i].name;
-                scoreNode.AppendChild(nameNode);
-
-                // Rank
-                XmlNode rankNode = doc.CreateElement("rank");
-                rankNode.InnerText = (i + 1).ToString();
-                scoreNode.AppendChild(rankNode);
-
-                // Value
-                XmlNode valueNode = doc.CreateElement("value");
-                valueNode.InnerText = _scores[i].score.ToString();
-                scoreNode.AppendChild(valueNode);
-
-                rootNode.AppendChild(scoreNode);
-            }
-
-            doc.Save(_filepath);
+            Xml.Node scoreNode;
+            rootNode.AddChild("score", out scoreNode);
+            
+            scoreNode.AddChild("name", _scores[i].name);
+            scoreNode.AddChild("rank", _scores[i].rank);
+            scoreNode.AddChild("value", _scores[i].score);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine("Failed to save scores at: " + _filepath);
-            Console.WriteLine(e);
-        }
+
+        Xml.Write(_filepath, rootNode);
     }
 
     public void AddNewRecord(float score, string name = "Anon")
@@ -101,29 +77,16 @@ public class ScoreboardManager
 
     public void LoadScores()
     {
-        try
-        {
-            if (File.Exists(_filepath))
-            {
-                _scores.Clear();
+        XmlNodeList[] elementList = Xml.Read(_filepath, "score");
+        if (elementList.Length == 0) return;
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(_filepath);
-
-                XmlNodeList elementList = doc.GetElementsByTagName("score");
-                foreach (XmlElement e in elementList)
-                {
-                    string name = e.ChildNodes[0].InnerText;
-                    int rank = int.Parse(e.ChildNodes[1].InnerText);
-                    float score = float.Parse(e.ChildNodes[2].InnerText);
-                    
-                    _scores.Add(new ScoreData(name, rank, score));
-                }
-            }
-        }
-        catch
+        foreach (XmlElement e in elementList[0])
         {
-            Console.WriteLine("Failed to load scores from: " + _filepath);
+            string name = e.ChildNodes[0].InnerText;
+            int rank = int.Parse(e.ChildNodes[1].InnerText);
+            float score = float.Parse(e.ChildNodes[2].InnerText);
+
+            _scores.Add(new ScoreData(name, rank, score));
         }
     }
 

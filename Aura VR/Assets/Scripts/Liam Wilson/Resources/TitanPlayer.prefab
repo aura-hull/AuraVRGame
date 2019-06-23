@@ -1636,11 +1636,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4053609356318984208, guid: 7f71d8d6afdebf64489fb3a78358411d,
-        type: 3}
-      propertyPath: displayText
-      value: Place Turbine Build Sites\nPoint/Select Icons
-      objectReference: {fileID: 0}
     - target: {fileID: 717083958393590030, guid: 7f71d8d6afdebf64489fb3a78358411d,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1651,20 +1646,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 55
       objectReference: {fileID: 0}
-    - target: {fileID: 6085977021615777607, guid: 7f71d8d6afdebf64489fb3a78358411d,
+    - target: {fileID: 4053609356318984208, guid: 7f71d8d6afdebf64489fb3a78358411d,
         type: 3}
-      propertyPath: m_FontData.m_LineSpacing
-      value: 1.4
+      propertyPath: displayText
+      value: Place Turbine Build Sites\nPoint/Select Icons
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238382425951788173, guid: 7f71d8d6afdebf64489fb3a78358411d,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 8074377201310669055, guid: 7f71d8d6afdebf64489fb3a78358411d,
         type: 3}
       propertyPath: displayText
       value: Grab Turbine Parts
       objectReference: {fileID: 0}
-    - target: {fileID: 5238382425951788173, guid: 7f71d8d6afdebf64489fb3a78358411d,
+    - target: {fileID: 6085977021615777607, guid: 7f71d8d6afdebf64489fb3a78358411d,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 140
+      propertyPath: m_FontData.m_LineSpacing
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f71d8d6afdebf64489fb3a78358411d, type: 3}
@@ -1972,16 +1972,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2479203732411069647, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5340417471330252012, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: customColliderContainer
       value: 
       objectReference: {fileID: 726259104752477241}
+    - target: {fileID: 2479203732411069647, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2479203731505126337, guid: 1dae7ce5d516cb64b8efa5c4810731c6,
         type: 3}
       propertyPath: m_Layer
@@ -2100,6 +2100,51 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[0]
+      value: 
+      objectReference: {fileID: 3093275943830134505}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[1]
+      value: 
+      objectReference: {fileID: 3092869872736228897}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[2]
+      value: 
+      objectReference: {fileID: 3090517187562544369}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: scriptAliasLeftController
+      value: 
+      objectReference: {fileID: 5851469867816369661}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: scriptAliasRightController
+      value: 
+      objectReference: {fileID: 886335442123669728}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].symbol
+      value: VRTK_DEFINE_SDK_OCULUS_AVATAR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].buildTargetGroupName
+      value: Standalone
+      objectReference: {fileID: 0}
     - target: {fileID: 4693252548441896, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2156,51 +2201,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[0]
-      value: 
-      objectReference: {fileID: 3093275943830134505}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[1]
-      value: 
-      objectReference: {fileID: 3092869872736228897}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[2]
-      value: 
-      objectReference: {fileID: 3090517187562544369}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: scriptAliasLeftController
-      value: 
-      objectReference: {fileID: 5851469867816369661}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: scriptAliasRightController
-      value: 
-      objectReference: {fileID: 886335442123669728}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].symbol
-      value: VRTK_DEFINE_SDK_OCULUS_AVATAR
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].buildTargetGroupName
-      value: Standalone
-      objectReference: {fileID: 0}
     - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
       propertyPath: cachedSystemSDKInfo.typeName
@@ -2235,6 +2235,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114763421436745384, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: hideOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114474757664791164, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: expandMixedRealityCapturePropertySheet
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114477814731103964, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: playerMoveMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180607595303644, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: hideOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20233699360078248, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20233699360078248, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: near clip plane
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 20044939616229044, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20044939616229044, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: near clip plane
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: near clip plane
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224949530939371072, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
@@ -2295,56 +2345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 66
-      objectReference: {fileID: 0}
-    - target: {fileID: 114763421436745384, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: hideOnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114474757664791164, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: expandMixedRealityCapturePropertySheet
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114477814731103964, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: playerMoveMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114180607595303644, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: hideOnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20233699360078248, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 20233699360078248, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: near clip plane
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 20044939616229044, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 20044939616229044, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: near clip plane
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 20066930844247714, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: near clip plane
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224025683014901206, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
@@ -2763,11 +2763,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2793814419463064519, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
-        type: 3}
-      propertyPath: displayText
-      value: Place Turbine Build Sites\nPoint/Select Icons
-      objectReference: {fileID: 0}
     - target: {fileID: 2681660058259630674, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -2778,10 +2773,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 55
       objectReference: {fileID: 0}
-    - target: {fileID: 4141935963392530361, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
+    - target: {fileID: 2793814419463064519, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
         type: 3}
-      propertyPath: m_FontData.m_LineSpacing
-      value: 1.4
+      propertyPath: displayText
+      value: Place Turbine Build Sites\nPoint/Select Icons
       objectReference: {fileID: 0}
     - target: {fileID: 8010402030933333202, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
         type: 3}
@@ -2792,6 +2787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141935963392530361, guid: 0dbe4e5a09d44e341970be9afd5b1d2e,
+        type: 3}
+      propertyPath: m_FontData.m_LineSpacing
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dbe4e5a09d44e341970be9afd5b1d2e, type: 3}
@@ -3092,12 +3092,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 8627062872925079057, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 8674654241532995211, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 8674654241532995211, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 8627062872925079057, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
@@ -3107,12 +3107,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 5932185669245495306, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 6457576651736636959, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 6457576651736636959, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 5932185669245495306, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
@@ -4074,6 +4074,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Play Area
       objectReference: {fileID: 0}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: ignoreCollisionsWith.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: headsetYOffset
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: customBodyColliderContainer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: attachedView
+      value: 
+      objectReference: {fileID: 3133286319932603433}
+    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+        type: 3}
+      propertyPath: ignoreGrabbedCollisions
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4690439092638924279, guid: d6296c14b0331ca4a91f761cee9b7bd0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4134,11 +4164,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 850796610106041789, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1301487827208239310, guid: d6296c14b0331ca4a91f761cee9b7bd0,
         type: 3}
       propertyPath: identifiers.Array.size
@@ -4154,35 +4179,10 @@ PrefabInstance:
       propertyPath: identifiers.Array.data[1]
       value: PartColliders
       objectReference: {fileID: 0}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: ignoreCollisionsWith.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: headsetYOffset
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: customBodyColliderContainer
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
+    - target: {fileID: 850796610106041789, guid: d6296c14b0331ca4a91f761cee9b7bd0,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: attachedView
-      value: 
-      objectReference: {fileID: 3133286319932603433}
-    - target: {fileID: 3222613984357226375, guid: d6296c14b0331ca4a91f761cee9b7bd0,
-        type: 3}
-      propertyPath: ignoreGrabbedCollisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6296c14b0331ca4a91f761cee9b7bd0, type: 3}

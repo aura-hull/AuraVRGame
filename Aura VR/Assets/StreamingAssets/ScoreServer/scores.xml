@@ -1,62 +1,17 @@
 <scores>
   <score>
-    <name>C</name>
+    <name>Liam</name>
     <rank>1</rank>
-    <value>743</value>
+    <value>600</value>
   </score>
   <score>
-    <name>K</name>
+    <name>Meg</name>
     <rank>2</rank>
-    <value>736</value>
+    <value>547</value>
   </score>
   <score>
-    <name>I</name>
+    <name>Bill</name>
     <rank>3</rank>
-    <value>732</value>
-  </score>
-  <score>
-    <name>H</name>
-    <rank>4</rank>
-    <value>730</value>
-  </score>
-  <score>
-    <name>G</name>
-    <rank>5</rank>
-    <value>725</value>
-  </score>
-  <score>
-    <name>J</name>
-    <rank>6</rank>
-    <value>725</value>
-  </score>
-  <score>
-    <name>E</name>
-    <rank>7</rank>
-    <value>724</value>
-  </score>
-  <score>
-    <name>B</name>
-    <rank>8</rank>
-    <value>723</value>
-  </score>
-  <score>
-    <name>D</name>
-    <rank>9</rank>
-    <value>706</value>
-  </score>
-  <score>
-    <name>F</name>
-    <rank>10</rank>
-    <value>668</value>
-  </score>
-  <score>
-    <name>L</name>
-    <rank>11</rank>
-    <value>0</value>
-  </score>
-  <score>
-    <name>A</name>
-    <rank>12</rank>
-    <value>701</value>
+    <value>331</value>
   </score>
 </scores>
