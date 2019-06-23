@@ -191,17 +191,16 @@ public class AuraGameManager
         switch (_currentState)
         {
             case GameState.Tutorial:
-                ResetManager();
                 TutorialManager.Instance.StartTutorial();
                 OnTutorialStarted?.Invoke();
                 break;
 
             case GameState.Gameplay:
-                ResetManager();
                 OnGameplayStarted?.Invoke();
                 break;
 
             case GameState.GameOver:
+                ResetManager();
                 OnGameOver?.Invoke();
                 break;
         }
