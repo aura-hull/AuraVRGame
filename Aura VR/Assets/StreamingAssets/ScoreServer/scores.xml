@@ -3,4 +3,24 @@
     <name>Will</name>
     <value>600</value>
   </score>
+    <score>
+    <name>Will</name>
+    <value>500</value>
+  </score>
+    <score>
+    <name>Will</name>
+    <value>400</value>
+  </score>
+    <score>
+    <name>Will</name>
+    <value>300</value>
+  </score>
+    <score>
+    <name>Will</name>
+    <value>200</value>
+  </score>
+    <score>
+    <name>Will</name>
+    <value>100</value>
+  </score>
 </scores>
