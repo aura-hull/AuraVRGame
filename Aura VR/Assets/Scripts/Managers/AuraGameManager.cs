@@ -218,6 +218,11 @@ public class AuraGameManager
     {
         _currentState = newState;
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            NetworkController.Instance.NotifyGameStateChanged(_currentState);
+        }
+
         switch (_currentState)
         {
             case GameState.Waiting:
