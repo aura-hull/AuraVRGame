@@ -176,7 +176,7 @@ namespace AuraHull.AuraVRGame
             );
         }
 
-        public void NotifySyncManagers(float score, string name, int insertedIndex)
+        public void NotifyScoreSaved(float score, string name, int insertedIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;

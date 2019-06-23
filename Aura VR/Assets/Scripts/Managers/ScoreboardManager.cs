@@ -63,6 +63,7 @@ public class ScoreboardManager
         }
 
         _scores.Insert(insertAt, new ScoreData(name, score));
+        NetworkController.Instance.NotifyScoreSaved(score, name, insertAt);
     }
 
     public void SyncNewRecord(float score, string name, int insertAt)
