@@ -284,14 +284,15 @@ public class Buoyancy : MonoBehaviour
 				}
 
 				var velocity = rigidbody.GetPointVelocity(wp);
-                if (velocity.x != Double.NaN)
-                {
-                    var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
-                    var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
-                    rigidbody.AddForceAtPosition(force, wp);
+                var localDampingForce = -velocity * DAMPFER * rigidbody.mass;
+                var force = localDampingForce + Mathf.Sqrt(k) * localArchimedesForce;
 
-                    forces.Add(new[] { wp, force }); // For drawing force gizmos
+                if (force.x != Single.NaN && force.x != Double.NaN)
+                {
+                    rigidbody.AddForceAtPosition(force, wp);
                 }
+
+                forces.Add(new[] { wp, force }); // For drawing force gizmos
 			}
 		}
 	}
