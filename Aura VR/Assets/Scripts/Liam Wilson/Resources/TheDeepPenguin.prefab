@@ -831,15 +831,15 @@ MonoBehaviour:
     _audio: {fileID: 8300000, guid: 813a9d66f5345c74191e1c6cb9bbcacb, type: 3}
   - _name: Outro
     _audio: {fileID: 8300000, guid: 2caab10c1e6f1bb48a4aa285a16ba81f, type: 3}
-  currentDialogue: 20
+  currentDialogue: 0
   defaultDelay: 0.2
   delayExceptions:
-  - beforeDialogueIndex: 5
-    delay: 2.5
-  - beforeDialogueIndex: 11
-    delay: 2.5
+  - beforeDialogueIndex: 6
+    delay: 1.5
+  - beforeDialogueIndex: 12
+    delay: 1.5
   - beforeDialogueIndex: 19
-    delay: 2.5
+    delay: 1.5
 --- !u!114 &7205074418517849881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7a967c3a7f084299be2e6b6269e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localTest: 1
 --- !u!1 &7977243804698517545
 GameObject:
   m_ObjectHideFlags: 0

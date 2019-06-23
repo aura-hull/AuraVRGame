@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class TutorialModel : MonoBehaviour, IPunObservable
 {
-    [SerializeField] private bool localTest = false;
-
     public Speaker speaker { get; private set; }
     private PenguinAnimationControl _animator;
 
@@ -54,6 +52,7 @@ public class TutorialModel : MonoBehaviour, IPunObservable
             yield return null;
 
         speaker.Speak(nextSpeakIndex);
+        TutorialManager.Instance.ToggleBehaviours();
     }
 
     private void OnClientReady()
@@ -78,6 +77,16 @@ public class TutorialModel : MonoBehaviour, IPunObservable
         {
             _animator.speaking = (speaker.GetCurrentLoudness() >= 0.005f);
             checkVolumeTicks = 0.0f;
+        }
+
+        // Special condition checks.
+        if (!PhotonNetwork.IsMasterClient) return;
+        if (TutorialManager.Instance.WaitingOnCondition)
+        {
+            if (TutorialManager.Instance.SpecialConditionIsDone())
+            {
+                NetworkController.Instance.NotifyPlayNextTutorial(speaker.currentDialogue++);
+            }
         }
     }
 

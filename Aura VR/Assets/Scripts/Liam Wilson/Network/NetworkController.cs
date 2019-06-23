@@ -12,6 +12,7 @@ namespace AuraHull.AuraVRGame
 {
     public enum NetworkEvent
     {
+        GAMESTATE_CHANGED,
         TUTORIAL_NEXT,
         TUTORIAL_CLIENT_READY,
         UPGRADED_OR_DOWNGRADED,
@@ -32,9 +33,11 @@ namespace AuraHull.AuraVRGame
         Connection _connection;
         
         public static event Action OnGameConnected;
+        public static event Action<AuraGameManager.GameState> OnGameStateChanged;
         public static event Action<int> OnPlayNextTutorial;
         public static event Action OnTutorialClientReady;
         public static event Action<float, float, int> OnUpgradedOrDowngraded;
+        public static event Action OnTurbineBuildSitePlaced;
         public static event Action<int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
@@ -75,6 +78,19 @@ namespace AuraHull.AuraVRGame
         public static int ConnectedPlayers
         {
             get { return PhotonNetwork.CurrentRoom.PlayerCount; }
+        }
+
+        public void NotifyGameStateChanged(AuraGameManager.GameState state)
+        {
+            RaiseEventOptions customOptions = new RaiseEventOptions();
+            customOptions.Receivers = ReceiverGroup.All;
+
+            PhotonNetwork.RaiseEvent(
+                (byte)NetworkEvent.GAMESTATE_CHANGED,
+                eventContent: new object[1] { state },
+                raiseEventOptions: customOptions,
+                sendOptions: SendOptions.SendReliable
+            );
         }
 
         public void NotifyPlayNextTutorial(int nextSpeakIndex)
@@ -202,6 +218,10 @@ namespace AuraHull.AuraVRGame
 
             switch (receivedNetworkEvent)
             {
+                case NetworkEvent.GAMESTATE_CHANGED:
+                    OnGameStateChanged?.Invoke((AuraGameManager.GameState)serialize[0]);
+                    break;
+
                 case NetworkEvent.TUTORIAL_NEXT:
                     OnPlayNextTutorial?.Invoke((int)serialize[0]);
                     break;
@@ -219,6 +239,7 @@ namespace AuraHull.AuraVRGame
                     {
                         PhotonNetwork.InstantiateSceneObject((string) serialize[0], (Vector3) serialize[1], Quaternion.identity);
                     }
+                    OnTurbineBuildSitePlaced?.Invoke();
                     break;
 
                 case NetworkEvent.BUILD_SITE_DESTROYED:
@@ -242,10 +263,7 @@ namespace AuraHull.AuraVRGame
                         PhotonNetwork.Destroy(buildSite);
                     }
 
-                    if (OnTurbineBuilt != null)
-                    {
-                        // power stuff
-                    }
+                    OnTurbineBuilt?.Invoke((int)serialize[0], (string)serialize[1]);
                     break;
 
                 case NetworkEvent.SYNC_MANAGERS:

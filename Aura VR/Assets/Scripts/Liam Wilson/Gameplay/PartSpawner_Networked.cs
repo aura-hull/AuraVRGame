@@ -125,7 +125,7 @@ public class PartSpawner_Networked : MonoBehaviour
 
                     float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f);
                     Vector3 polarPoint = Quaternion.Euler(0, randomAngle, 0) * (Vector3.forward * dispersionRadius);
-                    newPart.transform.position = transform.position + polarPoint;
+                    newPart.transform.position = transform.position + polarPoint + (Vector3.up * 10.0f);
                     newPart.transform.rotation = Quaternion.Euler(randomAngle, randomAngle, randomAngle);
                 }
             }

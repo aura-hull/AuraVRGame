@@ -10,6 +10,7 @@ public class AuraGameManager
 {
     public enum GameState
     {
+        Null,
         Waiting,
         Tutorial,
         Gameplay,
@@ -26,7 +27,7 @@ public class AuraGameManager
         }
     }
 
-    public Action OnTutorialStarted;
+    public Action OnStateWaiting;
     public Action OnGameplayStarted;
     public Action OnGameOver;
     public Action OnPlayDurationChanged;
@@ -37,10 +38,11 @@ public class AuraGameManager
     private ScoreboardManager _scoreboardManager;
     private TutorialManager _tutorialManager;
 
-    private float _playDurationLimit = 3;
+    private float _playDurationLimit = 600;
     private float _playDuration = 0;
 
     private GameState _currentState;
+    private GameState _returnToState;
 
     private GameOverScreen _gameOverScreen = null;
     public GameOverScreen gameOverScreen
@@ -72,16 +74,19 @@ public class AuraGameManager
         _scoreboardManager = ScoreboardManager.Instance;
         _tutorialManager = TutorialManager.Instance;
 
-        OnTutorialStarted += _upgradeManager.DisableUpgrades;
-        OnGameplayStarted += _upgradeManager.EnableUpgrades;
-        OnGameOver += _upgradeManager.DisableUpgrades;
-
         Setup();
 
+        NetworkController.OnGameStateChanged += SyncState;
         NetworkController.OnSyncManagers += Sync;
         NetworkController.OnUpgradedOrDowngraded += _upgradeManager.SyncUpgradeState;
         NetworkController.OnScoreSaved += _scoreboardManager.SyncNewRecord;
         AuraSceneManager.Instance.SubscribeOnSceneReset(Setup);
+    }
+
+    void SyncState(GameState state)
+    {
+        if (PhotonNetwork.IsMasterClient) return;
+        SetState(state);
     }
 
     void Sync(float powerProduced, float powerUsed, float powerStored, float playDuration, float score)
@@ -110,7 +115,9 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
+        _returnToState = GameState.Null;
         SetState(GameState.Waiting);
+        ResetManager();
 
         Sync(_powerManager.PowerProduced, _powerManager.PowerUsed, _powerManager.PowerStored, _playDuration, _scoreManager.Score);
     }
@@ -118,17 +125,26 @@ public class AuraGameManager
     // Update is called once per frame
     public void Execute()
     {
+        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
+        {
+            _returnToState = _currentState;
+            SetState(GameState.Waiting);
+        }
+
         switch (_currentState)
         {
             case GameState.Waiting:
                 ExecuteWaiting();
                 break;
+
             case GameState.Tutorial:
                 ExecuteTutorial();
                 break;
+
             case GameState.Gameplay:
                 ExecuteGameplay();
                 break;
+
             case GameState.GameOver:
                 ExecuteEnd();
                 break;
@@ -137,22 +153,37 @@ public class AuraGameManager
 
     private void ExecuteWaiting()
     {
-        Debug.Log(NetworkController.ConnectedPlayers);
-        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients) return;
+        if (!PhotonNetwork.IsMasterClient) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
         {
-            SetState(GameState.Tutorial);
+            if (_returnToState != GameState.Null)
+            {
+                // This happens if a client disconnected.
+                SetState(_returnToState);
+                _returnToState = GameState.Null;
+            }
+            else
+            {
+                // This happens at the start of a playthrough.
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SetState(GameState.Tutorial);
+                }
+            }
         }
     }
 
     private void ExecuteTutorial()
     {
-
+        GameModel.Instance.SpawnParts();
     }
     
     private void ExecuteGameplay()
     {
+        GameModel.Instance.SpawnParts();
+        GameModel.Instance.IssueUpgrades();
+
         if (!PhotonNetwork.IsMasterClient) return;
 
         _playDuration += Time.deltaTime;
@@ -173,6 +204,8 @@ public class AuraGameManager
 
     private void ExecuteEnd()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         if (gameOverScreen != null)
         {
             gameOverScreen.SetScoreText(_scoreManager.ScoreInt);
@@ -188,11 +221,19 @@ public class AuraGameManager
     {
         _currentState = newState;
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            NetworkController.Instance.NotifyGameStateChanged(_currentState);
+        }
+
         switch (_currentState)
         {
+            case GameState.Waiting:
+                OnStateWaiting?.Invoke();
+                break;
+
             case GameState.Tutorial:
                 TutorialManager.Instance.StartTutorial();
-                OnTutorialStarted?.Invoke();
                 break;
 
             case GameState.Gameplay:

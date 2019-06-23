@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialConditionTrigger : TutorialTrigger
+public class TT_Collision : TutorialTrigger
 {
     [SerializeField] private string searchForName = "";
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     void OnEnable()
     {
@@ -24,11 +29,7 @@ public class TutorialConditionTrigger : TutorialTrigger
 
         if (nameMatch)
         {
-            if (live)
-            {
-                OnConditionMet?.Invoke();
-                live = false;
-            }
+            Trigger();
         }
     }
 

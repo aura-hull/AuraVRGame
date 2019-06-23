@@ -21,14 +21,6 @@ public class UpgradePoint_Networked : MonoBehaviour
 
     void Update()
     {
-        if (!UpgradeManager.Instance.upgradesEnabled)
-        {
-            _timeRemaining = timeBetweenUpgrades;
-            if (timeRemainingText != null)
-                timeRemainingText.text = UsefulFuncs.NeatTime(_timeRemaining);
-            return;
-        }
-
         if (PhotonNetwork.IsMasterClient)
         {
             if (!_upgradeIsReady)
@@ -83,7 +75,6 @@ public class UpgradePoint_Networked : MonoBehaviour
 
     public void UpgradeIfReady()
     {
-        if (!UpgradeManager.Instance.upgradesEnabled) return;
         if (_activeCollector == null) return;
 
         if (!_activeCollector.available) return;
