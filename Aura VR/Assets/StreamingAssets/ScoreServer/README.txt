@@ -14,8 +14,8 @@ WILL LAPTOP:
 "C:\Users\lucius laptop\Downloads\ScoreServer"
  
 WILL PC:
-"C:\Program Files\IIS Express\iisexpress.exe" /path:"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\ScoreServer" /port:8080
-"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\ScoreServer"
+"C:\Program Files\IIS Express\iisexpress.exe" /path:"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\Assets\StreamingAssets\ScoreServer" /port:8080
+"C:\Users\lucius-PC\Documents\Git\AuraVR\AuraVRGame\Aura VR\Assets\StreamingAssets\ScoreServer"
 
 LIAM PC:
 "C:\Program Files\IIS Express\iisexpress.exe" /path:"D:\Users\Liam\Documents\GitHub\AuraVrGame\Aura VR\Assets\StreamingAssets\ScoreServer" /port:8080
