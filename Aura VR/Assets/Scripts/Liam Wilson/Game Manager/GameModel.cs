@@ -13,6 +13,16 @@ namespace AuraHull.AuraVRGame
         [SerializeField] private ColliderManager _colliderManager;
         [SerializeField] private GameObject penguinPrefab;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private bool isLocalTest = false;
+
+        public int RequiredClients
+        {
+            get
+            {
+                if (isLocalTest) return 1;
+                else return NetworkController.MAX_PLAYERS;
+            }
+        }
 
         private BaseGameState _activeGameState;
 
@@ -23,7 +33,7 @@ namespace AuraHull.AuraVRGame
 
         public IAuraPlayer CurrentPlayer { get; set; }
 
-        public static GameModel Instance { get; set; }
+        public static GameModel Instance { get; private set; }
 
         private void Awake()
         {
