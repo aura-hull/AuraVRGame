@@ -675,7 +675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2637604393393252588}
   - component: {fileID: 257560899118839225}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: NoPlacey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
