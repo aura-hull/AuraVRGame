@@ -27,6 +27,7 @@ namespace AuraHull.AuraVRGame
             base.ExecuteState();
             
             GameModel.Instance.SpawnParts();
+            GameModel.Instance.IssueUpgrades();
             AuraGameManager.Instance.Execute();
         }
 

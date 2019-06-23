@@ -31,6 +31,8 @@ public class UpgradeManager
 
     public Action OnUpgradedOrDowngraded;
 
+    public bool upgradesEnabled { get; private set; }
+
     private UpgradeManager()
     {
         _powerProductionMultiplier = POWER_PRODUCTION_MULTIPLIER;
@@ -86,5 +88,15 @@ public class UpgradeManager
     {
         if (!DIMINISHING_RETURN) return UPGRADE_RATE;
         else return UPGRADE_RATE / _upgradeLevel;
+    }
+
+    public void EnableUpgrades()
+    {
+        upgradesEnabled = true;
+    }
+
+    public void DisableUpgrades()
+    {
+        upgradesEnabled = false;
     }
 }

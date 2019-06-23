@@ -9,6 +9,7 @@ namespace AuraHull.AuraVRGame
     {
         [SerializeField] private PlayerFactory _playerFactory;
         [SerializeField] private PartSpawner_Networked[] _partSpawners;
+        [SerializeField] private UpgradePoint_Networked[] _upgradePoints;
         [SerializeField] private ColliderManager _colliderManager;
         [SerializeField] private GameObject penguinPrefab;
         [SerializeField] private Transform spawnPoint;
@@ -72,6 +73,18 @@ namespace AuraHull.AuraVRGame
                 if (_partSpawners[i] != null)
                 {
                     _partSpawners[i].SpawnIfReady();
+                }
+            }
+        }
+
+        public void IssueUpgrades()
+        {
+            if (!PhotonNetwork.IsMasterClient) return;
+            for (int i = 0; i < _upgradePoints.Length; i++)
+            {
+                if (_upgradePoints[i] != null)
+                {
+                    _upgradePoints[i].UpgradeIfReady();
                 }
             }
         }
