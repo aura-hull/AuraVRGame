@@ -28,7 +28,6 @@ public class AuraGameManager
     }
 
     public Action OnStateWaiting;
-    public Action OnTutorialStarted;
     public Action OnGameplayStarted;
     public Action OnGameOver;
     public Action OnPlayDurationChanged;
@@ -43,7 +42,7 @@ public class AuraGameManager
     private float _playDuration = 0;
 
     private GameState _currentState;
-    private GameState _returnToState;
+    //private GameState _returnToState;
 
     private GameOverScreen _gameOverScreen = null;
     public GameOverScreen gameOverScreen
@@ -74,10 +73,6 @@ public class AuraGameManager
         _scoreManager = ScoreManager.Instance;
         _scoreboardManager = ScoreboardManager.Instance;
         _tutorialManager = TutorialManager.Instance;
-
-        OnTutorialStarted += _upgradeManager.DisableUpgrades;
-        OnGameplayStarted += _upgradeManager.EnableUpgrades;
-        OnGameOver += _upgradeManager.DisableUpgrades;
 
         Setup();
 
@@ -113,7 +108,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        _returnToState = GameState.Null;
+        //_returnToState = GameState.Null;
         SetState(GameState.Waiting);
         ResetManager();
 
@@ -123,22 +118,25 @@ public class AuraGameManager
     // Update is called once per frame
     public void Execute()
     {
-        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
-        {
-            SetState(GameState.Waiting);
-        }
+        //if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
+        //{
+        //    SetState(GameState.Waiting);
+        //}
 
         switch (_currentState)
         {
             case GameState.Waiting:
                 ExecuteWaiting();
                 break;
+
             case GameState.Tutorial:
                 ExecuteTutorial();
                 break;
+
             case GameState.Gameplay:
                 ExecuteGameplay();
                 break;
+
             case GameState.GameOver:
                 ExecuteEnd();
                 break;
@@ -147,23 +145,29 @@ public class AuraGameManager
 
     private void ExecuteWaiting()
     {
-        if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
+        // This happens at the start of a playthrough.
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (_returnToState != GameState.Null)
-            {
-                // This happens if a client disconnected.
-                SetState(_returnToState);
-                _returnToState = GameState.Null;
-            }
-            else
-            {
-                // This happens at the start of a playthrough.
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    SetState(GameState.Tutorial);
-                }
-            }
+            SetState(GameState.Tutorial);
         }
+
+        //if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
+        //{
+        //    if (_returnToState != GameState.Null)
+        //    {
+        //        // This happens if a client disconnected.
+        //        SetState(_returnToState);
+        //        _returnToState = GameState.Null;
+        //    }
+        //    else
+        //    {
+        //        // This happens at the start of a playthrough.
+        //        if (Input.GetKeyDown(KeyCode.Space))
+        //        {
+        //            SetState(GameState.Tutorial);
+        //        }
+        //    }
+        //}
     }
 
     private void ExecuteTutorial()
@@ -219,7 +223,6 @@ public class AuraGameManager
 
             case GameState.Tutorial:
                 TutorialManager.Instance.StartTutorial();
-                OnTutorialStarted?.Invoke();
                 break;
 
             case GameState.Gameplay:

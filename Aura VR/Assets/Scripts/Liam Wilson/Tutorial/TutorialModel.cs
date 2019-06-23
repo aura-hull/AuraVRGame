@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class TutorialModel : MonoBehaviour, IPunObservable
 {
-    [SerializeField] private bool localTest = false;
-
     public Speaker speaker { get; private set; }
     private PenguinAnimationControl _animator;
 
