@@ -26,6 +26,7 @@ public class UpgradePoint_Networked : MonoBehaviour
             _timeRemaining = timeBetweenUpgrades;
             if (timeRemainingText != null)
                 timeRemainingText.text = UsefulFuncs.NeatTime(_timeRemaining);
+            return;
         }
 
         if (PhotonNetwork.IsMasterClient)
