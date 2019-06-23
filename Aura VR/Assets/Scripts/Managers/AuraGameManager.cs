@@ -42,7 +42,7 @@ public class AuraGameManager
     private float _playDuration = 0;
 
     private GameState _currentState;
-    //private GameState _returnToState;
+    private GameState _returnToState;
 
     private GameOverScreen _gameOverScreen = null;
     public GameOverScreen gameOverScreen
@@ -108,7 +108,7 @@ public class AuraGameManager
 
         _scoreboardManager.LoadScores();
 
-        //_returnToState = GameState.Null;
+        _returnToState = GameState.Null;
         SetState(GameState.Waiting);
         ResetManager();
 
@@ -118,10 +118,10 @@ public class AuraGameManager
     // Update is called once per frame
     public void Execute()
     {
-        //if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
-        //{
-        //    SetState(GameState.Waiting);
-        //}
+        if (NetworkController.ConnectedPlayers < GameModel.Instance.RequiredClients && _currentState != GameState.Waiting)
+        {
+            SetState(GameState.Waiting);
+        }
 
         switch (_currentState)
         {
@@ -145,29 +145,23 @@ public class AuraGameManager
 
     private void ExecuteWaiting()
     {
-        // This happens at the start of a playthrough.
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
         {
-            SetState(GameState.Tutorial);
+            if (_returnToState != GameState.Null)
+            {
+                // This happens if a client disconnected.
+                SetState(_returnToState);
+                _returnToState = GameState.Null;
+            }
+            else
+            {
+                // This happens at the start of a playthrough.
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SetState(GameState.Tutorial);
+                }
+            }
         }
-
-        //if (NetworkController.ConnectedPlayers >= GameModel.Instance.RequiredClients)
-        //{
-        //    if (_returnToState != GameState.Null)
-        //    {
-        //        // This happens if a client disconnected.
-        //        SetState(_returnToState);
-        //        _returnToState = GameState.Null;
-        //    }
-        //    else
-        //    {
-        //        // This happens at the start of a playthrough.
-        //        if (Input.GetKeyDown(KeyCode.Space))
-        //        {
-        //            SetState(GameState.Tutorial);
-        //        }
-        //    }
-        //}
     }
 
     private void ExecuteTutorial()
