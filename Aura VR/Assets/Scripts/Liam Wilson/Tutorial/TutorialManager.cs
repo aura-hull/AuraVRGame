@@ -40,19 +40,34 @@ public class TutorialManager
     
     public TutorialModel tutorialModel;
     private List<ConditionPair> specialConditions;
+    private List<TutorialToggle> toggleBehaviours;
     public bool isRunning { get; private set; } = false;
 
     public Action OnTutorialStart;
     public Action OnTutorialEnd;
 
+    private int _waitingOnCondition = -1;
+
+    public bool WaitingOnCondition
+    {
+        get { return _waitingOnCondition != -1; }
+    }
+
     private TutorialManager()
     {
         specialConditions = new List<ConditionPair>();
+        toggleBehaviours = new List<TutorialToggle>();
     }
 
     public bool AddTriggerCondition(TutorialTrigger trigger)
     {
         specialConditions.Add(new ConditionPair(trigger));
+        return true;
+    }
+
+    public bool AddToggleBehaviour(TutorialToggle toggle)
+    {
+        toggleBehaviours.Add(toggle);
         return true;
     }
 
@@ -74,13 +89,29 @@ public class TutorialManager
         OnTutorialEnd?.Invoke();
     }
 
+    public void ToggleBehaviours()
+    {
+        foreach (TutorialToggle tt in toggleBehaviours)
+        {
+            tt.Toggle(tutorialModel.speaker.currentDialogue);
+        }
+    }
+
+    public bool SpecialConditionIsDone()
+    {
+        bool value = specialConditions[_waitingOnCondition].conditionWasMet;
+        if (value == true) _waitingOnCondition = -1;
+        return value;
+    }
+
     public void CheckNextTutorialCondition()
     {
-        foreach (ConditionPair cp in specialConditions)
+        for (int i = 0; i < specialConditions.Count; i++)
         {
-            if (cp.TutorialIndex == tutorialModel.speaker.currentDialogue)
+            if (specialConditions[i].TutorialIndex == tutorialModel.speaker.currentDialogue)
             {
-                cp.trigger.SetLive();
+                specialConditions[i].trigger.SetLive();
+                _waitingOnCondition = i;
                 return;
             }
         }

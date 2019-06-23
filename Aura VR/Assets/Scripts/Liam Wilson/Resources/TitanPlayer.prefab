@@ -2100,51 +2100,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[0]
-      value: 
-      objectReference: {fileID: 3093275943830134505}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[1]
-      value: 
-      objectReference: {fileID: 3092869872736228897}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: setups.Array.data[2]
-      value: 
-      objectReference: {fileID: 3090517187562544369}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: scriptAliasLeftController
-      value: 
-      objectReference: {fileID: 5851469867816369661}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: scriptAliasRightController
-      value: 
-      objectReference: {fileID: 886335442123669728}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].symbol
-      value: VRTK_DEFINE_SDK_OCULUS_AVATAR
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
-        type: 3}
-      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].buildTargetGroupName
-      value: Standalone
-      objectReference: {fileID: 0}
     - target: {fileID: 4693252548441896, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2200,6 +2155,51 @@ PrefabInstance:
     - target: {fileID: 4693252548441896, guid: eb6748575a8fce346b19dff6cb1471ec, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[0]
+      value: 
+      objectReference: {fileID: 3093275943830134505}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[1]
+      value: 
+      objectReference: {fileID: 3092869872736228897}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: setups.Array.data[2]
+      value: 
+      objectReference: {fileID: 3090517187562544369}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: scriptAliasLeftController
+      value: 
+      objectReference: {fileID: 5851469867816369661}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: scriptAliasRightController
+      value: 
+      objectReference: {fileID: 886335442123669728}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].symbol
+      value: VRTK_DEFINE_SDK_OCULUS_AVATAR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830853864008150, guid: eb6748575a8fce346b19dff6cb1471ec,
+        type: 3}
+      propertyPath: activeScriptingDefineSymbolsWithoutSDKClasses.Array.data[0].buildTargetGroupName
+      value: Standalone
       objectReference: {fileID: 0}
     - target: {fileID: 114328711732940310, guid: eb6748575a8fce346b19dff6cb1471ec,
         type: 3}
@@ -3092,12 +3092,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 8674654241532995211, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 8627062872925079057, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 8627062872925079057, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 8674654241532995211, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
@@ -3107,12 +3107,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 6457576651736636959, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 5932185669245495306, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 5932185669245495306, guid: e0080ee2f33c7904f8ec840de61eb7a4,
+    - target: {fileID: 6457576651736636959, guid: e0080ee2f33c7904f8ec840de61eb7a4,
         type: 3}
       propertyPath: m_Layer
       value: 13
@@ -4311,8 +4311,7 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7048045916025654568, guid: f6da5f3d28425e7438072f041a1349b0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6da5f3d28425e7438072f041a1349b0, type: 3}
 --- !u!4 &3241673445800196317 stripped
 Transform:

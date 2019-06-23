@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class TutorialConditionTrigger : TutorialTrigger
+public class TT_Collision : TutorialTrigger
 {
     [SerializeField] private string searchForName = "";
 
