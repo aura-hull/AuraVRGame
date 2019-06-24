@@ -109,7 +109,7 @@ public class AuraGameManager
         
         _powerManager.PowerProduced = 0;
         _powerManager.PowerUsed = 0;
-        _powerManager.PowerStored = 600;
+        _powerManager.PowerStored = 400;
 
         _scoreManager.Score = 0;
 

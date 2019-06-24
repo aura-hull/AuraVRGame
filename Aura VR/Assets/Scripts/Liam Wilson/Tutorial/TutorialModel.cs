@@ -8,6 +8,7 @@ using UnityEngine;
 public class TutorialModel : MonoBehaviour, IPunObservable
 {
     public Speaker speaker { get; private set; }
+    public Renderer renderer;
     private PenguinAnimationControl _animator;
 
     private int _clientsReady = 0;
@@ -65,6 +66,11 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void ResetTutorial()
     {
+        if (renderer != null)
+        {
+            renderer.enabled = true;
+        }
+
         _animator.speaking = false;
         speaker.Reset();
     }

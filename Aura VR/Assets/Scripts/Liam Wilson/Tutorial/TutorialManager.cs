@@ -86,6 +86,11 @@ public class TutorialManager
         AuraGameManager.Instance.SetState(AuraGameManager.GameState.Gameplay);
         isRunning = false;
 
+        if (tutorialModel != null && tutorialModel.renderer != null)
+        {
+            tutorialModel.renderer.enabled = false;
+        }
+
         OnTutorialEnd?.Invoke();
     }
 
