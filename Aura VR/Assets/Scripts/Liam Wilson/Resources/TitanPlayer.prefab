@@ -4461,6 +4461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartsDeliverTrigger_Tutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 4490991050512878267, guid: f6da5f3d28425e7438072f041a1349b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7048045916025654568, guid: f6da5f3d28425e7438072f041a1349b0,
         type: 3}
       propertyPath: canTriggerEarly
