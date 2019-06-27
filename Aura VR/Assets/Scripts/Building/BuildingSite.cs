@@ -39,12 +39,13 @@ public class BuildingSite : MonoBehaviour
     {
         if (!ConstructPart(matcher.Index)) return;
 
-        NetworkController.Instance.NotifyTurbinePartBuilt(matcher.Index);
+        NetworkController.Instance.NotifyTurbinePartBuilt(gameObject.GetPhotonView().ViewID, matcher.Index);
     }
 
-    private void ConstructPartNetworked(int actorNumber, int matcherIndex)
+    private void ConstructPartNetworked(int actorNumber, int turbinePhotonId, int matcherIndex)
     {
         if (actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) return;
+        if (turbinePhotonId != gameObject.GetPhotonView().ViewID) return;
         ConstructPart(matcherIndex);
     }
 

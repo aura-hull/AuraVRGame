@@ -1,0 +1,7 @@
+<ServerSettings>
+  <AppSettings>
+    <Server>192.168.137.27</Server>
+    <Port>5055</Port>
+    <Protocol>UDP</Protocol>
+  </AppSettings>
+</ServerSettings>

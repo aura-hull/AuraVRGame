@@ -37,7 +37,7 @@ public class TutorialManager
             return _instance;
         }
     }
-    
+
     public TutorialModel tutorialModel;
     private List<ConditionPair> specialConditions;
     private List<TutorialToggle> toggleBehaviours;
@@ -86,11 +86,6 @@ public class TutorialManager
         AuraGameManager.Instance.SetState(AuraGameManager.GameState.Gameplay);
         isRunning = false;
 
-        if (tutorialModel != null && tutorialModel.renderer != null)
-        {
-            tutorialModel.renderer.enabled = false;
-        }
-
         OnTutorialEnd?.Invoke();
     }
 
@@ -122,5 +117,23 @@ public class TutorialManager
         }
         
         NetworkController.Instance.NotifyPlayNextTutorial(tutorialModel.speaker.currentDialogue++);
+    }
+
+    public void SetPenguinVisible(bool value)
+    {
+        if (tutorialModel != null && tutorialModel.renderer != null)
+        {
+            tutorialModel.renderer.enabled = value;
+        }
+    }
+
+    public void SilencePenguin()
+    {
+        if (tutorialModel != null)
+        {
+            tutorialModel.speaker.Stop();
+            isRunning = false;
+            OnTutorialEnd?.Invoke();
+        }
     }
 }

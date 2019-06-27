@@ -100,6 +100,14 @@ public class Speaker : MonoBehaviour
     {
         currentDialogue = resetToDialogue;
     }
+
+    public void Stop()
+    {
+        Reset();
+
+        _source.Stop();
+        isSpeaking = false;
+    }
     
     public float GetCurrentLoudness()
     {

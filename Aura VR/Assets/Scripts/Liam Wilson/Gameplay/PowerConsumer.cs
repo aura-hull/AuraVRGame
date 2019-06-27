@@ -42,7 +42,7 @@ public class PowerConsumer : MonoBehaviour
                 if (tag == ce.effectorTag) sum += ce.consumption;
             }
         }
-        
+
         return sum * consumptionFactor;
     }
 

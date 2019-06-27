@@ -66,11 +66,6 @@ public class TutorialModel : MonoBehaviour, IPunObservable
 
     public void ResetTutorial()
     {
-        if (renderer != null)
-        {
-            renderer.enabled = true;
-        }
-
         _animator.speaking = false;
         speaker.Reset();
     }

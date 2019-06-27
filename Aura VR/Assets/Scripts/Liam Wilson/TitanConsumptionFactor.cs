@@ -6,18 +6,18 @@ using VRTK;
 public class TitanConsumptionFactor : MonoBehaviour
 {
     [SerializeField] private PowerConsumer powerConsumer;
-    [SerializeField] private VRTK_SlideObjectControlAction[] slideContributors;
+
+    private Vector3 lastPosition;
+
+    private void Start()
+    {
+        lastPosition = transform.position;
+    }
 
     void Update()
     {
-        float factor = 0.0f;
-
-        foreach (VRTK_SlideObjectControlAction s in slideContributors)
-        {
-            factor += Mathf.Abs(s.CurrentSpeed) / s.maximumSpeed;
-        }
-
-        factor /= slideContributors.Length;
+        float factor = Mathf.Clamp01(Vector3.Distance(transform.position, lastPosition));
+        lastPosition = transform.position;
         powerConsumer.consumptionFactor = factor;
     }
 }

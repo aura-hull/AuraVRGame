@@ -65,4 +65,9 @@ public class BoatDriver : MonoBehaviour
             powerConsumer.consumptionFactor = Mathf.Abs(throttle);
         }
     }
+
+    public void ForceStopThrottle()
+    {
+        throttleControl.SetValue(throttleControl.GetAngleFromStepValue(realThrottleZero));
+    }
 }

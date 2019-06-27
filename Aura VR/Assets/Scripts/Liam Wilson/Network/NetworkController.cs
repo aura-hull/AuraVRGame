@@ -38,7 +38,7 @@ namespace AuraHull.AuraVRGame
         public static event Action OnTutorialClientReady;
         public static event Action<float, float, int> OnUpgradedOrDowngraded;
         public static event Action OnTurbineBuildSitePlaced;
-        public static event Action<int, int> OnTurbinePartBuilt;
+        public static event Action<int, int, int> OnTurbinePartBuilt;
         public static event Action<int, string> OnTurbineBuilt;
         public static event Action<float, float, float, float, float> OnSyncManagers;
         public static event Action<float, string, int> OnScoreSaved;
@@ -158,14 +158,14 @@ namespace AuraHull.AuraVRGame
             );
         }
 
-        public void NotifyTurbinePartBuilt(int matcherIndex)
+        public void NotifyTurbinePartBuilt(int turbinePhotonId, int matcherIndex)
         {
             RaiseEventOptions customOptions = new RaiseEventOptions();
             customOptions.Receivers = ReceiverGroup.All;
 
             PhotonNetwork.RaiseEvent(
                 (byte)NetworkEvent.TURBINE_PART_BUILT,
-                eventContent: new object[2] { PhotonNetwork.LocalPlayer.ActorNumber, matcherIndex },
+                eventContent: new object[3] { PhotonNetwork.LocalPlayer.ActorNumber, turbinePhotonId, matcherIndex },
                 raiseEventOptions: customOptions,
                 sendOptions: SendOptions.SendReliable
             );
@@ -251,7 +251,7 @@ namespace AuraHull.AuraVRGame
                     break;
 
                 case NetworkEvent.TURBINE_PART_BUILT:
-                    OnTurbinePartBuilt?.Invoke((int)serialize[0], (int)serialize[1]);
+                    OnTurbinePartBuilt?.Invoke((int)serialize[0], (int)serialize[1], (int)serialize[2]);
                     break;
 
                 case NetworkEvent.TURBINE_BUILT:

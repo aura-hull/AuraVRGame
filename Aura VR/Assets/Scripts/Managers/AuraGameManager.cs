@@ -38,7 +38,7 @@ public class AuraGameManager
     private ScoreboardManager _scoreboardManager;
     private TutorialManager _tutorialManager;
 
-    private float _playDurationLimit = 600;
+    private float _playDurationLimit = 300;
     private float _playDuration = 0;
 
     private GameState _currentState;
@@ -177,6 +177,12 @@ public class AuraGameManager
     private void ExecuteTutorial()
     {
         GameModel.Instance.SpawnParts();
+
+        // Press space during tutorial to skip to gameplay.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetState(GameState.Gameplay);
+        }
     }
     
     private void ExecuteGameplay()
@@ -234,10 +240,13 @@ public class AuraGameManager
 
             case GameState.Tutorial:
                 TutorialManager.Instance.StartTutorial();
+                TutorialManager.Instance.SetPenguinVisible(true);
                 break;
 
             case GameState.Gameplay:
                 OnGameplayStarted?.Invoke();
+                TutorialManager.Instance.SetPenguinVisible(false);
+                TutorialManager.Instance.SilencePenguin();
                 break;
 
             case GameState.GameOver:
